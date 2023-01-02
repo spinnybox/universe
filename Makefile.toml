@@ -1,0 +1,1075 @@
+[tasks.format]
+command = "cargo"
+args = ["x:bin", "dprint", "fmt"]
+
+[tasks."build:debug"]
+dependencies = [
+  # "build-aarch64-linux-android-debug",
+  # "build-armv7-linux-androideabi-debug",
+  # "build-i686-linux-android-debug",
+  # "build-x86_64-linux-android-debug",
+  # "build-i686-unknown-linux-gnu-debug",
+  # "build-x86_64-unknown-linux-gnu-debug",
+  # "build-aarch64-apple-darwin-debug",
+  "build-x86_64-apple-darwin-debug",
+  # "build-aarch64-apple-ios-debug",
+  # "build-i686-pc-windows-gnu-debug",
+  # "build-x86_64-pc-windows-gnu-debug",
+  # "build-i686-pc-windows-msvc-debug",
+  # "build-x86_64-pc-windows-msvc-debug",
+  # "build-wasm32-unknown-emscripten-debug",
+]
+
+[tasks."build:watch"]
+watch = { watch = ["games/${@}/src", "games/${@}/Cargo.toml"] }
+dependencies = ["build:debug"]
+# run_task = "run-godot"
+
+[tasks."build:release"]
+dependencies = [
+  # "build-aarch64-linux-android-release",
+  # "build-armv7-linux-androideabi-release",
+  # "build-i686-linux-android-release",
+  # "build-x86_64-linux-android-release",
+  # "build-i686-unknown-linux-gnu-release",
+  # "build-x86_64-unknown-linux-gnu-release",
+  "build-x86_64-apple-darwin-release",
+  "build-aarch64-apple-darwin-release",
+  # "build-aarch64-apple-ios-release",
+  # "build-i686-pc-windows-gnu-release",
+  # "build-x86_64-pc-windows-gnu-release",
+  # "build-i686-pc-windows-msvc-release",
+  # "build-x86_64-pc-windows-msvc-release",
+  # "build-wasm32-unknown-emscripten-release",
+]
+
+[tasks."export:debug"]
+dependencies = [
+  # "export-aarch64-linux-android-debug",
+  # "export-armv7-linux-androideabi-debug",
+  # "export-i686-linux-android-debug",
+  # "export-x86_64-linux-android-debug",
+  # "export-i686-unknown-linux-gnu-debug",
+  # "export-x86_64-unknown-linux-gnu-debug",
+  "export-x86_64-apple-darwin-debug",
+  # "export-aarch64-apple-darwin-debug",
+  # "export-aarch64-apple-ios-debug",
+  # "export-i686-pc-windows-gnu-debug",
+  # "export-x86_64-pc-windows-gnu-debug",
+  # "export-i686-pc-windows-msvc-debug",
+  # "export-x86_64-pc-windows-msvc-debug",
+  # "export-wasm32-unknown-emscripten-debug",
+]
+
+[tasks."export:release"]
+dependencies = [
+  # "export-aarch64-linux-android-release",
+  # "export-armv7-linux-androideabi-release",
+  # "export-i686-linux-android-release",
+  # "export-x86_64-linux-android-release",
+  # "export-i686-unknown-linux-gnu-release",
+  # "export-x86_64-unknown-linux-gnu-release",
+  "export-x86_64-apple-darwin-release",
+  # "export-aarch64-apple-darwin-release",
+  # "export-aarch64-apple-ios-release",
+  # "export-i686-pc-windows-gnu-release",
+  # "export-x86_64-pc-windows-gnu-release",
+  # "export-i686-pc-windows-msvc-release",
+  # "export-x86_64-pc-windows-msvc-release",
+  # "export-wasm32-unknown-emscripten-release",
+]
+
+[tasks.ps1-build-aarch64-linux-android-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target aarch64-linux-android --package ${@}
+mv ./target/aarch64-linux-android/debug/lib${@}.so ./games/${@}/godot/lib/aarch64-linux-android
+'''
+
+[tasks.sh-build-aarch64-linux-android-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target aarch64-linux-android --package ${@}
+if [[ -f ./games/${@}/godot/lib/aarch64-linux-android/lib${@}.so ]]; then
+  rm ./games/${@}/godot/lib/aarch64-linux-android/lib${@}.so
+fi
+mv ./target/aarch64-linux-android/debug/lib${@}.so ./games/${@}/godot/lib/aarch64-linux-android
+'''
+
+[tasks.build-aarch64-linux-android-debug]
+run_task = [
+  { name = "ps1-build-aarch64-linux-android-debug", condition = { platforms = ["windows"] } },
+  { name = "sh-build-aarch64-linux-android-debug", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-aarch64-linux-android-debug]
+dependencies = ["build-aarch64-linux-android-debug"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export-debug "Android.aarch64-linux-android.debug" ./games/${@}/bin/aarch64-linux-android/${@}.debug.aarch64-linux-android.apk
+'''
+
+[tasks.ps1-build-aarch64-linux-android-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target aarch64-linux-android --release --package ${@}
+mv ./target/aarch64-linux-android/release/lib${@}.so ./games/${@}/godot/lib/aarch64-linux-android
+'''
+
+[tasks.sh-build-aarch64-linux-android-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target aarch64-linux-android --release --package ${@}
+if [[ -f ./games/${@}/godot/lib/aarch64-linux-android/lib${@}.so ]]; then
+  rm ./games/${@}/godot/lib/aarch64-linux-android/lib${@}.so
+fi
+mv ./target/aarch64-linux-android/release/lib${@}.so ./games/${@}/godot/lib/aarch64-linux-android
+'''
+
+[tasks.build-aarch64-linux-android-release]
+run_task = [
+  { name = "ps1-build-aarch64-linux-android-release", condition = { platforms = ["windows"] } },
+  { name = "sh-build-aarch64-linux-android-release", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-aarch64-linux-android-release]
+dependencies = ["build-aarch64-linux-android-release"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export "Android.aarch64-linux-android.release" ./games/${@}/bin/aarch64-linux-android/${@}.release.aarch64-linux-android.apk
+'''
+
+[tasks.ps1-build-armv7-linux-androideabi-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target armv7-linux-androideabi --package ${@}
+mv ./target/armv7-linux-androideabi/debug/lib${@}.so ./games/${@}/godot/lib/armv7-linux-androideabi
+'''
+
+[tasks.sh-build-armv7-linux-androideabi-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target armv7-linux-androideabi --package ${@}
+if [[ -f ./games/${@}/godot/lib/armv7-linux-androideabi/lib${@}.so ]]; then
+  rm ./games/${@}/godot/lib/armv7-linux-androideabi/lib${@}.so
+fi
+mv ./target/armv7-linux-androideabi/debug/lib${@}.so ./games/${@}/godot/lib/armv7-linux-androideabi
+'''
+
+[tasks.build-armv7-linux-androideabi-debug]
+run_task = [
+  { name = "ps1-build-armv7-linux-androideabi-debug", condition = { platforms = ["windows"] } },
+  { name = "sh-build-armv7-linux-androideabi-debug", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-armv7-linux-androideabi-debug]
+dependencies = ["build-armv7-linux-androideabi-debug"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export-debug "Android.armv7-linux-androideabi.debug" ./games/${@}/bin/armv7-linux-androideabi/${@}.debug.armv7-linux-androideabi.apk
+'''
+
+[tasks.ps1-build-armv7-linux-androideabi-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target armv7-linux-androideabi --release --package ${@}
+mv ./target/armv7-linux-androideabi/release/lib${@}.so ./games/${@}/godot/lib/armv7-linux-androideabi
+'''
+
+[tasks.sh-build-armv7-linux-androideabi-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target armv7-linux-androideabi --release --package ${@}
+if [[ -f ./games/${@}/godot/lib/armv7-linux-androideabi/lib${@}.so ]]; then
+  rm ./games/${@}/godot/lib/armv7-linux-androideabi/lib${@}.so
+fi
+mv ./target/armv7-linux-androideabi/release/lib${@}.so ./games/${@}/godot/lib/armv7-linux-androideabi
+'''
+
+[tasks.build-armv7-linux-androideabi-release]
+run_task = [
+  { name = "ps1-build-armv7-linux-androideabi-release", condition = { platforms = ["windows"] } },
+  { name = "sh-build-armv7-linux-androideabi-release", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-armv7-linux-androideabi-release]
+dependencies = ["build-armv7-linux-androideabi-release"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export "Android.armv7-linux-androideabi.release" ./games/${@}/bin/armv7-linux-androideabi/${@}.release.armv7-linux-androideabi.apk
+'''
+
+[tasks.ps1-build-i686-linux-android-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-linux-android --package ${@}
+mv ./target/i686-linux-android/debug/lib${@}.so ./games/${@}/godot/lib/i686-linux-android
+'''
+
+[tasks.sh-build-i686-linux-android-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-linux-android --package ${@}
+if [[ -f ./games/${@}/godot/lib/i686-linux-android/lib${@}.so ]]; then
+  rm ./games/${@}/godot/lib/i686-linux-android/lib${@}.so
+fi
+mv ./target/i686-linux-android/debug/lib${@}.so ./games/${@}/godot/lib/i686-linux-android
+'''
+
+[tasks.build-i686-linux-android-debug]
+run_task = [
+  { name = "ps1-build-i686-linux-android-debug", condition = { platforms = ["windows"] } },
+  { name = "sh-build-i686-linux-android-debug", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-i686-linux-android-debug]
+dependencies = ["build-i686-linux-android-debug"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export-debug "Android.i686-linux-android.debug" ./games/${@}/bin/i686-linux-android/${@}.debug.i686-linux-android.apk
+'''
+
+[tasks.ps1-build-i686-linux-android-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-linux-android --release --package ${@}
+mv ./target/i686-linux-android/release/lib${@}.so ./games/${@}/godot/lib/i686-linux-android
+'''
+
+[tasks.sh-build-i686-linux-android-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-linux-android --release --package ${@}
+if [[ -f ./games/${@}/godot/lib/i686-linux-android/lib${@}.so ]]; then
+  rm ./games/${@}/godot/lib/i686-linux-android/lib${@}.so
+fi
+mv ./target/i686-linux-android/release/lib${@}.so ./games/${@}/godot/lib/i686-linux-android
+'''
+
+[tasks.build-i686-linux-android-release]
+run_task = [
+  { name = "ps1-build-i686-linux-android-release", condition = { platforms = ["windows"] } },
+  { name = "sh-build-i686-linux-android-release", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-i686-linux-android-release]
+dependencies = ["build-i686-linux-android-release"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export "Android.i686-linux-android.release" ./games/${@}/bin/i686-linux-android/${@}.release.i686-linux-android.apk
+'''
+
+[tasks.ps1-build-x86_64-linux-android-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-linux-android --package ${@}
+mv ./target/x86_64-linux-android/debug/lib${@}.so ./games/${@}/godot/lib/x86_64-linux-android
+'''
+
+[tasks.sh-build-x86_64-linux-android-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-linux-android --package ${@}
+if [[ -f ./games/${@}/godot/lib/x86_64-linux-android/lib${@}.so ]]; then
+  rm ./games/${@}/godot/lib/x86_64-linux-android/lib${@}.so
+fi
+mv ./target/x86_64-linux-android/debug/lib${@}.so ./games/${@}/godot/lib/x86_64-linux-android
+'''
+
+[tasks.build-x86_64-linux-android-debug]
+run_task = [
+  { name = "ps1-build-x86_64-linux-android-debug", condition = { platforms = ["windows"] } },
+  { name = "sh-build-x86_64-linux-android-debug", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-x86_64-linux-android-debug]
+dependencies = ["build-x86_64-linux-android-debug"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export-debug "Android.x86_64-linux-android.debug" ./games/${@}/bin/x86_64-linux-android/${@}.debug.x86_64-linux-android.apk
+'''
+
+[tasks.ps1-build-x86_64-linux-android-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-linux-android --release --package ${@}
+mv ./target/x86_64-linux-android/release/lib${@}.so ./games/${@}/godot/lib/x86_64-linux-android
+'''
+
+[tasks.sh-build-x86_64-linux-android-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-linux-android --release --package ${@}
+if [[ -f ./games/${@}/godot/lib/x86_64-linux-android/lib${@}.so ]]; then
+  rm ./games/${@}/godot/lib/x86_64-linux-android/lib${@}.so
+fi
+mv ./target/x86_64-linux-android/release/lib${@}.so ./games/${@}/godot/lib/x86_64-linux-android
+'''
+
+[tasks.build-x86_64-linux-android-release]
+run_task = [
+  { name = "ps1-build-x86_64-linux-android-release", condition = { platforms = ["windows"] } },
+  { name = "sh-build-x86_64-linux-android-release", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-x86_64-linux-android-release]
+dependencies = ["build-x86_64-linux-android-release"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export "Android.x86_64-linux-android.release" ./games/${@}/bin/x86_64-linux-android/${@}.release.x86_64-linux-android.apk
+'''
+
+[tasks.ps1-build-i686-unknown-linux-gnu-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-unknown-linux-gnu --package ${@}
+mv ./target/i686-unknown-linux-gnu/debug/lib${@}.so ./games/${@}/godot/lib/i686-unknown-linux-gnu
+'''
+
+[tasks.sh-build-i686-unknown-linux-gnu-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-unknown-linux-gnu --package ${@}
+if [[ -f ./games/${@}/godot/lib/i686-unknown-linux-gnu/lib${@}.so ]]; then
+  rm ./games/${@}/godot/lib/i686-unknown-linux-gnu/lib${@}.so
+fi
+mv ./target/i686-unknown-linux-gnu/debug/lib${@}.so ./games/${@}/godot/lib/i686-unknown-linux-gnu
+'''
+
+[tasks.build-i686-unknown-linux-gnu-debug]
+run_task = [
+  { name = "ps1-build-i686-unknown-linux-gnu-debug", condition = { platforms = ["windows"] } },
+  { name = "sh-build-i686-unknown-linux-gnu-debug", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-i686-unknown-linux-gnu-debug]
+dependencies = ["build-i686-unknown-linux-gnu-debug"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export-debug "Linux/X11.i686-unknown-linux-gnu.debug" ./games/${@}/bin/i686-unknown-linux-gnu/${@}.debug.i686-unknown-linux-gnu
+'''
+
+[tasks.ps1-build-i686-unknown-linux-gnu-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-unknown-linux-gnu --release --package ${@}
+mv ./target/i686-unknown-linux-gnu/release/lib${@}.so ./games/${@}/godot/lib/i686-unknown-linux-gnu
+'''
+
+[tasks.sh-build-i686-unknown-linux-gnu-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-unknown-linux-gnu --release --package ${@}
+if [[ -f ./games/${@}/godot/lib/i686-unknown-linux-gnu/lib${@}.so ]]; then
+  rm ./games/${@}/godot/lib/i686-unknown-linux-gnu/lib${@}.so
+fi
+mv ./target/i686-unknown-linux-gnu/release/lib${@}.so ./games/${@}/godot/lib/i686-unknown-linux-gnu
+'''
+
+[tasks.build-i686-unknown-linux-gnu-release]
+run_task = [
+  { name = "ps1-build-i686-unknown-linux-gnu-release", condition = { platforms = ["windows"] } },
+  { name = "sh-build-i686-unknown-linux-gnu-release", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-i686-unknown-linux-gnu-release]
+dependencies = ["build-i686-unknown-linux-gnu-release"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export "Linux/X11.i686-unknown-linux-gnu.release" ./games/${@}/bin/i686-unknown-linux-gnu/${@}.release.i686-unknown-linux-gnu
+'''
+
+[tasks.ps1-build-x86_64-unknown-linux-gnu-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-unknown-linux-gnu --package ${@}
+mv ./target/x86_64-unknown-linux-gnu/debug/lib${@}.so ./games/${@}/godot/lib/x86_64-unknown-linux-gnu
+'''
+
+[tasks.sh-build-x86_64-unknown-linux-gnu-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-unknown-linux-gnu --package ${@}
+if [[ -f ./games/${@}/godot/lib/x86_64-unknown-linux-gnu/lib${@}.so ]]; then
+  rm ./games/${@}/godot/lib/x86_64-unknown-linux-gnu/lib${@}.so
+fi
+mv ./target/x86_64-unknown-linux-gnu/debug/lib${@}.so ./games/${@}/godot/lib/x86_64-unknown-linux-gnu
+'''
+
+[tasks.build-x86_64-unknown-linux-gnu-debug]
+run_task = [
+  { name = "ps1-build-x86_64-unknown-linux-gnu-debug", condition = { platforms = ["windows"] } },
+  { name = "sh-build-x86_64-unknown-linux-gnu-debug", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-x86_64-unknown-linux-gnu-debug]
+dependencies = ["build-x86_64-unknown-linux-gnu-debug"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export-debug "Linux/X11.x86_64-unknown-linux-gnu.debug" ./games/${@}/bin/x86_64-unknown-linux-gnu/${@}.debug.x86_64-unknown-linux-gnu
+'''
+
+[tasks.ps1-build-x86_64-unknown-linux-gnu-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-unknown-linux-gnu --release --package ${@}
+mv ./target/x86_64-unknown-linux-gnu/release/lib${@}.so ./games/${@}/godot/lib/x86_64-unknown-linux-gnu
+'''
+
+[tasks.sh-build-x86_64-unknown-linux-gnu-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-unknown-linux-gnu --release --package ${@}
+if [[ -f ./games/${@}/godot/lib/x86_64-unknown-linux-gnu/lib${@}.so ]]; then
+  rm ./games/${@}/godot/lib/x86_64-unknown-linux-gnu/lib${@}.so
+fi
+mv ./target/x86_64-unknown-linux-gnu/release/lib${@}.so ./games/${@}/godot/lib/x86_64-unknown-linux-gnu
+'''
+
+[tasks.build-x86_64-unknown-linux-gnu-release]
+run_task = [
+  { name = "ps1-build-x86_64-unknown-linux-gnu-release", condition = { platforms = ["windows"] } },
+  { name = "sh-build-x86_64-unknown-linux-gnu-release", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-x86_64-unknown-linux-gnu-release]
+dependencies = ["build-x86_64-unknown-linux-gnu-release"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export "Linux/X11.x86_64-unknown-linux-gnu.release" ./games/${@}/bin/x86_64-unknown-linux-gnu/${@}.release.x86_64-unknown-linux-gnu
+'''
+
+[tasks.ps1-build-x86_64-apple-darwin-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-apple-darwin --package ${@}
+mv ./target/x86_64-apple-darwin/debug/lib${@}.dylib ./games/${@}/godot/lib/x86_64-apple-darwin
+'''
+
+[tasks.sh-build-x86_64-apple-darwin-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-apple-darwin --package ${@}
+if [[ -f ./games/${@}/godot/lib/x86_64-apple-darwin/lib${@}.dylib ]]; then
+  rm ./games/${@}/godot/lib/x86_64-apple-darwin/lib${@}.dylib
+fi
+mv ./target/x86_64-apple-darwin/debug/lib${@}.dylib ./games/${@}/godot/lib/x86_64-apple-darwin
+'''
+
+[tasks.build-x86_64-apple-darwin-debug]
+run_task = [
+  { name = "ps1-build-x86_64-apple-darwin-debug", condition = { platforms = ["windows"] } },
+  { name = "sh-build-x86_64-apple-darwin-debug", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-x86_64-apple-darwin-debug]
+dependencies = ["build-x86_64-apple-darwin-debug"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export-debug "Mac OSX.x86_64-apple-darwin.debug" ./games/${@}/bin/x86_64-apple-darwin/${@}.debug.x86_64-apple-darwin.dmg
+'''
+
+[tasks.ps1-build-x86_64-apple-darwin-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-apple-darwin --release --package ${@}
+mv ./target/x86_64-apple-darwin/release/lib${@}.dylib ./games/${@}/godot/lib/x86_64-apple-darwin
+'''
+
+[tasks.sh-build-x86_64-apple-darwin-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-apple-darwin --release --package ${@}
+if [[ -f ./games/${@}/godot/lib/x86_64-apple-darwin/lib${@}.dylib ]]; then
+  rm ./games/${@}/godot/lib/x86_64-apple-darwin/lib${@}.dylib
+fi
+mv ./target/x86_64-apple-darwin/release/lib${@}.dylib ./games/${@}/godot/lib/x86_64-apple-darwin
+'''
+
+[tasks.build-x86_64-apple-darwin-release]
+run_task = [
+  { name = "ps1-build-x86_64-apple-darwin-release", condition = { platforms = ["windows"] } },
+  { name = "sh-build-x86_64-apple-darwin-release", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-x86_64-apple-darwin-release]
+dependencies = ["build-x86_64-apple-darwin-release"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export "Mac OSX.x86_64-apple-darwin.release" ./games/${@}/bin/x86_64-apple-darwin/${@}.release.x86_64-apple-darwin.dmg
+'''
+
+[tasks.ps1-build-aarch64-apple-darwin-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target aarch64-apple-darwin --package ${@}
+mv target/aarch64-apple-darwin/debug/lib${@}.dylib ./games/${@}/godot/lib/aarch64-apple-darwin
+'''
+
+[tasks.sh-build-aarch64-apple-darwin-debug]
+# dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target aarch64-apple-darwin --package ${@}
+if [[ -f ./games/${@}/godot/lib/aarch64-apple-darwin/lib${@}.dylib ]]; then
+  rm ./games/${@}/godot/lib/aarch64-apple-darwin/lib${@}.dylib
+fi
+echo $PWD
+mv ./target/aarch64-apple-darwin/debug/lib${@}.dylib ./games/${@}/godot/lib/aarch64-apple-darwin
+'''
+
+[tasks.build-aarch64-apple-darwin-debug]
+run_task = [
+  { name = "ps1-build-aarch64-apple-darwin-debug", condition = { platforms = ["windows"] } },
+  { name = "sh-build-aarch64-apple-darwin-debug", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-aarch64-apple-darwin-debug]
+dependencies = ["build-aarch64-apple-darwin-debug"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export-debug "Mac OSX.aarch64-apple-darwin.debug" ./games/${@}/bin/aarch64-apple-darwin/${@}.debug.aarch64-apple-darwin.dmg
+'''
+
+[tasks.ps1-build-aarch64-apple-darwin-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target aarch64-apple-darwin --release --package ${@}
+mv ./target/aarch64-apple-darwin/release/lib${@}.dylib ./games/${@}/godot/lib/aarch64-apple-darwin
+'''
+
+[tasks.sh-build-aarch64-apple-darwin-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target aarch64-apple-darwin --release --package ${@}
+if [[ -f ./games/${@}/godot/lib/aarch64-apple-darwin/lib${@}.dylib ]]; then
+  rm ./games/${@}/godot/lib/aarch64-apple-darwin/lib${@}.dylib
+fi
+mv ./target/aarch64-apple-darwin/release/lib${@}.dylib ./games/${@}/godot/lib/aarch64-apple-darwin
+'''
+
+[tasks.build-aarch64-apple-darwin-release]
+run_task = [
+  { name = "ps1-build-aarch64-apple-darwin-release", condition = { platforms = ["windows"] } },
+  { name = "sh-build-aarch64-apple-darwin-release", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-aarch64-apple-darwin-release]
+dependencies = ["build-aarch64-apple-darwin-release"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export "Mac OSX.aarch64-apple-darwin.release" ./games/${@}/bin/aarch64-apple-darwin/${@}.release.aarch64-apple-darwin.dmg
+'''
+
+[tasks.ps1-build-aarch64-apple-ios-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target aarch64-apple-ios --package ${@}
+mv ./target/aarch64-apple-ios/debug/*.a ./games/${@}/godot/lib/aarch64-apple-ios
+'''
+
+[tasks.sh-build-aarch64-apple-ios-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target aarch64-apple-ios --package ${@}
+if [[ -f ./games/${@}/godot/lib/aarch64-apple-ios/*.a ]]; then
+  rm ./games/${@}/godot/lib/aarch64-apple-ios/*.a
+fi
+mv ./target/aarch64-apple-ios/debug/*.a ./games/${@}/godot/lib/aarch64-apple-ios
+'''
+
+[tasks.build-aarch64-apple-ios-debug]
+run_task = [
+  { name = "ps1-build-aarch64-apple-ios-debug", condition = { platforms = ["windows"] } },
+  { name = "sh-build-aarch64-apple-ios-debug", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-aarch64-apple-ios-debug]
+dependencies = ["build-aarch64-apple-ios-debug"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export-debug "iOS.aarch64-apple-ios.debug" ./games/${@}/bin/aarch64-apple-ios/${@}.debug.aarch64-apple-ios
+'''
+
+[tasks.ps1-build-aarch64-apple-ios-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target aarch64-apple-ios --release --package ${@}
+mv ./target/aarch64-apple-ios/release/*.a ./games/${@}/godot/lib/aarch64-apple-ios
+'''
+
+[tasks.sh-build-aarch64-apple-ios-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target aarch64-apple-ios --release --package ${@}
+if [[ -f ./games/${@}/godot/lib/aarch64-apple-ios/*.a ]]; then
+  rm ./games/${@}/godot/lib/aarch64-apple-ios/*.a
+fi
+mv ./target/aarch64-apple-ios/release/*.a ./games/${@}/godot/lib/aarch64-apple-ios
+'''
+
+[tasks.build-aarch64-apple-ios-release]
+run_task = [
+  { name = "ps1-build-aarch64-apple-ios-release", condition = { platforms = ["windows"] } },
+  { name = "sh-build-aarch64-apple-ios-release", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-aarch64-apple-ios-release]
+dependencies = ["build-aarch64-apple-ios-release"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export "iOS.aarch64-apple-ios.release" ./games/${@}/bin/aarch64-apple-ios/${@}.release.aarch64-apple-ios
+'''
+
+[tasks.ps1-build-i686-pc-windows-gnu-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-pc-windows-gnu --package ${@}
+mv ./target/i686-pc-windows-gnu/debug/${@}.dll ./games/${@}/godot/lib/i686-pc-windows-gnu
+'''
+
+[tasks.sh-build-i686-pc-windows-gnu-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-pc-windows-gnu --package ${@}
+if [[ -f ./games/${@}/godot/lib/i686-pc-windows-gnu/${@}.dll ]]; then
+  rm ./games/${@}/godot/lib/i686-pc-windows-gnu/${@}.dll
+fi
+mv ./target/i686-pc-windows-gnu/debug/${@}.dll ./games/${@}/godot/lib/i686-pc-windows-gnu
+'''
+
+[tasks.build-i686-pc-windows-gnu-debug]
+run_task = [
+  { name = "ps1-build-i686-pc-windows-gnu-debug", condition = { platforms = ["windows"] } },
+  { name = "sh-build-i686-pc-windows-gnu-debug", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-i686-pc-windows-gnu-debug]
+dependencies = ["build-i686-pc-windows-gnu-debug"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export-debug "Windows Desktop.i686-pc-windows-gnu.debug" ./games/${@}/bin/i686-pc-windows-gnu/${@}.debug.i686-pc-windows-gnu.exe
+'''
+
+[tasks.ps1-build-i686-pc-windows-gnu-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-pc-windows-gnu --release --package ${@}
+mv ./target/i686-pc-windows-gnu/release/${@}.dll ./games/${@}/godot/lib/i686-pc-windows-gnu
+'''
+
+[tasks.sh-build-i686-pc-windows-gnu-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-pc-windows-gnu --release --package ${@}
+if [[ -f ./games/${@}/godot/lib/i686-pc-windows-gnu/${@}.dll ]]; then
+  rm ./games/${@}/godot/lib/i686-pc-windows-gnu/${@}.dll
+fi
+mv ./target/i686-pc-windows-gnu/release/${@}.dll ./games/${@}/godot/lib/i686-pc-windows-gnu
+'''
+
+[tasks.build-i686-pc-windows-gnu-release]
+run_task = [
+  { name = "ps1-build-i686-pc-windows-gnu-release", condition = { platforms = ["windows"] } },
+  { name = "sh-build-i686-pc-windows-gnu-release", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-i686-pc-windows-gnu-release]
+dependencies = ["build-i686-pc-windows-gnu-release"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export "Windows Desktop.i686-pc-windows-gnu.release" ./games/${@}/bin/i686-pc-windows-gnu/${@}.release.i686-pc-windows-gnu.exe
+'''
+
+[tasks.ps1-build-x86_64-pc-windows-gnu-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-pc-windows-gnu --package ${@}
+mv ./target/x86_64-pc-windows-gnu/debug/${@}.dll ./games/${@}/godot/lib/x86_64-pc-windows-gnu
+'''
+
+[tasks.sh-build-x86_64-pc-windows-gnu-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-pc-windows-gnu --package ${@}
+if [[ -f ./games/${@}/godot/lib/x86_64-pc-windows-gnu/${@}.dll ]]; then
+  rm ./games/${@}/godot/lib/x86_64-pc-windows-gnu/${@}.dll
+fi
+mv ./target/x86_64-pc-windows-gnu/debug/${@}.dll ./games/${@}/godot/lib/x86_64-pc-windows-gnu
+'''
+
+[tasks.build-x86_64-pc-windows-gnu-debug]
+run_task = [
+  { name = "ps1-build-x86_64-pc-windows-gnu-debug", condition = { platforms = ["windows"] } },
+  { name = "sh-build-x86_64-pc-windows-gnu-debug", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-x86_64-pc-windows-gnu-debug]
+dependencies = ["build-x86_64-pc-windows-gnu-debug"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export-debug "Windows Desktop.x86_64-pc-windows-gnu.debug" ./games/${@}/bin/x86_64-pc-windows-gnu/${@}.debug.x86_64-pc-windows-gnu.exe
+'''
+
+[tasks.ps1-build-x86_64-pc-windows-gnu-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-pc-windows-gnu --release --package ${@}
+mv ./target/x86_64-pc-windows-gnu/release/${@}.dll ./games/${@}/godot/lib/x86_64-pc-windows-gnu
+'''
+
+[tasks.sh-build-x86_64-pc-windows-gnu-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-pc-windows-gnu --release --package ${@}
+if [[ -f ./games/${@}/godot/lib/x86_64-pc-windows-gnu/${@}.dll ]]; then
+  rm ./games/${@}/godot/lib/x86_64-pc-windows-gnu/${@}.dll
+fi
+mv ./target/x86_64-pc-windows-gnu/release/${@}.dll ./games/${@}/godot/lib/x86_64-pc-windows-gnu
+'''
+
+[tasks.build-x86_64-pc-windows-gnu-release]
+run_task = [
+  { name = "ps1-build-x86_64-pc-windows-gnu-release", condition = { platforms = ["windows"] } },
+  { name = "sh-build-x86_64-pc-windows-gnu-release", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-x86_64-pc-windows-gnu-release]
+dependencies = ["build-x86_64-pc-windows-gnu-release"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export "Windows Desktop.x86_64-pc-windows-gnu.release" ./games/${@}/bin/x86_64-pc-windows-gnu/${@}.release.x86_64-pc-windows-gnu.exe
+'''
+
+[tasks.ps1-build-i686-pc-windows-msvc-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-pc-windows-msvc --package ${@}
+mv ./target/i686-pc-windows-msvc/debug/${@}.dll ./games/${@}/godot/lib/i686-pc-windows-msvc
+'''
+
+[tasks.sh-build-i686-pc-windows-msvc-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-pc-windows-msvc --package ${@}
+if [[ -f ./games/${@}/godot/lib/i686-pc-windows-msvc/${@}.dll ]]; then
+  rm ./games/${@}/godot/lib/i686-pc-windows-msvc/${@}.dll
+fi
+mv ./target/i686-pc-windows-msvc/debug/${@}.dll ./games/${@}/godot/lib/i686-pc-windows-msvc
+'''
+
+[tasks.build-i686-pc-windows-msvc-debug]
+run_task = [
+  { name = "ps1-build-i686-pc-windows-msvc-debug", condition = { platforms = ["windows"] } },
+  { name = "sh-build-i686-pc-windows-msvc-debug", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-i686-pc-windows-msvc-debug]
+dependencies = ["build-i686-pc-windows-msvc-debug"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export-debug "Windows Desktop.i686-pc-windows-msvc.debug" ./games/${@}/bin/i686-pc-windows-msvc/${@}.debug.i686-pc-windows-msvc.exe
+'''
+
+[tasks.ps1-build-i686-pc-windows-msvc-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-pc-windows-msvc --release --package ${@}
+mv ./target/i686-pc-windows-msvc/release/${@}.dll ./games/${@}/godot/lib/i686-pc-windows-msvc
+'''
+
+[tasks.sh-build-i686-pc-windows-msvc-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target i686-pc-windows-msvc --release --package ${@}
+if [[ -f ./games/${@}/godot/lib/i686-pc-windows-msvc/${@}.dll ]]; then
+  rm ./games/${@}/godot/lib/i686-pc-windows-msvc/${@}.dll
+fi
+mv ./target/i686-pc-windows-msvc/release/${@}.dll ./games/${@}/godot/lib/i686-pc-windows-msvc
+'''
+
+[tasks.build-i686-pc-windows-msvc-release]
+run_task = [
+  { name = "ps1-build-i686-pc-windows-msvc-release", condition = { platforms = ["windows"] } },
+  { name = "sh-build-i686-pc-windows-msvc-release", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-i686-pc-windows-msvc-release]
+dependencies = ["build-i686-pc-windows-msvc-release"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export "Windows Desktop.i686-pc-windows-msvc.release" ./games/${@}/bin/i686-pc-windows-msvc/${@}.release.i686-pc-windows-msvc.exe
+'''
+
+[tasks.ps1-build-x86_64-pc-windows-msvc-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-pc-windows-msvc --package ${@}
+mv ./target/x86_64-pc-windows-msvc/debug/${@}.dll ./games/${@}/godot/lib/x86_64-pc-windows-msvc
+'''
+
+[tasks.sh-build-x86_64-pc-windows-msvc-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-pc-windows-msvc --package ${@}
+if [[ -f ./games/${@}/godot/lib/x86_64-pc-windows-msvc/${@}.dll ]]; then
+  rm ./games/${@}/godot/lib/x86_64-pc-windows-msvc/${@}.dll
+fi
+mv ./target/x86_64-pc-windows-msvc/debug/${@}.dll ./games/${@}/godot/lib/x86_64-pc-windows-msvc
+'''
+
+[tasks.build-x86_64-pc-windows-msvc-debug]
+run_task = [
+  { name = "ps1-build-x86_64-pc-windows-msvc-debug", condition = { platforms = ["windows"] } },
+  { name = "sh-build-x86_64-pc-windows-msvc-debug", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-x86_64-pc-windows-msvc-debug]
+dependencies = ["build-x86_64-pc-windows-msvc-debug"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export-debug "Windows Desktop.x86_64-pc-windows-msvc.debug" ./games/${@}/bin/x86_64-pc-windows-msvc/${@}.debug.x86_64-pc-windows-msvc.exe
+'''
+
+[tasks.ps1-build-x86_64-pc-windows-msvc-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-pc-windows-msvc --release --package ${@}
+mv ./target/x86_64-pc-windows-msvc/release/${@}.dll ./games/${@}/godot/lib/x86_64-pc-windows-msvc
+'''
+
+[tasks.sh-build-x86_64-pc-windows-msvc-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target x86_64-pc-windows-msvc --release --package ${@}
+if [[ -f ./games/${@}/godot/lib/x86_64-pc-windows-msvc/${@}.dll ]]; then
+  rm ./games/${@}/godot/lib/x86_64-pc-windows-msvc/${@}.dll
+fi
+mv ./target/x86_64-pc-windows-msvc/release/${@}.dll ./games/${@}/godot/lib/x86_64-pc-windows-msvc
+'''
+
+[tasks.build-x86_64-pc-windows-msvc-release]
+run_task = [
+  { name = "ps1-build-x86_64-pc-windows-msvc-release", condition = { platforms = ["windows"] } },
+  { name = "sh-build-x86_64-pc-windows-msvc-release", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-x86_64-pc-windows-msvc-release]
+dependencies = ["build-x86_64-pc-windows-msvc-release"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export "Windows Desktop.x86_64-pc-windows-msvc.release" ./games/${@}/bin/x86_64-pc-windows-msvc/${@}.release.x86_64-pc-windows-msvc.exe
+'''
+
+[tasks.ps1-build-wasm32-unknown-emscripten-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target wasm32-unknown-emscripten --package ${@}
+mv ./target/wasm32-unknown-emscripten/debug/${@}.wasm ./games/${@}/godot/lib/wasm32-unknown-emscripten
+'''
+
+[tasks.sh-build-wasm32-unknown-emscripten-debug]
+script_runner = "@shell"
+script = '''
+cargo build --target wasm32-unknown-emscripten --package ${@}
+if [[ -f ./games/${@}/godot/lib/wasm32-unknown-emscripten/${@}.wasm ]]; then
+  rm ./games/${@}/godot/lib/wasm32-unknown-emscripten/${@}.wasm
+fi
+mv ./target/wasm32-unknown-emscripten/debug/${@}.wasm ./games/${@}/godot/lib/wasm32-unknown-emscripten
+'''
+
+[tasks.build-wasm32-unknown-emscripten-debug]
+run_task = [
+  { name = "ps1-build-wasm32-unknown-emscripten-debug", condition = { platforms = ["windows"] } },
+  { name = "sh-build-wasm32-unknown-emscripten-debug", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-wasm32-unknown-emscripten-debug]
+dependencies = ["build-wasm32-unknown-emscripten-debug"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export-debug "HTML5.wasm32-unknown-emscripten.debug" ./games/${@}/bin/wasm32-unknown-emscripten/${@}.debug.wasm32-unknown-emscripten.html
+'''
+
+[tasks.ps1-build-wasm32-unknown-emscripten-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target wasm32-unknown-emscripten --release --package ${@}
+mv ./target/wasm32-unknown-emscripten/release/${@}.wasm ./games/${@}/godot/lib/wasm32-unknown-emscripten
+'''
+
+[tasks.sh-build-wasm32-unknown-emscripten-release]
+dependencies = ["clean"]
+script_runner = "@shell"
+script = '''
+cargo build --target wasm32-unknown-emscripten --release --package ${@}
+if [[ -f ./games/${@}/godot/lib/wasm32-unknown-emscripten/${@}.wasm ]]; then
+  rm ./games/${@}/godot/lib/wasm32-unknown-emscripten/${@}.wasm
+fi
+mv ./target/wasm32-unknown-emscripten/release/${@}.wasm ./games/${@}/godot/lib/wasm32-unknown-emscripten
+'''
+
+[tasks.build-wasm32-unknown-emscripten-release]
+run_task = [
+  { name = "ps1-build-wasm32-unknown-emscripten-release", condition = { platforms = ["windows"] } },
+  { name = "sh-build-wasm32-unknown-emscripten-release", condition = { platforms = ["linux", "mac"] } },
+]
+
+[tasks.export-wasm32-unknown-emscripten-release]
+dependencies = ["build-wasm32-unknown-emscripten-release"]
+script_runner = "@shell"
+script = '''
+cd ../godot/
+godot --export "HTML5.wasm32-unknown-emscripten.release" ./games/${@}/bin/wasm32-unknown-emscripten/${@}.release.wasm32-unknown-emscripten.html
+'''
+
+[tasks.audit]
+command = "cargo"
+args = ["audit"]
+
+[tasks.check]
+command = "cargo"
+args = ["check"]
+dependencies = ["clean"]
+
+[tasks.clean]
+command = "cargo"
+args = ["clean"]
+
+[tasks.a]
+script_runner = "@shell"
+script = '''
+echo see this "${3}", "${2}", "${1}"
+'''
+
+[tasks."keystore:debug"]
+script_runner = "@shell"
+script = '''
+keytool -keyalg RSA -genkeypair -alias ${1}debugkey -keypass android -keystore ${1}.debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 -deststoretype pkcs12
+mv *.keystore games/${1} ..
+'''
+
+[tasks."keystore:release"]
+script_runner = "@shell"
+script = '''
+keytool -keyalg RSA -genkeypair -alias ${2} -keypass ${3} -keystore ${1}.release.keystore -storepass ${4} -dname "CN=${5},O=Android,C=US" -validity 10000 -deststoretype pkcs12
+mv *.keystore games/${1} ..
+'''
+
+[tasks.doc]
+command = "cargo"
+args = ["doc", "--no-deps", "--open", "-v"]
+dependencies = ["clean"]
+
+[tasks.edit]
+script_runner = "@shell"
+script = '''
+godot --path ./games/${@}/godot -e
+'''
+
+[tasks.run-for-linux]
+# dependencies = ["build-i686-unknown-linux-gnu-debug"]
+dependencies = ["build-x86_64-unknown-linux-gnu-debug"]
+run_task = "run-godot"
+
+[tasks.run-for-macos]
+dependencies = ["build-x86_64-apple-darwin-debug"]
+run_task = "run-godot-macos"
+
+[tasks.run-for-macos-apple-silicon]
+dependencies = ["build-aarch64-apple-darwin-debug"]
+run_task = "run-godot-macos"
+
+[tasks.run-for-windows]
+# dependencies = ["build-i686-pc-windows-gnu-debug"]
+# dependencies = ["build-i686-pc-windows-msvc-debug"]
+# dependencies = ["build-x86_64-pc-windows-gnu-debug"]
+dependencies = ["build-x86_64-pc-windows-msvc-debug"]
+run_task = "run-godot"
+
+[tasks.run-godot]
+script_runner = "@shell"
+script = '''
+cd ./games/${@}/godot
+godot -d
+'''
+
+[tasks.run-godot-macos]
+script_runner = "@shell"
+script = '''
+cd ./games/${@}/godot
+/Applications/Godot.app/Contents/MacOS/Godot -d
+'''
+
+[tasks.run]
+run_task = [
+  { name = "run-for-windows", condition = { platforms = ["windows"] } },
+  { name = "run-for-linux", condition = { platforms = ["linux"] } },
+  { name = "run-for-macos", condition = { platforms = ["mac"], env = { "CARGO_MAKE_RUST_TARGET_ARCH" = "x86_64" } } },
+  { name = "run-for-macos-apple-silicon", condition = { platforms = ["mac"], env = { "CARGO_MAKE_RUST_TARGET_ARCH" = "aarch64" } } },
+]
+
+[tasks.test]
+command = "cargo"
+dependencies = ["clean"]
+args = ["test"]
+
+[env]
+CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
+
+[config]
+default_to_workspace = false

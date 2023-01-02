@@ -1,0 +1,18 @@
+[alias]
+"x:bin" = "x bin"
+"bootstrap" = "x:bin --all"
+"x:make" = "x:bin cargo-make"
+"dodge:debug" = "x:make build:debug dodge"
+"dodge:edit" = "x:make edit dodge"
+"dodge:release" = "x:make build:release dodge"
+"dodge:run" = "x:make run dodge"
+"dodge:watch" = "x:make build:watch dodge"
+"x" = "run --package xtask --"
+"x:leptos" = "x:bin cargo-leptos serve"
+
+[target.wasm32-unknown-emscripten]
+rustflags = [
+  "-Clink-arg=-sSIDE_MODULE=2", # build a side module that Godot can load
+  "-Zlink-native-libraries=no", # workaround for a wasm-ld error during linking
+  "-Cpanic=abort", # workaround for a runtime error related to dyncalls
+]

@@ -1,0 +1,97 @@
+[workspace]
+members = ["spinnybox_com", "games/*", "xtask"]
+default-members = ["spinnybox_com", "games/*", "xtask"]
+
+[workspace.dependencies]
+actix-files = "0.6"
+actix-web = "4"
+anchor-client = { git = "https://github.com/coral-xyz/anchor", rev = "66e4295" }
+anchor-lang = { git = "https://github.com/coral-xyz/anchor", rev = "66e4295" }
+anchor-spl = { git = "https://github.com/coral-xyz/anchor", rev = "66e4295" }
+anyhow = "1"
+bevy = "0.9"
+binary-install = "0.0.2"
+binstalk = "0.6"
+bitflags = "1"
+broadcaster = "1"
+cargo_metadata = "0.15"
+cargo_toml = "0.13"
+cfg-if = "1"
+clap = "4"
+console_error_panic_hook = "0.1"
+console_log = "0.2"
+crates_io_api = "0.8"
+doc-comment = "0.3"
+env_logger = "0.10"
+fs_extra = "1"
+fstrings = "0.2"
+futures = "0.3"
+fyrox = "0.28"
+fyroxed_base = "0.15"
+gdnative = { git = "https://github.com/godot-rust/gdnative", rev = "d0538f0" }
+gloo = { git = "https://github.com/rustwasm/gloo", rev = "f748b49" }
+gloo-net = { git = "https://github.com/rustwasm/gloo", rev = "f748b49" }
+heck = "0.4"
+hex = "0.4"
+home = "0.5"
+http = "0.2"
+indexmap = "1"
+insta = "1"
+lazy_static = "1"
+leptos = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
+leptos_axum = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
+leptos_actix = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
+leptos_dom = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
+leptos_meta = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
+leptos_reactive = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
+leptos_router = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
+leptos_server = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
+log = "0.4"
+notify = "5"
+owo-colors = "3"
+prisma-client-rust = { git = "https://github.com/Brendonovich/prisma-client-rust", tag = "0.6.3" }
+prisma-client-rust-cli = { git = "https://github.com/Brendonovich/prisma-client-rust", tag = "0.6.3" }
+rand = "0.8"
+regex = "1"
+reqwest = "0.11"
+run_script = "0.10"
+serde = "1"
+serde_json = "1"
+simple_logger = "4"
+solana-account-decoder = "1.14"
+solana-client = "1.13"
+solana-program = "1.13"
+solana-sdk = "1.13"
+thiserror = "1"
+tokio = "1"
+typed-builder = "0.11"
+validator = "0.16"
+version_check = "0.9"
+walrus = "0.19"
+wasm-bindgen = "0.2"
+wasm-bindgen-cli-support = "0.2"
+
+# binaries
+cargo-leptos = "0.1"
+cargo-all-features = "1"
+cargo-binstall = "0.17"
+cargo-edit = "0.11"
+cargo-insta = "1"
+cargo-make = "0.36"
+dprint = "0.33"
+cargo-generate = "0.17"
+trunk = "0.16"
+wasm-pack = "0.10"
+
+[profile.dev]
+opt-level = 1
+
+[workspace.metadata.cargo-all-features]
+skip_feature_sets = [["csr", "ssr"], ["csr", "hydrate"], ["ssr", "hydrate"]]
+
+[profile.release.package.spinnybox_com]
+codegen-units = 1
+opt-level = 'z'
+
+[profile.dev.package.dodge]
+opt-level = 3

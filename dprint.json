@@ -1,0 +1,48 @@
+{
+  "typescript": {
+    "deno": true,
+    "useTabs": false,
+    "module.sortExportDeclarations": "caseInsensitive",
+    "module.sortImportDeclarations": "caseInsensitive"
+  },
+  "json": { "deno": true, "useTabs": false },
+  "markdown": { "deno": true, "textWrap": "never" },
+  "toml": { "useTabs": false },
+  "includes": ["**/*.{ts,tsx,js,jsx,cjs,mjs,json,jsonc,md,toml,dockerfile,rs}"],
+  "rustfmt": {
+    "edition": "2021",
+    "version": "Two",
+    "max_width": 100,
+    "unstable_features": true,
+    "newline_style": "Unix",
+    "tab_spaces": 2,
+    "hard_tabs": false,
+    "imports_granularity": "Item",
+    "imports_layout": "HorizontalVertical",
+    "reorder_imports": true,
+    "group_imports": "StdExternalCrate",
+    "reorder_modules": true,
+    "format_code_in_doc_comments": true,
+    "normalize_comments": true,
+    "wrap_comments": true,
+    "condense_wildcard_suffixes": true,
+    "force_multiline_blocks": true,
+    "format_macro_matchers": true,
+    "format_strings": true,
+
+    "reorder_impl_items": true,
+    "use_field_init_shorthand": true
+  },
+  "excludes": [
+    "**/fixtures",
+    "**/snapshots",
+    "target/**"
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/rustfmt-0.6.2.json@886c6f3161cf020c2d75160262b0f56d74a521e05cfb91ec4f956650c8ca76ca",
+    "https://plugins.dprint.dev/typescript-0.78.0.wasm",
+    "https://plugins.dprint.dev/json-0.16.0.wasm",
+    "https://plugins.dprint.dev/markdown-0.14.2.wasm",
+    "https://plugins.dprint.dev/toml-0.5.4.wasm"
+  ]
+}

@@ -1,0 +1,27 @@
+[package]
+name = "xtask"
+version = "0.0.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = { workspace = true }
+binstalk = { workspace = true }
+cargo-binstall = { workspace = true }
+cargo_metadata = { workspace = true }
+cargo_toml = { workspace = true }
+clap = { workspace = true, features = ["derive"] }
+crates_io_api = { workspace = true }
+env_logger = { workspace = true }
+fstrings = { workspace = true }
+heck = { workspace = true }
+home = { workspace = true }
+log = { workspace = true }
+owo-colors = { workspace = true }
+regex = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+version_check = { workspace = true }
+
+[dev-dependencies]
+insta = { workspace = true }
