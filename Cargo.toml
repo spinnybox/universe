@@ -1,15 +1,13 @@
 [workspace]
 members = ["spinnybox_com", "games/*", "xtask"]
-default-members = ["spinnybox_com", "games/*", "xtask"]
+default-members = ["spinnybox_com", "games/*"]
 
 [workspace.dependencies]
-actix-files = "0.6"
-actix-web = "4"
-anchor-client = { git = "https://github.com/coral-xyz/anchor", rev = "66e4295" }
-anchor-lang = { git = "https://github.com/coral-xyz/anchor", rev = "66e4295" }
-anchor-spl = { git = "https://github.com/coral-xyz/anchor", rev = "66e4295" }
+anchor-client = "0.26"
+anchor-lang = "0.26"
+anchor-spl = "0.26"
 anyhow = "1"
-bevy = "0.9"
+axum = "0.6"
 binary-install = "0.0.2"
 binstalk = "0.6"
 bitflags = "1"
@@ -22,13 +20,14 @@ console_error_panic_hook = "0.1"
 console_log = "0.2"
 crates_io_api = "0.8"
 doc-comment = "0.3"
+dotenvy = "0.15"
 env_logger = "0.10"
 fs_extra = "1"
 fstrings = "0.2"
 futures = "0.3"
 fyrox = "0.28"
 fyroxed_base = "0.15"
-gdnative = { git = "https://github.com/godot-rust/gdnative", rev = "d0538f0" }
+gdnative = { git = "https://github.com/godot-rust/gdnative", rev = "f920000" }
 gloo = { git = "https://github.com/rustwasm/gloo", rev = "f748b49" }
 gloo-net = { git = "https://github.com/rustwasm/gloo", rev = "f748b49" }
 heck = "0.4"
@@ -38,14 +37,14 @@ http = "0.2"
 indexmap = "1"
 insta = "1"
 lazy_static = "1"
-leptos = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
-leptos_axum = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
-leptos_actix = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
-leptos_dom = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
-leptos_meta = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
-leptos_reactive = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
-leptos_router = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
-leptos_server = { git = "https://github.com/gbj/leptos", rev = "96bbb86" }
+leptos = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
+leptos_axum = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
+leptos_actix = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
+leptos_dom = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
+leptos_meta = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
+leptos_reactive = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
+leptos_router = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
+leptos_server = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
 log = "0.4"
 notify = "5"
 owo-colors = "3"
@@ -58,12 +57,13 @@ run_script = "0.10"
 serde = "1"
 serde_json = "1"
 simple_logger = "4"
-solana-account-decoder = "1.14"
+solana-account-decoder = "1.13"
 solana-client = "1.13"
 solana-program = "1.13"
 solana-sdk = "1.13"
 thiserror = "1"
 tokio = "1"
+tower-http = "0.3"
 typed-builder = "0.11"
 validator = "0.16"
 version_check = "0.9"
