@@ -8,8 +8,8 @@
 "dodge:run" = "x:make run dodge"
 "dodge:watch" = "x:make build:watch dodge"
 "x" = "run --package xtask --"
-"x:leptos" = "x:bin cargo-leptos serve"
-
+"x:leptos" = "x:bin cargo-leptos --"
+"website:serve" = "x:leptos serve"
 [target.wasm32-unknown-emscripten]
 rustflags = [
   "-Clink-arg=-sSIDE_MODULE=2", # build a side module that Godot can load

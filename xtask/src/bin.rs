@@ -181,6 +181,7 @@ fn run_binary(args: &Vec<String>) -> Result<()> {
   //   new_args.append(&mut args);
   //   args = new_args;
   // }
+  println!("command: {command}, args: {:#?}", &args);
 
   let spawn = process::Command::new(command)
     .stdout(process::Stdio::inherit())
@@ -198,7 +199,10 @@ fn run_binary(args: &Vec<String>) -> Result<()> {
     process::exit(status);
   }
 
-  println!("binary_details: {:#?}", &binary_details);
+  println!(
+    "binary_details: {:#?}, spawn_error: {:#?}",
+    &binary_details, &spawn,
+  );
   Err(anyhow!(format!(
     "Process {}@{} failed to start",
     &binary_details.name, &binary_details.version
@@ -259,12 +263,12 @@ impl Bin {
         "cargo-binstall",
         "cargo-edit",
         "cargo-insta",
+        "cargo-leptos",
         "cargo-make",
         "dprint",
         "trunk",
         "wasm-pack",
       ]
-      // .iter()
       .map(|bin_name| get_binary_details(bin_name).unwrap());
 
       install_binaries(details, details[0].root.to_string_lossy()).unwrap();

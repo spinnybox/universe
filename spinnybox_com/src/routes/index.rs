@@ -5,10 +5,8 @@ use leptos_router::*;
 pub fn Page(cx: Scope) -> impl IntoView {
   view! {
     cx,
-    <>
-      <h1>"Index"</h1>
-      <p>"This is the main page"</p>
-    </>
+    <h1>"Index Page"</h1>
+    <p>"This is the index page"</p>
   }
 }
 
@@ -16,18 +14,16 @@ pub fn Page(cx: Scope) -> impl IntoView {
 pub fn Layout(cx: Scope) -> impl IntoView {
   view! {
     cx,
-    <>
-      <header>
-        <nav>
-          <A href="/">
-            <span>"Main"</span>
-          </A>
-        </nav>
-      </header>
-      <main>
-        <Outlet />
-      </main>
-    </>
+    <header>
+      <nav>
+        <A href="/">
+          <span>"Main"</span>
+        </A>
+      </nav>
+    </header>
+    <main>
+      <Outlet />
+    </main>
   }
 }
 
@@ -35,8 +31,6 @@ pub fn Layout(cx: Scope) -> impl IntoView {
 pub fn NotFound(cx: Scope) -> impl IntoView {
   view! {
     cx,
-    <>
-      <h1>"Page not found"</h1>
-    </>
+    <h1>"Page not found"</h1>
   }
 }

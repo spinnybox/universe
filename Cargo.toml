@@ -1,6 +1,6 @@
 [workspace]
 members = ["spinnybox_com", "games/*", "xtask"]
-default-members = ["spinnybox_com", "games/*"]
+default-members = ["spinnybox_com", "games/*", "xtask"]
 
 [workspace.dependencies]
 anchor-client = "0.26"
@@ -37,14 +37,15 @@ http = "0.2"
 indexmap = "1"
 insta = "1"
 lazy_static = "1"
-leptos = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
-leptos_axum = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
-leptos_actix = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
-leptos_dom = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
-leptos_meta = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
-leptos_reactive = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
-leptos_router = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
-leptos_server = { git = "https://github.com/gbj/leptos", rev = "ab0b687" }
+# Workspace dependencies break feature detection.
+# leptos = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
+# leptos_axum = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
+# leptos_actix = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
+# leptos_dom = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
+# leptos_meta = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
+# leptos_reactive = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
+# leptos_router = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
+# leptos_server = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
 log = "0.4"
 notify = "5"
 owo-colors = "3"
@@ -74,7 +75,7 @@ wasm-bindgen-cli-support = "0.2"
 # binaries
 cargo-leptos = "0.1"
 cargo-all-features = "1"
-cargo-binstall = "0.17"
+cargo-binstall = "0.18"
 cargo-edit = "0.11"
 cargo-insta = "1"
 cargo-make = "0.36"

@@ -260,45 +260,12 @@ dependencies = [
 
 [[package]]
 name = "binstalk"
-version = "0.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3899cd3cf168a07901e853d7c1632bf24798a46eba811bccaa1c832ed7987d66"
-dependencies = [
- "async-trait",
- "binstalk-downloader 0.1.0",
- "binstalk-types",
- "cargo_toml",
- "compact_str",
- "crates_io_api",
- "detect-targets",
- "either",
- "futures-util",
- "home",
- "itertools",
- "jobslot",
- "miette",
- "normalize-path",
- "once_cell",
- "semver",
- "serde",
- "strum",
- "tempfile",
- "thiserror",
- "tinytemplate",
- "tokio",
- "tracing",
- "url",
- "xz2",
-]
-
-[[package]]
-name = "binstalk"
 version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7d496e9d6124415bb610ad74ab93a711efdcfab448e6b69371f9b0371a34fa43"
 dependencies = [
  "async-trait",
- "binstalk-downloader 0.2.0",
+ "binstalk-downloader",
  "binstalk-types",
  "cargo_toml",
  "compact_str",
@@ -322,35 +289,6 @@ dependencies = [
  "tracing",
  "url",
  "xz2",
-]
-
-[[package]]
-name = "binstalk-downloader"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "20971ec5a4c16bbda204e695ca1c8afa983295fab726dcc84306f338ee52f648"
-dependencies = [
- "binstalk-types",
- "binstall-tar",
- "bytes 1.3.0",
- "bzip2",
- "digest",
- "flate2",
- "futures-util",
- "generic-array",
- "httpdate",
- "reqwest",
- "scopeguard",
- "tempfile",
- "thiserror",
- "tokio",
- "tower",
- "tracing",
- "trust-dns-resolver",
- "url",
- "xz2",
- "zip",
- "zstd 0.11.2+zstd.1.5.2",
 ]
 
 [[package]]
@@ -527,11 +465,11 @@ dependencies = [
 
 [[package]]
 name = "cargo-binstall"
-version = "0.17.0"
+version = "0.18.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "33e19d431b342d740b5c02485d74404a401a4e47c79c6a3313c5f6a9e28bb935"
+checksum = "596fbb6877f1acd153626bdca05371ce5347d818b8a0df6f2721c1321c5115bf"
 dependencies = [
- "binstalk 0.5.0",
+ "binstalk",
  "binstalk-manifests",
  "clap",
  "crates_io_api",
@@ -857,15 +795,6 @@ name = "crc32fast"
 version = "1.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b540bd8bc810d3885c6ea91e2018302f68baba2129ab3e88f32389ee9370880d"
-dependencies = [
- "cfg-if",
-]
-
-[[package]]
-name = "crossbeam-utils"
-version = "0.8.14"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4fb766fa798726286dbbb842f174001dab8abc7b627a1dd86e0b7222a95d929f"
 dependencies = [
  "cfg-if",
 ]
@@ -2130,8 +2059,9 @@ checksum = "830d08ce1d1d941e6b30645f1a0eb5643013d835ce3779a5fc208261dbe10f55"
 
 [[package]]
 name = "leptos"
-version = "0.1.0-alpha"
-source = "git+https://github.com/gbj/leptos?rev=ab0b687#ab0b68794392f16505a336134f13795b9e400f4e"
+version = "0.1.0-beta"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "be0bbbd3695da86746386c3cc64a2dd6922fbe36c56ac82b5d0d3ee8247f7ec9"
 dependencies = [
  "cfg-if",
  "leptos_config",
@@ -2145,8 +2075,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_axum"
-version = "0.1.0-alpha"
-source = "git+https://github.com/gbj/leptos?rev=ab0b687#ab0b68794392f16505a336134f13795b9e400f4e"
+version = "0.1.0-beta"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0e7b7c91bc63be552ab04901296860f07bb6e5d40c107b312873b54d053bbd7a"
 dependencies = [
  "axum",
  "derive_builder",
@@ -2163,8 +2094,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_config"
-version = "0.1.0-alpha"
-source = "git+https://github.com/gbj/leptos?rev=ab0b687#ab0b68794392f16505a336134f13795b9e400f4e"
+version = "0.1.0-beta"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "42d992f1f1718a4f7d569225ccbedccb798a45f03f669d32ef2ca34e6cb90b69"
 dependencies = [
  "config",
  "fs",
@@ -2176,8 +2108,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_dom"
-version = "0.1.0-alpha"
-source = "git+https://github.com/gbj/leptos?rev=ab0b687#ab0b68794392f16505a336134f13795b9e400f4e"
+version = "0.1.0-beta"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cd25d4ebd51e834150688d27babfba8866386386613dfcf6972e14db1cd4e99b"
 dependencies = [
  "cfg-if",
  "drain_filter_polyfill",
@@ -2203,8 +2136,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_macro"
-version = "0.1.0-alpha"
-source = "git+https://github.com/gbj/leptos?rev=ab0b687#ab0b68794392f16505a336134f13795b9e400f4e"
+version = "0.1.0-beta"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c2995df0266213bdfb67836d381f8e051e9b5e13ba91c73c15a5874f25efa509"
 dependencies = [
  "cfg-if",
  "itertools",
@@ -2224,8 +2158,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_meta"
-version = "0.1.0-alpha"
-source = "git+https://github.com/gbj/leptos?rev=ab0b687#ab0b68794392f16505a336134f13795b9e400f4e"
+version = "0.1.0-beta"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4c4317cecc28bf3bed306463f30475abfb91722622eda3f3f4fdcc41802e209a"
 dependencies = [
  "cfg-if",
  "leptos",
@@ -2235,8 +2170,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_reactive"
-version = "0.1.0-alpha"
-source = "git+https://github.com/gbj/leptos?rev=ab0b687#ab0b68794392f16505a336134f13795b9e400f4e"
+version = "0.1.0-beta"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0beb20e100f087231e5e99c98f78e2ef8a0629d92b1632173869bdb46b0f571f"
 dependencies = [
  "base64",
  "cfg-if",
@@ -2256,8 +2192,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_router"
-version = "0.1.0-alpha"
-source = "git+https://github.com/gbj/leptos?rev=ab0b687#ab0b68794392f16505a336134f13795b9e400f4e"
+version = "0.1.0-beta"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e7ef85fb4c26da2e7651dcb5e9bb73e2e61d8b7da91d534e5ac7aa564453b486"
 dependencies = [
  "bincode",
  "cfg-if",
@@ -2282,8 +2219,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_server"
-version = "0.1.0-alpha"
-source = "git+https://github.com/gbj/leptos?rev=ab0b687#ab0b68794392f16505a336134f13795b9e400f4e"
+version = "0.1.0-beta"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8ea2251e767e271d4418c543b03ad461d2990e205520dda39c8af976391d432d"
 dependencies = [
  "ciborium",
  "form_urlencoded",
@@ -2450,6 +2388,16 @@ name = "mime"
 version = "0.3.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2a60c7ce501c71e03a9c9c0d35b861413ae925bd979cc7a4e30d060069aaac8d"
+
+[[package]]
+name = "mime_guess"
+version = "2.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4192263c238a5f0d0c6bfd21f336a313a4ce1c450542449ca191bb657b4642ef"
+dependencies = [
+ "mime",
+ "unicase",
+]
 
 [[package]]
 name = "mini-internal"
@@ -3500,6 +3448,7 @@ dependencies = [
  "leptos_axum",
  "leptos_meta",
  "leptos_router",
+ "leptos_server",
  "log",
  "reqwest",
  "serde_json",
@@ -3882,7 +3831,13 @@ dependencies = [
  "http",
  "http-body",
  "http-range-header",
+ "httpdate",
+ "mime",
+ "mime_guess",
+ "percent-encoding",
  "pin-project-lite",
+ "tokio",
+ "tokio-util",
  "tower",
  "tower-layer",
  "tower-service",
@@ -4056,6 +4011,15 @@ name = "ucd-trie"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9e79c4d996edb816c91e4308506774452e55e95c3c9de07b6729e17e15a5ef81"
+
+[[package]]
+name = "unicase"
+version = "2.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "50f37be617794602aabbeee0be4f259dc1778fabe05e2d67ee8f79326d5cb4f6"
+dependencies = [
+ "version_check",
+]
 
 [[package]]
 name = "unicode-bidi"
@@ -4460,7 +4424,7 @@ name = "xtask"
 version = "0.0.0"
 dependencies = [
  "anyhow",
- "binstalk 0.6.0",
+ "binstalk",
  "cargo-binstall",
  "cargo_metadata",
  "cargo_toml",
@@ -4494,20 +4458,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "56c1936c4cc7a1c9ab21a1ebb602eb942ba868cbd44a99cb7cdc5892335e1c85"
 dependencies = [
  "linked-hash-map",
-]
-
-[[package]]
-name = "zip"
-version = "0.6.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "537ce7411d25e54e8ae21a7ce0b15840e7bfcff15b51d697ec3266cc76bdf080"
-dependencies = [
- "byteorder",
- "bzip2",
- "crc32fast",
- "crossbeam-utils",
- "flate2",
- "zstd 0.11.2+zstd.1.5.2",
 ]
 
 [[package]]
