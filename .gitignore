@@ -149,3 +149,19 @@ packages/skribble-css/tailwind.config.js
 **/export.cfg
 **/*.rs.bk
 **/fyrox.log
+
+/target
+/.direnv
+/result
+
+# Devenv
+.devenv*
+devenv.local.nix
+
+# insta snapshots
+*.pending-snap
+*.snap.new
+
+# setup
+/.helix
+/.vscode

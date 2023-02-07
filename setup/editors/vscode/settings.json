@@ -2,7 +2,6 @@
   "deno.enable": true,
   "deno.testing.enable": true,
   "deno.lint": true,
-  "rust-analyzer.cargo.features": "all",
   "[markdown]": {
     "editor.defaultFormatter": "dprint.dprint"
   },
@@ -27,8 +26,10 @@
   "[toml]": {
     "editor.defaultFormatter": "dprint.dprint"
   },
-  "[rust]": {
+  "[yaml]": {
     "editor.defaultFormatter": "dprint.dprint"
   },
-  "godot_tools.editor_path": "/Users/ifiokjr/Developer/projects/spinnybox/universe/games/dodge/project.godot"
+  "[rust]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  }
 }
