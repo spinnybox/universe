@@ -1,6 +1,6 @@
 [workspace]
-members = ["spinnybox_com", "games/*", "xtask"]
-default-members = ["spinnybox_com", "games/*", "xtask"]
+members = ["spinnybox_com", "games/*"]
+default-members = ["spinnybox_com", "games/*"]
 
 [workspace.dependencies]
 anchor-client = "0.26"
