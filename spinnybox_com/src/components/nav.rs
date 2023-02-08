@@ -1,7 +1,4 @@
-use leptos::component;
-use leptos::view;
-use leptos::IntoView;
-use leptos::Scope;
+use leptos::*;
 use leptos_router::*;
 
 #[component]

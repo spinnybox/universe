@@ -8,12 +8,9 @@ anchor-lang = "0.26"
 anchor-spl = "0.26"
 anyhow = "1"
 axum = "0.6"
-binary-install = "0.0.2"
-binstalk = "0.6"
-bitflags = "1"
 broadcaster = "1"
 cargo_metadata = "0.15"
-cargo_toml = "0.13"
+cargo_toml = "0.15"
 cfg-if = "1"
 clap = "4"
 console_error_panic_hook = "0.1"
@@ -25,11 +22,7 @@ env_logger = "0.10"
 fs_extra = "1"
 fstrings = "0.2"
 futures = "0.3"
-fyrox = "0.28"
-fyroxed_base = "0.15"
-gdnative = { git = "https://github.com/godot-rust/gdnative", rev = "f920000" }
-gloo = { git = "https://github.com/rustwasm/gloo", rev = "f748b49" }
-gloo-net = { git = "https://github.com/rustwasm/gloo", rev = "f748b49" }
+gdnative = "0.11"
 heck = "0.4"
 hex = "0.4"
 home = "0.5"
@@ -37,20 +30,12 @@ http = "0.2"
 indexmap = "1"
 insta = "1"
 lazy_static = "1"
-# Workspace dependencies break feature detection.
-# leptos = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
-# leptos_axum = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
-# leptos_actix = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
-# leptos_dom = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
-# leptos_meta = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
-# leptos_reactive = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
-# leptos_router = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
-# leptos_server = { git = "https://github.com/gbj/leptos", rev = "a2943c4" }
 log = "0.4"
 notify = "5"
+once_cell = "1.17"
 owo-colors = "3"
-prisma-client-rust = { git = "https://github.com/Brendonovich/prisma-client-rust", tag = "0.6.3" }
-prisma-client-rust-cli = { git = "https://github.com/Brendonovich/prisma-client-rust", tag = "0.6.3" }
+prisma-client-rust = { git = "https://github.com/Brendonovich/prisma-client-rust", tag = "0.6.4" }
+prisma-client-rust-cli = { git = "https://github.com/Brendonovich/prisma-client-rust", tag = "0.6.4" }
 rand = "0.8"
 regex = "1"
 reqwest = "0.11"
@@ -62,27 +47,19 @@ solana-account-decoder = "1.13"
 solana-client = "1.13"
 solana-program = "1.13"
 solana-sdk = "1.13"
+strum = "0.24"
+strum_macros = "0.24"
 thiserror = "1"
 tokio = "1"
+tower-cookies = "0.8"
 tower-http = "0.3"
-typed-builder = "0.11"
+typed-builder = "0.12"
 validator = "0.16"
 version_check = "0.9"
 walrus = "0.19"
 wasm-bindgen = "0.2"
 wasm-bindgen-cli-support = "0.2"
-
-# binaries
-cargo-leptos = "0.1"
-cargo-all-features = "1"
-cargo-binstall = "0.18"
-cargo-edit = "0.11"
-cargo-insta = "1"
-cargo-make = "0.36"
-dprint = "0.33"
-cargo-generate = "0.17"
-trunk = "0.16"
-wasm-pack = "0.10"
+web-sys = "0.3"
 
 [profile.dev]
 opt-level = 1

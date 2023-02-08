@@ -1,5 +1,3 @@
-#[path = "./routes/index.rs"]
-pub(crate) mod route_index;
 use leptos::*;
 use leptos_router::*;
 // use route_index::Layout as RouteIndexLayout;
@@ -38,13 +36,17 @@ pub mod ssr {
   use axum::error_handling::HandleError;
   use axum::routing::post;
   use axum::Router;
+  use dotenvy::dotenv;
   use http::StatusCode;
   use leptos_axum::handle_server_fns;
   use leptos_axum::render_app_to_stream;
+  use tower_cookies::CookieManagerLayer;
+  use tower_cookies::Key;
   use tower_http::services::ServeDir;
 
   use super::*;
   use crate::root::*;
+  use crate::KEY;
 
   fn register_server_functions() {}
 
@@ -54,6 +56,9 @@ pub mod ssr {
 
   pub async fn run() -> std::io::Result<()> {
     register_server_functions();
+    _ = dotenv();
+    let key: &[u8] = std::env::var("COOKIE_SECRET").unwrap().as_bytes();
+    KEY.set(Key::from(key)).ok();
 
     let config = get_configuration(Some("spinnybox_com/Cargo.toml"))
       .await
@@ -74,6 +79,7 @@ pub mod ssr {
     let cargo_leptos_service = HandleError::new(ServeDir::new(&bundle_filepath), handle_file_error);
     let app = Router::new()
       .route("/rpc/*fn_name", post(handle_server_fns))
+      .layer(CookieManagerLayer::new())
       .nest_service(favicon_path, favicon_service)
       .nest_service(&bundle_path, cargo_leptos_service)
       .fallback(render_app_to_stream(
@@ -102,3 +108,6 @@ pub fn hydrate() {
     view! { cx , <Root /> }
   });
 }
+
+#[path = "./routes/index.rs"]
+pub(crate) mod route_index;

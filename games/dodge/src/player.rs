@@ -53,6 +53,7 @@ impl Player {
 
     let input = Input::godot_singleton();
     let mut velocity = Vector2::new(0.0, 0.0);
+    // let acc = input.get_accelerometer();
 
     // Note: exact=false by default, in Rust we have to provide it explicitly
     if Input::is_action_pressed(input, "ui_right", false) {

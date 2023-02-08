@@ -1,7 +1,3 @@
-[tasks.format]
-command = "cargo"
-args = ["x:bin", "dprint", "fmt"]
-
 [tasks."build:debug"]
 dependencies = [
   # "build-aarch64-linux-android-debug",

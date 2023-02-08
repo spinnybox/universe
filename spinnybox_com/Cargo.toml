@@ -9,49 +9,55 @@ crate-type = ["cdylib", "rlib"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-axum = { workspace = true, optional = true }
+axum = { workspace = true, optional = true, features = ["headers"] }
 cfg-if = { workspace = true }
 console_error_panic_hook = { workspace = true, optional = true }
 console_log = { workspace = true, optional = true }
+dotenvy = { workspace = true, optional = true }
 futures = { workspace = true }
-gloo-net = { workspace = true, features = ["http"] }
 http = { workspace = true, optional = true }
-leptos = { version = "0.1.0-beta", default-features = false, features = ["serde"] }
-leptos_axum = { version = "0.1.0-beta", optional = true, default_features = false }
-leptos_meta = { version = "0.1.0-beta", default-features = false }
-leptos_router = { version = "0.1.0-beta", default-features = false }
-leptos_server = { version = "0.1.0-beta", default-features = false }
+leptos = { git = "https://github.com/gbj/leptos", rev = "b0a98d8", default-features = false, features = ["serde"] }
+leptos_axum = { git = "https://github.com/gbj/leptos", rev = "b0a98d8", optional = true, default_features = false }
+leptos_meta = { git = "https://github.com/gbj/leptos", rev = "b0a98d8", default-features = false }
+leptos_router = { git = "https://github.com/gbj/leptos", rev = "b0a98d8", default-features = false }
+
 log = { workspace = true }
+once_cell = { workspace = true }
 reqwest = { workspace = true, features = ["json"], optional = true }
+serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true, optional = true }
 simple_logger = { workspace = true, optional = true }
+strum = { workspace = true }
+strum_macros = { workspace = true }
 tokio = { workspace = true, optional = true, features = ["full"] }
+tower-cookies = { workspace = true, optional = true, features = ["private", "signed"] }
 tower-http = { workspace = true, optional = true, features = ["fs", "redirect"] }
 wasm-bindgen = { workspace = true, optional = true }
+web-sys = { workspace = true, features = ["AbortController", "AbortSignal", "HtmlDocument"] }
 
 [features]
 leptos_autoreload = []
 default = ["csr"]
 hydrate = [
   "leptos/hydrate",
-  "leptos_meta/hydrate",
   "leptos_router/hydrate",
+  "leptos_meta/hydrate",
   "dep:wasm-bindgen",
   "dep:console_log",
   "dep:console_error_panic_hook",
 ]
 csr = [
   "leptos/csr",
-  "leptos_meta/csr",
   "leptos_router/csr",
+  "leptos_meta/csr",
   "dep:wasm-bindgen",
   "dep:console_log",
   "dep:console_error_panic_hook",
 ]
 ssr = [
   "leptos/ssr",
-  "leptos_meta/ssr",
   "leptos_router/ssr",
+  "leptos_meta/ssr",
   "dep:reqwest",
   "dep:axum",
   "dep:http",
@@ -60,6 +66,8 @@ ssr = [
   "dep:simple_logger",
   "dep:serde_json",
   "dep:tokio",
+  "dep:tower-cookies",
+  "dep:dotenvy",
 ]
 
 [package.metadata.leptos]
@@ -80,5 +88,5 @@ reload-port = 3001
 # Main style file. If scss or sass then it will be compiled to css.
 # the parent folder will be watched for changes
 style-file = "styles/main.scss"
-bin-features = ["ssr"]
 lib-features = ["hydrate"]
+bin-features = ["ssr"]

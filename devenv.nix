@@ -7,6 +7,7 @@
     pkgs.cargo-insta
     pkgs.cargo-make
     pkgs.cargo-workspaces
+    pkgs.cargo-watch
     pkgs.cargo-edit
     pkgs.deno
     pkgs.dprint
@@ -16,15 +17,15 @@
     pkgs.rust-analyzer
     pkgs.rustup
     pkgs.trunk
-    # pkgs.godot
   ];
 
   difftastic.enable = true;
   devcontainer.enable = true;
 
-
   # Scripts
-
+  scripts.make.exec = ''
+    cargo make $@
+  '';
   scripts."build:all".exec = ''
     cargo build
   '';
