@@ -31,7 +31,7 @@ runs:
         name: devenv
 
     - name: install devenv.sh
-      run: nix profile install github:cachix/devenv/v0.5
+      run: nix profile install github:cachix/devenv/v0.5.1
       shell: bash
 
     - name: run devenv in ci

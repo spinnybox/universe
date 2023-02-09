@@ -1,0 +1,19 @@
+[package]
+name = "fundraiser"
+version = "0.0.0"
+edition = "2021"
+description = "A program for raising funds (via solana) in exchange for nfts and early access."
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "fundraiser"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+
+[dependencies]
+anchor-lang = { workspace = true }

@@ -6,8 +6,8 @@
     pkgs.cargo-generate
     pkgs.cargo-insta
     pkgs.cargo-make
-    pkgs.cargo-workspaces
     pkgs.cargo-watch
+    pkgs.cargo-workspaces
     pkgs.cargo-edit
     pkgs.deno
     pkgs.dprint
@@ -25,6 +25,10 @@
   # Scripts
   scripts.make.exec = ''
     cargo make $@
+  '';
+  scripts.leptos.exec = ''
+    PATH=$PWD/.bin/bin:$PATH
+    cargo leptos $@
   '';
   scripts."build:all".exec = ''
     cargo build
@@ -54,6 +58,9 @@
   '';
   scripts."test:all".exec = ''
     cargo test
+  '';
+  scripts."setup:cargo".exec = ''
+    cargo install --root ./.bin cargo-leptos
   '';
   scripts."setup:helix".exec = ''
     rm -rf .helix
