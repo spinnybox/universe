@@ -1,11 +1,12 @@
 [workspace]
-members = ["spinnybox_com", "games/*", "programs/*"]
-default-members = ["spinnybox_com", "games/*"]
+members = ["spinnybox_com", "games/*", "programs/*", "crates/*"]
+default-members = ["spinnybox_com", "games/*", "programs/*", "crates/*"]
 
 [workspace.dependencies]
-anchor-client = "0.26"
-anchor-lang = "0.26"
-anchor-spl = "0.26"
+anchor-client = { git = "https://github.com/coral-xyz/anchor", rev = "9044b9b" }
+anchor-gen = "0.3"
+anchor-lang = { git = "https://github.com/coral-xyz/anchor", rev = "9044b9b" }
+anchor-spl = { git = "https://github.com/coral-xyz/anchor", rev = "9044b9b" }
 anyhow = "1"
 axum = "0.6"
 broadcaster = "1"
@@ -71,7 +72,7 @@ skip_feature_sets = [["csr", "ssr"], ["csr", "hydrate"], ["ssr", "hydrate"]]
 codegen-units = 1
 opt-level = 'z'
 
-[profile.dev.package.dodge]
+[profile.dev.package.spinnybox_2d]
 opt-level = 3
 
 [profile.release.package.fundraiser]

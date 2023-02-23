@@ -14,7 +14,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="dodge"
+config/name="spinnybox_2d"
 run/main_scene="res://scenes/root.tscn"
 config/icon="res://assets/godot-ferris-32x32.png"
 
