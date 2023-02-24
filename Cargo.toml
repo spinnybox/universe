@@ -78,7 +78,7 @@ skip_feature_sets = [["csr", "ssr"], ["csr", "hydrate"], ["ssr", "hydrate"]]
 codegen-units = 1
 opt-level = 'z'
 
-[profile.dev.package.spinnybox_2d]
+[profile.dev.package.spinnybox]
 opt-level = 3
 
 [profile.release.package.fundraiser]
