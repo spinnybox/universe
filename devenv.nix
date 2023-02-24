@@ -10,7 +10,7 @@
     pkgs.cargo-workspaces
     pkgs.cargo-edit
     pkgs.deno
-    pkgs.dprint
+    # pkgs.dprint
     pkgs.fnm
     pkgs.git
     pkgs.ripgrep

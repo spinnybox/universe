@@ -1,12 +1,12 @@
 [workspace]
-members = ["spinnybox_com", "games/*", "programs/*", "crates/*"]
-default-members = ["spinnybox_com", "games/*", "programs/*", "crates/*"]
+members = ["spinnybox_com", "games/*", "programs/*"]
+default-members = ["spinnybox_com", "games/*", "programs/*"]
 
 [workspace.dependencies]
-anchor-client = { git = "https://github.com/coral-xyz/anchor", rev = "9044b9b" }
+anchor-client = "0.26" # { git = "https://github.com/coral-xyz/anchor", rev = "9044b9b" }
 anchor-gen = "0.3"
-anchor-lang = { git = "https://github.com/coral-xyz/anchor", rev = "9044b9b" }
-anchor-spl = { git = "https://github.com/coral-xyz/anchor", rev = "9044b9b" }
+anchor-lang = "0.26" # { git = "https://github.com/coral-xyz/anchor", rev = "9044b9b" }
+anchor-spl = "0.26" # { git = "https://github.com/coral-xyz/anchor", rev = "9044b9b" }
 anyhow = "1"
 axum = "0.6"
 broadcaster = "1"
@@ -19,11 +19,14 @@ console_log = "0.2"
 crates_io_api = "0.8"
 doc-comment = "0.3"
 dotenvy = "0.15"
+egui = "0.21"
+egui_demo_lib = "0.21"
 env_logger = "0.10"
 fs_extra = "1"
 fstrings = "0.2"
 futures = "0.3"
 gdnative = "0.11"
+godot_egui = { git = "https://github.com/ifiokjr/godot-egui", rev = "bd1ad11" }
 heck = "0.4"
 hex = "0.4"
 home = "0.5"
