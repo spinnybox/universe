@@ -165,3 +165,8 @@ devenv.local.nix
 # setup
 /.helix
 /.vscode
+
+/games/*/bin/*/*
+/games/*/godot/lib/*/*
+!/games/*/godot/lib/*/.gitkeep
+!/games/*/bin/*/.gitkeep

@@ -1,14 +1,14 @@
 [tasks."build:debug"]
 dependencies = [
-  # "build-aarch64-linux-android-debug",
-  # "build-armv7-linux-androideabi-debug",
-  # "build-i686-linux-android-debug",
-  # "build-x86_64-linux-android-debug",
+  "build-aarch64-linux-android-debug",
+  "build-armv7-linux-androideabi-debug",
+  "build-i686-linux-android-debug",
+  "build-x86_64-linux-android-debug",
   # "build-i686-unknown-linux-gnu-debug",
   # "build-x86_64-unknown-linux-gnu-debug",
   # "build-aarch64-apple-darwin-debug",
-  "build-x86_64-apple-darwin-debug",
-  # "build-aarch64-apple-ios-debug",
+  # "build-x86_64-apple-darwin-debug",
+  "build-aarch64-apple-ios-debug",
   # "build-i686-pc-windows-gnu-debug",
   # "build-x86_64-pc-windows-gnu-debug",
   # "build-i686-pc-windows-msvc-debug",
@@ -23,14 +23,14 @@ dependencies = ["build:debug"]
 
 [tasks."build:release"]
 dependencies = [
-  # "build-aarch64-linux-android-release",
-  # "build-armv7-linux-androideabi-release",
-  # "build-i686-linux-android-release",
-  # "build-x86_64-linux-android-release",
+  "build-aarch64-linux-android-release",
+  "build-armv7-linux-androideabi-release",
+  "build-i686-linux-android-release",
+  "build-x86_64-linux-android-release",
   # "build-i686-unknown-linux-gnu-release",
   # "build-x86_64-unknown-linux-gnu-release",
-  "build-x86_64-apple-darwin-release",
-  "build-aarch64-apple-darwin-release",
+  # "build-x86_64-apple-darwin-release",
+  # "build-aarch64-apple-darwin-release",
   # "build-aarch64-apple-ios-release",
   # "build-i686-pc-windows-gnu-release",
   # "build-x86_64-pc-windows-gnu-release",
@@ -41,13 +41,13 @@ dependencies = [
 
 [tasks."export:debug"]
 dependencies = [
-  # "export-aarch64-linux-android-debug",
-  # "export-armv7-linux-androideabi-debug",
-  # "export-i686-linux-android-debug",
-  # "export-x86_64-linux-android-debug",
+  "export-aarch64-linux-android-debug",
+  "export-armv7-linux-androideabi-debug",
+  "export-i686-linux-android-debug",
+  "export-x86_64-linux-android-debug",
   # "export-i686-unknown-linux-gnu-debug",
   # "export-x86_64-unknown-linux-gnu-debug",
-  "export-x86_64-apple-darwin-debug",
+  # "export-x86_64-apple-darwin-debug",
   # "export-aarch64-apple-darwin-debug",
   # "export-aarch64-apple-ios-debug",
   # "export-i686-pc-windows-gnu-debug",
@@ -59,15 +59,15 @@ dependencies = [
 
 [tasks."export:release"]
 dependencies = [
-  # "export-aarch64-linux-android-release",
-  # "export-armv7-linux-androideabi-release",
-  # "export-i686-linux-android-release",
-  # "export-x86_64-linux-android-release",
+  "export-aarch64-linux-android-release",
+  "export-armv7-linux-androideabi-release",
+  "export-i686-linux-android-release",
+  "export-x86_64-linux-android-release",
   # "export-i686-unknown-linux-gnu-release",
   # "export-x86_64-unknown-linux-gnu-release",
-  "export-x86_64-apple-darwin-release",
+  # "export-x86_64-apple-darwin-release",
   # "export-aarch64-apple-darwin-release",
-  # "export-aarch64-apple-ios-release",
+  "export-aarch64-apple-ios-release",
   # "export-i686-pc-windows-gnu-release",
   # "export-x86_64-pc-windows-gnu-release",
   # "export-i686-pc-windows-msvc-release",
@@ -102,8 +102,8 @@ run_task = [
 dependencies = ["build-aarch64-linux-android-debug"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export-debug "Android.aarch64-linux-android.debug" ./games/${@}/bin/aarch64-linux-android/${@}.debug.aarch64-linux-android.apk
+cd ./games/${@}/godot
+godot --export-debug "Android.aarch64-linux-android.debug" ../bin/aarch64-linux-android/${@}.debug.aarch64-linux-android.apk
 '''
 
 [tasks.ps1-build-aarch64-linux-android-release]
@@ -135,8 +135,8 @@ run_task = [
 dependencies = ["build-aarch64-linux-android-release"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export "Android.aarch64-linux-android.release" ./games/${@}/bin/aarch64-linux-android/${@}.release.aarch64-linux-android.apk
+cd ./games/${@}/godot
+godot --export "Android.aarch64-linux-android.release" ../bin/aarch64-linux-android/${@}.release.aarch64-linux-android.apk
 '''
 
 [tasks.ps1-build-armv7-linux-androideabi-debug]
@@ -166,8 +166,8 @@ run_task = [
 dependencies = ["build-armv7-linux-androideabi-debug"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export-debug "Android.armv7-linux-androideabi.debug" ./games/${@}/bin/armv7-linux-androideabi/${@}.debug.armv7-linux-androideabi.apk
+cd ./games/${@}/godot
+godot --export-debug "Android.armv7-linux-androideabi.debug" ../bin/armv7-linux-androideabi/${@}.debug.armv7-linux-androideabi.apk
 '''
 
 [tasks.ps1-build-armv7-linux-androideabi-release]
@@ -199,8 +199,8 @@ run_task = [
 dependencies = ["build-armv7-linux-androideabi-release"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export "Android.armv7-linux-androideabi.release" ./games/${@}/bin/armv7-linux-androideabi/${@}.release.armv7-linux-androideabi.apk
+cd ./games/${@}/godot
+godot --export "Android.armv7-linux-androideabi.release" ../bin/armv7-linux-androideabi/${@}.release.armv7-linux-androideabi.apk
 '''
 
 [tasks.ps1-build-i686-linux-android-debug]
@@ -230,8 +230,8 @@ run_task = [
 dependencies = ["build-i686-linux-android-debug"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export-debug "Android.i686-linux-android.debug" ./games/${@}/bin/i686-linux-android/${@}.debug.i686-linux-android.apk
+cd ./games/${@}/godot
+godot --export-debug "Android.i686-linux-android.debug" ../bin/i686-linux-android/${@}.debug.i686-linux-android.apk
 '''
 
 [tasks.ps1-build-i686-linux-android-release]
@@ -263,8 +263,8 @@ run_task = [
 dependencies = ["build-i686-linux-android-release"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export "Android.i686-linux-android.release" ./games/${@}/bin/i686-linux-android/${@}.release.i686-linux-android.apk
+cd ./games/${@}/godot
+godot --export "Android.i686-linux-android.release" ../bin/i686-linux-android/${@}.release.i686-linux-android.apk
 '''
 
 [tasks.ps1-build-x86_64-linux-android-debug]
@@ -294,8 +294,8 @@ run_task = [
 dependencies = ["build-x86_64-linux-android-debug"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export-debug "Android.x86_64-linux-android.debug" ./games/${@}/bin/x86_64-linux-android/${@}.debug.x86_64-linux-android.apk
+cd ./games/${@}/godot
+godot --export-debug "Android.x86_64-linux-android.debug" ../bin/x86_64-linux-android/${@}.debug.x86_64-linux-android.apk
 '''
 
 [tasks.ps1-build-x86_64-linux-android-release]
@@ -327,8 +327,8 @@ run_task = [
 dependencies = ["build-x86_64-linux-android-release"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export "Android.x86_64-linux-android.release" ./games/${@}/bin/x86_64-linux-android/${@}.release.x86_64-linux-android.apk
+cd ./games/${@}/godot
+godot --export "Android.x86_64-linux-android.release" ../bin/x86_64-linux-android/${@}.release.x86_64-linux-android.apk
 '''
 
 [tasks.ps1-build-i686-unknown-linux-gnu-debug]
@@ -358,8 +358,8 @@ run_task = [
 dependencies = ["build-i686-unknown-linux-gnu-debug"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export-debug "Linux/X11.i686-unknown-linux-gnu.debug" ./games/${@}/bin/i686-unknown-linux-gnu/${@}.debug.i686-unknown-linux-gnu
+cd ./games/${@}/godot
+godot --export-debug "Linux/X11.i686-unknown-linux-gnu.debug" ../bin/i686-unknown-linux-gnu/${@}.debug.i686-unknown-linux-gnu
 '''
 
 [tasks.ps1-build-i686-unknown-linux-gnu-release]
@@ -391,8 +391,8 @@ run_task = [
 dependencies = ["build-i686-unknown-linux-gnu-release"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export "Linux/X11.i686-unknown-linux-gnu.release" ./games/${@}/bin/i686-unknown-linux-gnu/${@}.release.i686-unknown-linux-gnu
+cd ./games/${@}/godot
+godot --export "Linux/X11.i686-unknown-linux-gnu.release" ../bin/i686-unknown-linux-gnu/${@}.release.i686-unknown-linux-gnu
 '''
 
 [tasks.ps1-build-x86_64-unknown-linux-gnu-debug]
@@ -422,8 +422,8 @@ run_task = [
 dependencies = ["build-x86_64-unknown-linux-gnu-debug"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export-debug "Linux/X11.x86_64-unknown-linux-gnu.debug" ./games/${@}/bin/x86_64-unknown-linux-gnu/${@}.debug.x86_64-unknown-linux-gnu
+cd ./games/${@}/godot
+godot --export-debug "Linux/X11.x86_64-unknown-linux-gnu.debug" ../bin/x86_64-unknown-linux-gnu/${@}.debug.x86_64-unknown-linux-gnu
 '''
 
 [tasks.ps1-build-x86_64-unknown-linux-gnu-release]
@@ -455,8 +455,8 @@ run_task = [
 dependencies = ["build-x86_64-unknown-linux-gnu-release"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export "Linux/X11.x86_64-unknown-linux-gnu.release" ./games/${@}/bin/x86_64-unknown-linux-gnu/${@}.release.x86_64-unknown-linux-gnu
+cd ./games/${@}/godot
+godot --export "Linux/X11.x86_64-unknown-linux-gnu.release" ../bin/x86_64-unknown-linux-gnu/${@}.release.x86_64-unknown-linux-gnu
 '''
 
 [tasks.ps1-build-x86_64-apple-darwin-debug]
@@ -486,8 +486,8 @@ run_task = [
 dependencies = ["build-x86_64-apple-darwin-debug"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export-debug "Mac OSX.x86_64-apple-darwin.debug" ./games/${@}/bin/x86_64-apple-darwin/${@}.debug.x86_64-apple-darwin.dmg
+cd ./games/${@}/godot
+godot --export-debug "Mac OSX.x86_64-apple-darwin.debug" ../bin/x86_64-apple-darwin/${@}.debug.x86_64-apple-darwin.dmg
 '''
 
 [tasks.ps1-build-x86_64-apple-darwin-release]
@@ -519,8 +519,8 @@ run_task = [
 dependencies = ["build-x86_64-apple-darwin-release"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export "Mac OSX.x86_64-apple-darwin.release" ./games/${@}/bin/x86_64-apple-darwin/${@}.release.x86_64-apple-darwin.dmg
+cd ./games/${@}/godot
+godot --export "Mac OSX.x86_64-apple-darwin.release" ../bin/x86_64-apple-darwin/${@}.release.x86_64-apple-darwin.dmg
 '''
 
 [tasks.ps1-build-aarch64-apple-darwin-debug]
@@ -552,8 +552,8 @@ run_task = [
 dependencies = ["build-aarch64-apple-darwin-debug"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export-debug "Mac OSX.aarch64-apple-darwin.debug" ./games/${@}/bin/aarch64-apple-darwin/${@}.debug.aarch64-apple-darwin.dmg
+cd ./games/${@}/godot
+godot --export-debug "Mac OSX.aarch64-apple-darwin.debug" ../bin/aarch64-apple-darwin/${@}.debug.aarch64-apple-darwin.dmg
 '''
 
 [tasks.ps1-build-aarch64-apple-darwin-release]
@@ -585,8 +585,8 @@ run_task = [
 dependencies = ["build-aarch64-apple-darwin-release"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export "Mac OSX.aarch64-apple-darwin.release" ./games/${@}/bin/aarch64-apple-darwin/${@}.release.aarch64-apple-darwin.dmg
+cd ./games/${@}/godot
+godot --export "Mac OSX.aarch64-apple-darwin.release" ../bin/aarch64-apple-darwin/${@}.release.aarch64-apple-darwin.dmg
 '''
 
 [tasks.ps1-build-aarch64-apple-ios-debug]
@@ -616,8 +616,8 @@ run_task = [
 dependencies = ["build-aarch64-apple-ios-debug"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export-debug "iOS.aarch64-apple-ios.debug" ./games/${@}/bin/aarch64-apple-ios/${@}.debug.aarch64-apple-ios
+cd ./games/${@}/godot
+godot --export-debug "iOS.aarch64-apple-ios.debug" ../bin/aarch64-apple-ios/${@}.debug.aarch64-apple-ios
 '''
 
 [tasks.ps1-build-aarch64-apple-ios-release]
@@ -649,8 +649,8 @@ run_task = [
 dependencies = ["build-aarch64-apple-ios-release"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export "iOS.aarch64-apple-ios.release" ./games/${@}/bin/aarch64-apple-ios/${@}.release.aarch64-apple-ios
+cd ./games/${@}/godot
+godot --export "iOS.aarch64-apple-ios.release" ../bin/aarch64-apple-ios/${@}.release.aarch64-apple-ios
 '''
 
 [tasks.ps1-build-i686-pc-windows-gnu-debug]
@@ -680,8 +680,8 @@ run_task = [
 dependencies = ["build-i686-pc-windows-gnu-debug"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export-debug "Windows Desktop.i686-pc-windows-gnu.debug" ./games/${@}/bin/i686-pc-windows-gnu/${@}.debug.i686-pc-windows-gnu.exe
+cd ./games/${@}/godot
+godot --export-debug "Windows Desktop.i686-pc-windows-gnu.debug" ../bin/i686-pc-windows-gnu/${@}.debug.i686-pc-windows-gnu.exe
 '''
 
 [tasks.ps1-build-i686-pc-windows-gnu-release]
@@ -713,8 +713,8 @@ run_task = [
 dependencies = ["build-i686-pc-windows-gnu-release"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export "Windows Desktop.i686-pc-windows-gnu.release" ./games/${@}/bin/i686-pc-windows-gnu/${@}.release.i686-pc-windows-gnu.exe
+cd ./games/${@}/godot
+godot --export "Windows Desktop.i686-pc-windows-gnu.release" ../bin/i686-pc-windows-gnu/${@}.release.i686-pc-windows-gnu.exe
 '''
 
 [tasks.ps1-build-x86_64-pc-windows-gnu-debug]
@@ -744,8 +744,8 @@ run_task = [
 dependencies = ["build-x86_64-pc-windows-gnu-debug"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export-debug "Windows Desktop.x86_64-pc-windows-gnu.debug" ./games/${@}/bin/x86_64-pc-windows-gnu/${@}.debug.x86_64-pc-windows-gnu.exe
+cd ./games/${@}/godot
+godot --export-debug "Windows Desktop.x86_64-pc-windows-gnu.debug" ../bin/x86_64-pc-windows-gnu/${@}.debug.x86_64-pc-windows-gnu.exe
 '''
 
 [tasks.ps1-build-x86_64-pc-windows-gnu-release]
@@ -777,8 +777,8 @@ run_task = [
 dependencies = ["build-x86_64-pc-windows-gnu-release"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export "Windows Desktop.x86_64-pc-windows-gnu.release" ./games/${@}/bin/x86_64-pc-windows-gnu/${@}.release.x86_64-pc-windows-gnu.exe
+cd ./games/${@}/godot
+godot --export "Windows Desktop.x86_64-pc-windows-gnu.release" ../bin/x86_64-pc-windows-gnu/${@}.release.x86_64-pc-windows-gnu.exe
 '''
 
 [tasks.ps1-build-i686-pc-windows-msvc-debug]
@@ -808,8 +808,8 @@ run_task = [
 dependencies = ["build-i686-pc-windows-msvc-debug"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export-debug "Windows Desktop.i686-pc-windows-msvc.debug" ./games/${@}/bin/i686-pc-windows-msvc/${@}.debug.i686-pc-windows-msvc.exe
+cd ./games/${@}/godot
+godot --export-debug "Windows Desktop.i686-pc-windows-msvc.debug" ../bin/i686-pc-windows-msvc/${@}.debug.i686-pc-windows-msvc.exe
 '''
 
 [tasks.ps1-build-i686-pc-windows-msvc-release]
@@ -841,8 +841,8 @@ run_task = [
 dependencies = ["build-i686-pc-windows-msvc-release"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export "Windows Desktop.i686-pc-windows-msvc.release" ./games/${@}/bin/i686-pc-windows-msvc/${@}.release.i686-pc-windows-msvc.exe
+cd ./games/${@}/godot
+godot --export "Windows Desktop.i686-pc-windows-msvc.release" ../bin/i686-pc-windows-msvc/${@}.release.i686-pc-windows-msvc.exe
 '''
 
 [tasks.ps1-build-x86_64-pc-windows-msvc-debug]
@@ -872,8 +872,8 @@ run_task = [
 dependencies = ["build-x86_64-pc-windows-msvc-debug"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export-debug "Windows Desktop.x86_64-pc-windows-msvc.debug" ./games/${@}/bin/x86_64-pc-windows-msvc/${@}.debug.x86_64-pc-windows-msvc.exe
+cd ./games/${@}/godot
+godot --export-debug "Windows Desktop.x86_64-pc-windows-msvc.debug" ../bin/x86_64-pc-windows-msvc/${@}.debug.x86_64-pc-windows-msvc.exe
 '''
 
 [tasks.ps1-build-x86_64-pc-windows-msvc-release]
@@ -905,8 +905,8 @@ run_task = [
 dependencies = ["build-x86_64-pc-windows-msvc-release"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export "Windows Desktop.x86_64-pc-windows-msvc.release" ./games/${@}/bin/x86_64-pc-windows-msvc/${@}.release.x86_64-pc-windows-msvc.exe
+cd ./games/${@}/godot
+godot --export "Windows Desktop.x86_64-pc-windows-msvc.release" ../bin/x86_64-pc-windows-msvc/${@}.release.x86_64-pc-windows-msvc.exe
 '''
 
 [tasks.ps1-build-wasm32-unknown-emscripten-debug]
@@ -936,8 +936,8 @@ run_task = [
 dependencies = ["build-wasm32-unknown-emscripten-debug"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export-debug "HTML5.wasm32-unknown-emscripten.debug" ./games/${@}/bin/wasm32-unknown-emscripten/${@}.debug.wasm32-unknown-emscripten.html
+cd ./games/${@}/godot
+godot --export-debug "HTML5.wasm32-unknown-emscripten.debug" ../bin/wasm32-unknown-emscripten/${@}.debug.wasm32-unknown-emscripten.html
 '''
 
 [tasks.ps1-build-wasm32-unknown-emscripten-release]
@@ -969,8 +969,8 @@ run_task = [
 dependencies = ["build-wasm32-unknown-emscripten-release"]
 script_runner = "@shell"
 script = '''
-cd ../godot/
-godot --export "HTML5.wasm32-unknown-emscripten.release" ./games/${@}/bin/wasm32-unknown-emscripten/${@}.release.wasm32-unknown-emscripten.html
+cd ./games/${@}/godot
+godot --export "HTML5.wasm32-unknown-emscripten.release" ../bin/wasm32-unknown-emscripten/${@}.release.wasm32-unknown-emscripten.html
 '''
 
 [tasks.audit]
