@@ -8,7 +8,7 @@ dependencies = [
   # "build-x86_64-unknown-linux-gnu-debug",
   # "build-aarch64-apple-darwin-debug",
   # "build-x86_64-apple-darwin-debug",
-  "build-aarch64-apple-ios-debug",
+  # "build-aarch64-apple-ios-debug",
   # "build-i686-pc-windows-gnu-debug",
   # "build-x86_64-pc-windows-gnu-debug",
   # "build-i686-pc-windows-msvc-debug",
@@ -67,7 +67,7 @@ dependencies = [
   # "export-x86_64-unknown-linux-gnu-release",
   # "export-x86_64-apple-darwin-release",
   # "export-aarch64-apple-darwin-release",
-  "export-aarch64-apple-ios-release",
+  # "export-aarch64-apple-ios-release",
   # "export-i686-pc-windows-gnu-release",
   # "export-x86_64-pc-windows-gnu-release",
   # "export-i686-pc-windows-msvc-release",
@@ -612,13 +612,15 @@ run_task = [
   { name = "sh-build-aarch64-apple-ios-debug", condition = { platforms = ["linux", "mac"] } },
 ]
 
-[tasks.export-aarch64-apple-ios-debug]
-dependencies = ["build-aarch64-apple-ios-debug"]
+[tasks.export-aarch64-apple-ios-debug-script]
 script_runner = "@shell"
 script = '''
 cd ./games/${@}/godot
 godot --export-debug "iOS.aarch64-apple-ios.debug" ../bin/aarch64-apple-ios/${@}.debug.aarch64-apple-ios
 '''
+
+[tasks.export-aarch64-apple-ios-debug]
+dependencies = ["build-aarch64-apple-ios-debug", "export-aarch64-apple-ios-debug-script"]
 
 [tasks.ps1-build-aarch64-apple-ios-release]
 dependencies = ["clean"]
@@ -645,13 +647,15 @@ run_task = [
   { name = "sh-build-aarch64-apple-ios-release", condition = { platforms = ["linux", "mac"] } },
 ]
 
-[tasks.export-aarch64-apple-ios-release]
-dependencies = ["build-aarch64-apple-ios-release"]
+[tasks.export-aarch64-apple-ios-release-script]
 script_runner = "@shell"
 script = '''
 cd ./games/${@}/godot
 godot --export "iOS.aarch64-apple-ios.release" ../bin/aarch64-apple-ios/${@}.release.aarch64-apple-ios
 '''
+
+[tasks.export-aarch64-apple-ios-release]
+dependencies = ["build-aarch64-apple-ios-release", "export-aarch64-apple-ios-release-script"]
 
 [tasks.ps1-build-i686-pc-windows-gnu-debug]
 script_runner = "@shell"

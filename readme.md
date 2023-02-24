@@ -30,9 +30,9 @@ setup:helix  # Setup helix configuration
 There are three parts to the mvp
 
 - [ ] The 2d game
-  - [ ] build on ios
-  - [ ] build on android
-  - [ ] Support rotation tracking on `iOS` and `Android`
+  - [x] build on `iOS`
+  - [-] ~~build on android~~
+  - [ ] Support rotation tracking on `iOS`
     - [ ] Port from previous flutter application
   - [ ] Simplest game possible with a basic character
     - [ ] Rotate to dodge obstacles

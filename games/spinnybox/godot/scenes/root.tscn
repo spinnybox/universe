@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://native/root.gdns" type="Script" id=1]
-[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/hud.tscn" type="PackedScene" id=4]
 
@@ -12,7 +11,6 @@ _data = {
 
 [node name="root" type="Node"]
 script = ExtResource( 1 )
-enemy = ExtResource( 2 )
 
 [node name="player" parent="." instance=ExtResource( 3 )]
 
@@ -35,8 +33,6 @@ curve = SubResource( 1 )
 
 [node name="enemy_spawn_locations" type="PathFollow2D" parent="enemy_path"]
 
-[connection signal="hit" from="player" to="." method="game_over"]
 [connection signal="timeout" from="enemy_timer" to="." method="on_enemy_timer_timeout"]
 [connection signal="timeout" from="score_timer" to="." method="on_score_timer_timeout"]
 [connection signal="timeout" from="start_timer" to="." method="on_start_timer_timeout"]
-[connection signal="start_game" from="hud" to="." method="new_game"]

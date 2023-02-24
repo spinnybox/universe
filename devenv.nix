@@ -23,6 +23,18 @@
   devcontainer.enable = true;
 
   # Scripts
+  scripts."build:ios:debug".exec = ''
+    make export-aarch64-apple-ios-debug spinnybox
+  '';
+  scripts."build:ios".exec = ''
+    make export-aarch64-apple-ios-release spinnybox
+  '';
+  scripts."export:ios:debug".exec = ''
+    make export-aarch64-apple-ios-debug-script spinnybox
+  '';
+  scripts."export:ios".exec = ''
+    make export-aarch64-apple-ios-release-script spinnybox
+  '';
   scripts.make.exec = ''
     cargo make $@
   '';
