@@ -1,6 +1,6 @@
 [workspace]
-members = ["spinnybox_com", "games/*", "programs/*"]
-default-members = ["spinnybox_com", "games/*", "programs/*"]
+members = ["spinnybox_com", "games/spinnybox", "programs/*"]
+default-members = ["spinnybox_com", "games/spinnybox", "programs/*"]
 
 [workspace.dependencies]
 anchor-client = "0.26" # { git = "https://github.com/coral-xyz/anchor", rev = "9044b9b" }

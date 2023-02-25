@@ -10,7 +10,7 @@
     pkgs.cargo-workspaces
     pkgs.cargo-edit
     pkgs.deno
-    pkgs.dprint
+    # pkgs.dprint
     pkgs.fnm
     pkgs.git
     pkgs.ripgrep
@@ -21,6 +21,10 @@
 
   difftastic.enable = true;
   devcontainer.enable = true;
+
+  enterShell = ''
+    echo WASSUP
+  '';
 
   # Scripts
   scripts."build:ios:debug".exec = ''
