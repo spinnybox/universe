@@ -31,5 +31,11 @@
   },
   "[rust]": {
     "editor.defaultFormatter": "dprint.dprint"
-  }
+  },
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "Dart-Code.dart-code",
+    "editor.rulers": [100]
+  },
+  "dart.runPubGetOnPubspecChanges": "never"
 }
