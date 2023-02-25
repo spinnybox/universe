@@ -1,0 +1,12 @@
+<svg width="32" height="35" viewBox="0 0 32 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M30.6905 4.50146C30.6709 5.45213 30.7391 6.64966 29.7074 7.28534C28.5991 7.96824 26.8244 8.07253 25.6047 7.5395C24.3587 6.99494 23.9735 5.51554 24.0014 4.45361C24.0296 3.37738 24.3864 2.07591 25.5322 1.42752C27.3997 0.37074 30.2172 1.40256 30.7993 3.10802C31.3467 4.71174 30.7555 6.87476 29.254 8" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M30.6905 30.5015C30.6709 31.4521 30.7391 32.6497 29.7074 33.2853C28.5991 33.9682 26.8244 34.0725 25.6047 33.5395C24.3587 32.9949 23.9735 31.5155 24.0014 30.4536C24.0296 29.3774 24.3864 28.0759 25.5322 27.4275C27.3997 26.3707 30.2172 27.4026 30.7993 29.108C31.3467 30.7117 30.7555 32.8748 29.254 34" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.6905 16.5015C7.67095 17.4521 7.73912 18.6497 6.70745 19.2853C5.59912 19.9682 3.82443 20.0725 2.60474 19.5395C1.35865 18.9949 0.973538 17.5155 1.00139 16.4536C1.02962 15.3774 1.38639 14.0759 2.5322 13.4275C4.39968 12.3707 7.21719 13.4026 7.79932 15.108C8.34673 16.7117 7.75555 18.8748 6.25401 20" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M23.3417 6.47913C17.5822 8.31286 12.0809 10.9219 6.49902 13.2162" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M23.4767 29.1156C16.8314 27.1576 11.0863 23.0072 5.42139 19.1448" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M21.8027 5.42377C16.3288 7.98719 11.2113 11.286 5.97312 14.2831" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M24.8649 27.8526C18.0221 26.7707 11.7883 23.3984 5.67139 20.3013" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="4.5" cy="15.5" r="3.5" fill="black"/>
+<circle cx="28.5" cy="30.5" r="3.5" fill="black"/>
+<circle cx="27.5" cy="4.5" r="3.5" fill="black"/>
+</svg>
