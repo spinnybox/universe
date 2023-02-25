@@ -16,7 +16,7 @@ GoRoute get $mainRoute => GoRouteData.$route(
       factory: $MainRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
-          path: '/settings',
+          path: 'settings',
           factory: $SettingsRouteExtension._fromState,
         ),
       ],

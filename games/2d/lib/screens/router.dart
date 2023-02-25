@@ -13,8 +13,8 @@ part 'router.g.dart';
 @TypedGoRoute<MainRoute>(
   path: '/',
   routes: [
-    TypedGoRoute<SettingsRoute>(path: '/settings'),
-    // TypedGoRoute<ModeRoute>(path: '/mode/:name'),
+    TypedGoRoute<SettingsRoute>(path: 'settings'),
+    // TypedGoRoute<ModeRoute>(path: 'mode/:name'),
   ],
 )
 @immutable
@@ -167,4 +167,8 @@ class _CustomReveal extends HookWidget {
   }
 }
 
-GoRouter get router => GoRouter(routes: $appRoutes);
+final GoRouter appRouter = GoRouter(
+  routes: $appRoutes,
+  debugLogDiagnostics: true,
+  initialLocation: const MainRoute().location,
+);

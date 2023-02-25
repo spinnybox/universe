@@ -9,14 +9,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "52.0.0"
-  _flutterfire_internals:
-    dependency: transitive
-    description:
-      name: _flutterfire_internals
-      sha256: "64fcb0dbca4386356386c085142fa6e79c00a3326ceaa778a2d25f5d9ba61441"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.16"
   analyzer:
     dependency: transitive
     description:
@@ -345,46 +337,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.4"
-  firebase_core:
-    dependency: "direct main"
-    description:
-      name: firebase_core
-      sha256: fe30ac230f12f8836bb97e6e09197340d3c584526825b1746ea362a82e1e43f7
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.7.0"
-  firebase_core_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_core_platform_interface
-      sha256: "5615b30c36f55b2777d0533771deda7e5730e769e5d3cb7fda79e9bed86cfa55"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.5.3"
-  firebase_core_web:
-    dependency: transitive
-    description:
-      name: firebase_core_web
-      sha256: "291fbcace608aca6c860652e1358ef89752be8cc3ef227f8bbcd1e62775b833a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.1"
-  firebase_crashlytics:
-    dependency: "direct main"
-    description:
-      name: firebase_crashlytics
-      sha256: "816bbb920316c8fe257b460b8856b01e274e867a729961bf7a3be6322cdf13e1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.15"
-  firebase_crashlytics_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_crashlytics_platform_interface
-      sha256: "120e47b9bac3654848d1bdc60b8027f3574b53ee0b81b1a2e5e76ddaa58f6645"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.3.15"
   fixnum:
     dependency: transitive
     description:
@@ -496,22 +448,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
-  games_services:
-    dependency: "direct main"
-    description:
-      name: games_services
-      sha256: cf89767a0a94ef4549fbf9006a695d663715fac07cd8b39798abb17b66c61291
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
-  games_services_platform_interface:
-    dependency: transitive
-    description:
-      name: games_services_platform_interface
-      sha256: e3173860bdd2b02aca3bd1325c79b97e6bbf909ba6ceca21df4b73828dba2785
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.1"
   glob:
     dependency: transitive
     description:
@@ -536,14 +472,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.2"
-  google_mobile_ads:
-    dependency: "direct main"
-    description:
-      name: google_mobile_ads
-      sha256: "7a39fe63007764115395550fc3eaf0d469de685298208040138c373d5444ab48"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.0"
   graphs:
     dependency: transitive
     description:
@@ -608,38 +536,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.15"
-  in_app_purchase:
-    dependency: "direct main"
-    description:
-      name: in_app_purchase
-      sha256: af00db44f0314eda24f5e7ff18a6b445ab95e11fcf49c53e4b7c6bef005eeecf
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.5"
-  in_app_purchase_android:
-    dependency: transitive
-    description:
-      name: in_app_purchase_android
-      sha256: "55b71810734239a2fcb9b7443d9f232ac09dc99953f02b24cc4567dbb05b4bdb"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.4+2"
-  in_app_purchase_platform_interface:
-    dependency: transitive
-    description:
-      name: in_app_purchase_platform_interface
-      sha256: ba5d4d7059ba512907382dce363eabab53c0826ecb23cfb40c58cec6141ea105
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.3"
-  in_app_purchase_storekit:
-    dependency: transitive
-    description:
-      name: in_app_purchase_storekit
-      sha256: b0b88545831becc1c08717476d9f10f56f2911273dd797a4c281da4b612d0322
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.6+1"
   io:
     dependency: transitive
     description:
@@ -1229,14 +1125,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  visibility_detector:
-    dependency: transitive
-    description:
-      name: visibility_detector
-      sha256: "15c54a459ec2c17b4705450483f3d5a2858e733aee893dcee9d75fd04814940d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.3"
   vm_service:
     dependency: transitive
     description:

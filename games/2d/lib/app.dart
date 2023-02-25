@@ -7,15 +7,14 @@ class GameApp extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final r = router;
     return MaterialApp.router(
       title: 'SpinnyBox',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      routeInformationProvider: r.routeInformationProvider,
-      routeInformationParser: r.routeInformationParser,
-      routerDelegate: r.routerDelegate,
+      routeInformationProvider: appRouter.routeInformationProvider,
+      routeInformationParser: appRouter.routeInformationParser,
+      routerDelegate: appRouter.routerDelegate,
     );
   }
 }
