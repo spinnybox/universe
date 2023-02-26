@@ -10,10 +10,6 @@ import 'filler.dart';
 import 'generator.dart';
 
 class RoughDrawingStyle {
-  final double? width;
-  final Color? color;
-  final Gradient? gradient;
-  final BlendMode? blendMode;
   // final BorderRadius borderRadius;
   // this.boxShadow?,
 
@@ -23,6 +19,10 @@ class RoughDrawingStyle {
     this.gradient,
     this.blendMode,
   });
+  final double? width;
+  final Color? color;
+  final Gradient? gradient;
+  final BlendMode? blendMode;
 }
 
 /// The shape to use when rendering a [RoughBoxDecoration].
@@ -47,11 +47,6 @@ enum RoughBoxShape {
 }
 
 class RoughBoxDecoration extends Decoration {
-  final RoughBoxShape shape;
-  final RoughDrawingStyle? borderStyle;
-  final DrawConfig? drawConfig;
-  final RoughDrawingStyle? fillStyle;
-  final Filler? filler;
   const RoughBoxDecoration({
     this.borderStyle,
     this.drawConfig,
@@ -59,6 +54,12 @@ class RoughBoxDecoration extends Decoration {
     this.shape = RoughBoxShape.rectangle,
     this.filler,
   });
+
+  final RoughBoxShape shape;
+  final RoughDrawingStyle? borderStyle;
+  final DrawConfig? drawConfig;
+  final RoughDrawingStyle? fillStyle;
+  final Filler? filler;
 
   @override
   EdgeInsetsGeometry get padding =>
@@ -71,11 +72,10 @@ class RoughBoxDecoration extends Decoration {
 }
 
 class RoughDecorationPainter extends BoxPainter {
-  final RoughBoxDecoration roughDecoration;
-
   RoughDecorationPainter(
     this.roughDecoration,
   );
+  final RoughBoxDecoration roughDecoration;
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {

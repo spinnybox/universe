@@ -19,6 +19,10 @@ GoRoute get $mainRoute => GoRouteData.$route(
           path: 'settings',
           factory: $SettingsRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'shop',
+          factory: $ShopRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -42,6 +46,21 @@ extension $SettingsRouteExtension on SettingsRoute {
 
   String get location => GoRouteData.$location(
         '/settings',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: this);
+}
+
+extension $ShopRouteExtension on ShopRoute {
+  static ShopRoute _fromState(GoRouterState state) => const ShopRoute();
+
+  String get location => GoRouteData.$location(
+        '/shop',
       );
 
   void go(BuildContext context) => context.go(location, extra: this);

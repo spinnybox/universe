@@ -11,7 +11,7 @@ class PlayScreen extends HookWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        'This is the GAME screen with $id',
+        'This is the PlayScreen screen with $id',
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spinnybox_2d/colors.dart';
 import '../rough/rough.dart';
 
 import 'const.dart';
@@ -16,6 +17,27 @@ import 'wired_base.dart';
 /// ),
 /// ```
 class WiredButton extends WiredBaseWidget {
+  const WiredButton({
+    Key? key,
+    required this.onPressed,
+    required this.child,
+    this.width = 42.0,
+    this.height,
+    this.borderColor = AppColors.black,
+    this.fillColor = AppColors.white,
+  }) : super(key: key);
+
+  const WiredButton.icon({
+    Key? key,
+    required this.onPressed,
+    required Widget icon,
+    double size = 40,
+    this.borderColor = AppColors.black,
+    this.fillColor = AppColors.white,
+  })  : child = icon,
+        width = size,
+        height = size;
+
   /// Typically the button's label.
   final Widget child;
 
@@ -28,13 +50,8 @@ class WiredButton extends WiredBaseWidget {
   /// The height of the button.
   final double? height;
 
-  const WiredButton({
-    Key? key,
-    required this.child,
-    required this.onPressed,
-    this.width = 42.0,
-    this.height,
-  }) : super(key: key);
+  final Color? borderColor;
+  final Color? fillColor;
 
   @override
   Widget buildWiredElement() {
@@ -42,12 +59,11 @@ class WiredButton extends WiredBaseWidget {
       padding: EdgeInsets.zero,
       height: height,
       width: width,
-      decoration: const RoughBoxDecoration(
+      decoration: RoughBoxDecoration(
+        filler: SolidFiller(),
         shape: RoughBoxShape.rectangle,
-        borderStyle: RoughDrawingStyle(
-          width: 2,
-          color: borderColor,
-        ),
+        fillStyle: RoughDrawingStyle(color: fillColor),
+        borderStyle: RoughDrawingStyle(width: 2, color: borderColor),
       ),
       child: SizedBox(
         height: double.infinity,

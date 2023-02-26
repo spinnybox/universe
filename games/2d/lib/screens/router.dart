@@ -1,12 +1,21 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
-import 'package:spinnybox_2d/colors.dart';
+import 'package:flutter/material.dart'
+    show BuildContext, Color, Key, LocalKey, Page, Widget, immutable;
+import 'package:go_router/go_router.dart'
+    show
+        CustomTransitionPage,
+        GoRoute,
+        GoRouteData,
+        GoRouter,
+        GoRouterHelper,
+        GoRouterState,
+        TypedGoRoute;
+import 'package:spinnybox_2d/colors.dart' show AppColors;
+import 'package:spinnybox_2d/widgets/widgets.dart' show CustomReveal;
 import 'package:spinnybox_2d/screens/play_screen.dart' show PlayScreen;
 import 'package:spinnybox_2d/screens/main_screen.dart' show MainScreen;
 import 'package:spinnybox_2d/screens/settings_screen.dart' show SettingsScreen;
 import 'package:spinnybox_2d/screens/game_over_screen.dart' show GameOverScreen;
-import 'package:nanoid/nanoid.dart';
+import 'package:nanoid/nanoid.dart' show nanoid;
 
 part 'router.g.dart';
 
@@ -14,7 +23,7 @@ part 'router.g.dart';
   path: '/',
   routes: [
     TypedGoRoute<SettingsRoute>(path: 'settings'),
-    // TypedGoRoute<ModeRoute>(path: 'mode/:name'),
+    TypedGoRoute<ShopRoute>(path: 'shop'),
   ],
 )
 @immutable
@@ -32,9 +41,22 @@ class SettingsRoute extends GoRouteData {
   const SettingsRoute();
 
   @override
-  Page<void> pageBuilder(BuildContext context, GoRouterState state) {
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
     return buildPageTransition(
       child: const SettingsScreen(key: Key('SettingsScreen')),
+      color: AppColors.white,
+    );
+  }
+}
+
+@immutable
+class ShopRoute extends GoRouteData {
+  const ShopRoute();
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return buildPageTransition(
+      child: const SettingsScreen(key: Key('ShopScreen')),
       color: AppColors.white,
     );
   }
@@ -52,8 +74,14 @@ class PlayRoute extends GoRouteData {
   const PlayRoute();
 
   @override
-  String redirect(BuildContext context, GoRouterState state) =>
-      PlayIdRoute(id: nanoid(10)).location;
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    final id = nanoid(10);
+
+    return buildPageTransition(
+      child: PlayScreen(key: const Key('PlayScreen'), id: id),
+      color: AppColors.white,
+    );
+  }
 }
 
 @immutable
@@ -63,8 +91,11 @@ class PlayIdRoute extends GoRouteData {
   final String id;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return PlayScreen(key: const Key('PlayScreen'), id: id);
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return buildPageTransition(
+      child: PlayScreen(key: const Key('PlayScreenWithId'), id: id),
+      color: AppColors.white,
+    );
   }
 }
 
@@ -77,7 +108,7 @@ class GameOverRoute extends GoRouteData {
   final String game;
 
   @override
-  Page<void> pageBuilder(BuildContext context, GoRouterState state) {
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
     return buildPageTransition(
       child: GameOverScreen(key: const Key('GameOverScreen'), game: game),
       color: AppColors.white,
@@ -96,7 +127,7 @@ CustomTransitionPage<T> buildPageTransition<T>({
   return CustomTransitionPage<T>(
     child: child,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      return _CustomReveal(
+      return CustomReveal(
         animation: animation,
         color: color,
         child: child,
@@ -108,63 +139,6 @@ CustomTransitionPage<T> buildPageTransition<T>({
     restorationId: restorationId,
     transitionDuration: const Duration(milliseconds: 700),
   );
-}
-
-class _CustomReveal extends HookWidget {
-  final Animation<double> animation;
-  final Color color;
-  final Widget child;
-
-  const _CustomReveal({
-    required this.animation,
-    required this.color,
-    required this.child,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final finished = useState(false);
-    final statusListener = useCallback(
-      (AnimationStatus status) {
-        if (status == AnimationStatus.completed) {
-          finished.value = true;
-          return;
-        }
-
-        finished.value = false;
-      },
-      const [],
-    );
-    final tween = useRef(Tween(begin: const Offset(0, -1), end: Offset.zero));
-
-    useEffect(() {
-      animation.addStatusListener(statusListener);
-      return () => animation.removeStatusListener(statusListener);
-    }, [animation]);
-
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        SlideTransition(
-          position: tween.value.animate(
-            CurvedAnimation(
-              parent: animation,
-              curve: Curves.easeOutCubic,
-              reverseCurve: Curves.easeOutCubic,
-            ),
-          ),
-          child: Container(
-            color: color,
-          ),
-        ),
-        AnimatedOpacity(
-          opacity: finished.value ? 1 : 0,
-          duration: const Duration(milliseconds: 300),
-          child: child,
-        ),
-      ],
-    );
-  }
 }
 
 final GoRouter appRouter = GoRouter(
