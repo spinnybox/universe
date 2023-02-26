@@ -432,8 +432,16 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  freezed:
+    dependency: "direct dev"
+    description:
+      name: freezed
+      sha256: e819441678f1679b719008ff2ff0ef045d66eed9f9ec81166ca0d9b02a187454
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.2"
   freezed_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: freezed_annotation
       sha256: aeac15850ef1b38ee368d4c53ba9a847e900bb2c53a4db3f6881cbb3cb684338
@@ -448,6 +456,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
+  functional_widget:
+    dependency: "direct dev"
+    description:
+      name: functional_widget
+      sha256: "58af369f6b882b5433e2232eaca0b86505167727c94975dd1bdac0f75c90d0b7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.10.1"
+  functional_widget_annotation:
+    dependency: "direct main"
+    description:
+      name: functional_widget_annotation
+      sha256: f0612079cb7e226b7be32b473bdaf85fe680370886c0c13ea69a102ccc17a0c7
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.10.0"
   glob:
     dependency: transitive
     description:
@@ -561,7 +585,7 @@ packages:
     source: hosted
     version: "4.8.0"
   json_serializable:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: json_serializable
       sha256: dadc08bd61f72559f938dd08ec20dbfec6c709bba83515085ea943d2078d187a
