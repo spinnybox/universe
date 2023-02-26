@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'wired_base.dart';
 
 import 'canvas/wired_canvas.dart';
+
+part 'wired_dialog.g.dart';
 
 /// Wired dialog.
 ///
@@ -51,37 +54,32 @@ import 'canvas/wired_canvas.dart';
 /// 	child: WiredText('Open wired dialog'),
 ///   ),
 /// ```
-class WiredDialog extends StatelessWidget {
+@swidget
+Widget _wiredDialog(
+  BuildContext context, {
   /// The content in dialog.
-  final Widget child;
+  required Widget child,
 
   /// The padding for dialog's content, defaults to 20.0 if null.
-  final EdgeInsetsGeometry? padding;
-
-  const WiredDialog({
-    Key? key,
-    required this.child,
-    this.padding,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      child: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(5.0),
-            child: WiredCanvas(
-              painter: WiredRectangleBase(),
-              fillerType: RoughFilter.NoFiller,
-            ),
+  EdgeInsetsGeometry? padding,
+  Color fillColor = Colors.white,
+  RoughFilter fillerType = RoughFilter.noFiller,
+}) {
+  return Dialog(
+    child: Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: WiredCanvas(
+            painter: WiredRectangleBase(fillColor: fillColor),
+            fillerType: fillerType,
           ),
-          Padding(
-            padding: padding ?? EdgeInsets.all(20.0),
-            child: child,
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+        Padding(
+          padding: padding ?? const EdgeInsets.all(20.0),
+          child: child,
+        ),
+      ],
+    ),
+  );
 }

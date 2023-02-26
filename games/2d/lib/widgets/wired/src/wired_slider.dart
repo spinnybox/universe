@@ -110,7 +110,7 @@ class WiredSlider extends HookWidget {
               y2: 0,
               strokeWidth: 2,
             ),
-            fillerType: RoughFilter.HatchFiller,
+            fillerType: RoughFilter.hatchFiller,
           ),
         ),
         Positioned(
@@ -123,7 +123,7 @@ class WiredSlider extends HookWidget {
                 diameterRatio: .7,
                 fillColor: textColor,
               ),
-              fillerType: RoughFilter.HachureFiller,
+              fillerType: RoughFilter.hachureFiller,
               fillerConfig: FillerConfig.build(hachureGap: 1.0),
             ),
           ),

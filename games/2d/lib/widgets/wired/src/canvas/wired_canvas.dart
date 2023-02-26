@@ -37,21 +37,21 @@ class WiredCanvas extends StatelessWidget {
 
 Map<RoughFilter, Filler Function(FillerConfig)> _filters =
     <RoughFilter, Filler Function(FillerConfig)>{
-  RoughFilter.NoFiller: (fillerConfig) => NoFiller(fillerConfig),
-  RoughFilter.HachureFiller: (fillerConfig) => HachureFiller(fillerConfig),
-  RoughFilter.ZigZagFiller: (fillerConfig) => ZigZagFiller(fillerConfig),
-  RoughFilter.HatchFiller: (fillerConfig) => HatchFiller(fillerConfig),
-  RoughFilter.DotFiller: (fillerConfig) => DotFiller(fillerConfig),
-  RoughFilter.DashedFiller: (fillerConfig) => DashedFiller(fillerConfig),
-  RoughFilter.SolidFiller: (fillerConfig) => SolidFiller(fillerConfig),
+  RoughFilter.noFiller: (fillerConfig) => NoFiller(fillerConfig),
+  RoughFilter.hachureFiller: (fillerConfig) => HachureFiller(fillerConfig),
+  RoughFilter.zigZagFiller: (fillerConfig) => ZigZagFiller(fillerConfig),
+  RoughFilter.hatchFiller: (fillerConfig) => HatchFiller(fillerConfig),
+  RoughFilter.dotFiller: (fillerConfig) => DotFiller(fillerConfig),
+  RoughFilter.dashedFiller: (fillerConfig) => DashedFiller(fillerConfig),
+  RoughFilter.solidFiller: (fillerConfig) => SolidFiller(fillerConfig),
 };
 
 enum RoughFilter {
-  NoFiller,
-  HachureFiller,
-  ZigZagFiller,
-  HatchFiller,
-  DotFiller,
-  DashedFiller,
-  SolidFiller,
+  noFiller,
+  hachureFiller,
+  zigZagFiller,
+  hatchFiller,
+  dotFiller,
+  dashedFiller,
+  solidFiller,
 }

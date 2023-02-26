@@ -86,7 +86,7 @@ class _WiredToggleState extends State<WiredToggle>
                 diameterRatio: .7,
                 fillColor: textColor,
               ),
-              fillerType: RoughFilter.HachureFiller,
+              fillerType: RoughFilter.hachureFiller,
               fillerConfig: FillerConfig.build(hachureGap: 1.0),
             ),
           ),
@@ -96,7 +96,7 @@ class _WiredToggleState extends State<WiredToggle>
           height: _thumbRadius,
           child: WiredCanvas(
             painter: WiredRectangleBase(),
-            fillerType: RoughFilter.NoFiller,
+            fillerType: RoughFilter.noFiller,
           ),
         ),
       ],

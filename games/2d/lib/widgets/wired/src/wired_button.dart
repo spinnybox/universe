@@ -25,6 +25,7 @@ class WiredButton extends WiredBaseWidget {
     this.height,
     this.borderColor = AppColors.black,
     this.fillColor = AppColors.white,
+    this.disabled = false,
   }) : super(key: key);
 
   const WiredButton.icon({
@@ -34,6 +35,7 @@ class WiredButton extends WiredBaseWidget {
     double size = 40,
     this.borderColor = AppColors.black,
     this.fillColor = AppColors.white,
+    this.disabled = false,
   })  : child = icon,
         width = size,
         height = size;
@@ -43,6 +45,9 @@ class WiredButton extends WiredBaseWidget {
 
   /// Called when the button is tapped
   final void Function() onPressed;
+
+  /// Whether the button is disabled.
+  final bool disabled;
 
   /// The width of the button.
   final double? width;
@@ -70,8 +75,9 @@ class WiredButton extends WiredBaseWidget {
         child: TextButton(
           style: TextButton.styleFrom(
             foregroundColor: textColor,
+            enableFeedback: !disabled,
           ),
-          onPressed: onPressed,
+          onPressed: disabled ? null : onPressed,
           child: child,
         ),
       ),

@@ -38,6 +38,7 @@ Widget __mainScreenChild(
         flex: 3,
         child: ui,
       ),
+      const TermsAndConditions(),
     ],
   );
 }

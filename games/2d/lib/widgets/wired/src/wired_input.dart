@@ -70,7 +70,7 @@ class WiredInput extends StatelessWidget {
                 height: 48.0,
                 child: WiredCanvas(
                   painter: WiredRectangleBase(),
-                  fillerType: RoughFilter.NoFiller,
+                  fillerType: RoughFilter.noFiller,
                 ),
               ),
               TextField(

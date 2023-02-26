@@ -37,7 +37,7 @@ class WiredDivider extends StatelessWidget {
               x2: double.infinity,
               y2: 0,
             ),
-            fillerType: RoughFilter.NoFiller,
+            fillerType: RoughFilter.noFiller,
           ),
         ),
         Divider(color: Colors.transparent),

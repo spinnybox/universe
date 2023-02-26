@@ -76,6 +76,12 @@ abstract class WiredRepaintMixin {
 
 /// Base wired rectangle.
 class WiredRectangleBase extends WiredPainterBase {
+  WiredRectangleBase({
+    this.leftIndent = 0.0,
+    this.rightIndent = 0.0,
+    this.fillColor = filledColor,
+  });
+
   /// The amount of empty space to the leading edge of the rectangle.
   final double leftIndent;
 
@@ -83,12 +89,6 @@ class WiredRectangleBase extends WiredPainterBase {
   final double rightIndent;
 
   final Color fillColor;
-
-  WiredRectangleBase({
-    this.leftIndent = 0.0,
-    this.rightIndent = 0.0,
-    this.fillColor = filledColor,
-  });
 
   @override
   void paintRough(
@@ -128,10 +128,6 @@ class WiredInvertedTriangleBase extends WiredPainterBase {
 ///
 /// [strokeWidth] defaults to 1.
 class WiredLineBase extends WiredPainterBase {
-  final double x1, y1;
-  final double x2, y2;
-  final double strokeWidth;
-
   WiredLineBase({
     Key? key,
     required this.x1,
@@ -140,6 +136,9 @@ class WiredLineBase extends WiredPainterBase {
     required this.y2,
     this.strokeWidth = 1,
   });
+  final double x1, y1;
+  final double x2, y2;
+  final double strokeWidth;
 
   @override
   void paintRough(
@@ -167,9 +166,9 @@ class WiredLineBase extends WiredPainterBase {
 ///
 /// If [diameterRatio] = 1, then the diameter of circle is the canvas's width.
 class WiredCircleBase extends WiredPainterBase {
+  WiredCircleBase({this.diameterRatio = 1, this.fillColor = filledColor});
   final double diameterRatio;
   final Color fillColor;
-  WiredCircleBase({this.diameterRatio = 1, this.fillColor = filledColor});
 
   @override
   void paintRough(

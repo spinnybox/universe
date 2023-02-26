@@ -74,7 +74,7 @@ class _WiredComboState extends State<WiredCombo> {
             top: 20.0,
             child: WiredCanvas(
               painter: WiredInvertedTriangleBase(),
-              fillerType: RoughFilter.HachureFiller,
+              fillerType: RoughFilter.hachureFiller,
               fillerConfig: FillerConfig.build(hachureGap: 2),
               size: Size(18.0, 18.0),
             ),
@@ -99,7 +99,7 @@ class _WiredComboState extends State<WiredCombo> {
                       children: [
                         WiredCanvas(
                           painter: WiredRectangleBase(),
-                          fillerType: RoughFilter.NoFiller,
+                          fillerType: RoughFilter.noFiller,
                           size: Size(double.infinity, _height),
                         ),
                         Positioned(

@@ -77,7 +77,7 @@ class _WiredProgressState extends State<WiredProgress> with WiredRepaintMixin {
           width: _width * _animation.value,
           child: WiredCanvas(
             painter: WiredRectangleBase(fillColor: borderColor),
-            fillerType: RoughFilter.HachureFiller,
+            fillerType: RoughFilter.hachureFiller,
             fillerConfig: FillerConfig.build(hachureGap: 1.5),
           ),
         ),
@@ -86,7 +86,7 @@ class _WiredProgressState extends State<WiredProgress> with WiredRepaintMixin {
           width: _width,
           child: WiredCanvas(
             painter: WiredRectangleBase(),
-            fillerType: RoughFilter.NoFiller,
+            fillerType: RoughFilter.noFiller,
           ),
         ),
         LinearProgressIndicator(

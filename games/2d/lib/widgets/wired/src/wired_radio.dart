@@ -64,7 +64,7 @@ class _WiredRadioState<T> extends State<WiredRadio<T>> {
             width: 48.0,
             child: WiredCanvas(
               painter: WiredCircleBase(diameterRatio: .7),
-              fillerType: RoughFilter.NoFiller,
+              fillerType: RoughFilter.noFiller,
             ),
           ),
         ),
@@ -80,7 +80,7 @@ class _WiredRadioState<T> extends State<WiredRadio<T>> {
                   diameterRatio: .7,
                   fillColor: textColor,
                 ),
-                fillerType: RoughFilter.HachureFiller,
+                fillerType: RoughFilter.hachureFiller,
                 fillerConfig: FillerConfig.build(hachureGap: 1.0),
               ),
             ),
