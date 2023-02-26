@@ -59,10 +59,10 @@ class SettingsModel with _$SettingsModel {
       _$SettingsModelFromJson(json);
 }
 
+const _settingsKey = '__spinnybox_2d_settings__';
+
 @riverpod
 class Settings extends _$Settings {
-  static const _key = '__spinnybox_2d_settings__';
-
   /// Load all settings. Should be run before the app starts.
   static Future<SettingsModel> loadSettings() async {
     final data = _data;
@@ -72,18 +72,19 @@ class Settings extends _$Settings {
     }
 
     _preferences ??= await SharedPreferences.getInstance();
-    final jsonString = _preferences?.getString(_key);
+    final jsonString = _preferences?.getString(_settingsKey);
     final json = jsonDecode(jsonString ?? '{}') as Map<String, dynamic>;
-    final settings = Settings();
     final newData = SettingsModel.fromJson(json);
 
-    // _instance = Settings._(SettingsModel.fromJson(json));
-    settings.state = newData;
     _data = newData;
 
     // If this is the first time retrieving the settings then save them.
     if (jsonString == null) {
-      await settings.save(newData, force: true);
+      await _saveSettings(
+        settings: newData,
+        preferences: preferences,
+        force: true,
+      );
     }
 
     return newData;
@@ -126,22 +127,15 @@ class Settings extends _$Settings {
     SettingsModel settings, {
     bool force = false,
   }) async {
-    final currentJsonString = jsonEncode(state.toJson());
-    final jsonString = jsonEncode(settings.toJson());
+    await _saveSettings(
+      settings: settings,
+      previous: state,
+      preferences: preferences,
+      force: force,
+    );
 
-    if (currentJsonString == jsonString && !force) {
-      return;
-    }
-
-    // Optimistically update the state.
-    state = settings;
-
-    // Persist the settings.
-    _preferences ??= await SharedPreferences.getInstance();
-    await _preferences?.setString(_key, jsonString);
-
-    // Update the static cached data.
-    _data = settings;
+    // Update the state and store the _data singleton.
+    _data = state = settings;
   }
 
   /// Update and save the settings. Use copyWith on the settings model.
@@ -152,6 +146,23 @@ class Settings extends _$Settings {
     final settings = updater(state);
     await save(settings, force: force);
   }
+}
+
+Future<void> _saveSettings({
+  required SharedPreferences preferences,
+  required SettingsModel settings,
+  SettingsModel? previous,
+  required bool force,
+}) async {
+  final previousJson = previous != null ? jsonEncode(previous.toJson()) : '';
+  final settingsJson = jsonEncode(settings.toJson());
+
+  if (previousJson == settingsJson && !force) {
+    return;
+  }
+
+  // Persist the settings.
+  await preferences.setString(_settingsKey, settingsJson);
 }
 
 typedef SettingsUpdater = SettingsModel Function(SettingsModel current);

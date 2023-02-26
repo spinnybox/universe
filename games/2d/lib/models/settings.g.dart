@@ -70,7 +70,7 @@ Map<String, dynamic> _$$_SettingsModelToJson(_$_SettingsModel instance) =>
 // RiverpodGenerator
 // **************************************************************************
 
-String _$settingsHash() => r'15071facd3168ca875e66a7fe642daef5a421d34';
+String _$settingsHash() => r'972c1206d43df5df7dbbbd4c7f7fe3f0845928d3';
 
 /// See also [Settings].
 @ProviderFor(Settings)
