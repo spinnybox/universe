@@ -22,10 +22,6 @@
   difftastic.enable = true;
   devcontainer.enable = true;
 
-  enterShell = ''
-    echo WASSUP
-  '';
-
   # Scripts
   scripts."prisma:generate".exec = ''
     prisma generate --schema=./apps/spinnybox_com/prisma/schema.prisma
