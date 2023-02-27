@@ -10,7 +10,7 @@
     pkgs.cargo-workspaces
     pkgs.cargo-edit
     pkgs.deno
-    # pkgs.dprint
+    pkgs.dprint
     pkgs.fnm
     pkgs.git
     pkgs.ripgrep
@@ -27,19 +27,25 @@
   '';
 
   # Scripts
+  scripts."prisma:generate".exec = ''
+    prisma generate --schema=./apps/spinnybox_com/prisma/schema.prisma
+  '';
+  scripts."prisma".exec = ''
+    cargo run --bin run_prisma -- $@
+  '';
   scripts."build:ios:debug".exec = ''
-    make export-aarch64-apple-ios-debug spinnybox
+    m export-aarch64-apple-ios-debug spinnybox
   '';
   scripts."build:ios".exec = ''
-    make export-aarch64-apple-ios-release spinnybox
+    m export-aarch64-apple-ios-release spinnybox
   '';
   scripts."export:ios:debug".exec = ''
-    make export-aarch64-apple-ios-debug-script spinnybox
+    m export-aarch64-apple-ios-debug-script spinnybox
   '';
   scripts."export:ios".exec = ''
-    make export-aarch64-apple-ios-release-script spinnybox
+    m export-aarch64-apple-ios-release-script spinnybox
   '';
-  scripts.make.exec = ''
+  scripts.m.exec = ''
     cargo make $@
   '';
   scripts.leptos.exec = ''
