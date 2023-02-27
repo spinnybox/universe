@@ -28,7 +28,10 @@ pub async fn toggle_dark_mode(cx: Scope, prefers_dark: bool) -> Result<bool, Ser
 
 #[cfg(not(feature = "ssr"))]
 fn initial_prefers_dark(cx: Scope) -> bool {
-  let doc = document().unchecked_into::<web_sys::HtmlDocument>();
+  use wasm_bindgen::JsCast;
+  use web_sys::HtmlDocument;
+
+  let doc = document().unchecked_into::<HtmlDocument>();
   let cookie = doc.cookie().unwrap_or_default();
   cookie.contains("darkmode=true")
 }

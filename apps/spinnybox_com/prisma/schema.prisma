@@ -5,12 +5,12 @@ datasource db {
 
 generator client {
   // Corresponds to the cargo alias created earlier
-  provider      = "cargo prisma"
+  provider = "prisma"
   // The location to generate the client. Is relative to the position of the schema
-  output        = "../src/prisma.rs"
+  output   = "../src/prisma.rs"
 }
 
 model User {
-  id          String  @id
+  id          String @id
   displayName String
 }

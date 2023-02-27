@@ -16,13 +16,15 @@ console_log = { workspace = true, optional = true }
 dotenvy = { workspace = true, optional = true }
 futures = { workspace = true }
 http = { workspace = true, optional = true }
-leptos = { git = "https://github.com/gbj/leptos", rev = "b0a98d8", default-features = false, features = ["serde"] }
-leptos_axum = { git = "https://github.com/gbj/leptos", rev = "b0a98d8", optional = true, default_features = false }
-leptos_meta = { git = "https://github.com/gbj/leptos", rev = "b0a98d8", default-features = false }
-leptos_router = { git = "https://github.com/gbj/leptos", rev = "b0a98d8", default-features = false }
+leptos = { version = "0.2", default-features = false, features = ["serde"] }
+leptos_axum = { version = "0.2", optional = true, default_features = false }
+leptos_meta = { version = "0.2", default-features = false }
+leptos_router = { version = "0.2", default-features = false }
 
 log = { workspace = true }
 once_cell = { workspace = true }
+prisma-client-rust = { workspace = true }
+prisma-client-rust-cli = { workspace = true }
 reqwest = { workspace = true, features = ["json"], optional = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true, optional = true }
