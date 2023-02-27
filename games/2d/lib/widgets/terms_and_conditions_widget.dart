@@ -21,6 +21,7 @@ Widget _termsAndConditions(
   final finishedReadingTerms = useState(false);
   final acceptedTerms = useState(false);
   final scrollController = useScrollController();
+
   useEffect(() {
     scrollController.addListener(() {
       if (!scrollController.position.atEdge) return;
@@ -35,17 +36,23 @@ Widget _termsAndConditions(
     return () => scrollController.dispose();
   }, [scrollController]);
 
+  final widget = _PopupColumn(
+    acceptedTerms: acceptedTerms,
+    finishedReadingTerms: finishedReadingTerms,
+    scrollController: scrollController,
+  );
+
+  // showWiredDialog(context, widget);
+  // showDialog<void>(context: context, builder: (context) => const _Example());
+
   useEffect(() {
-    if (settings.hasAcceptedTerms) return;
+    // TODO change this to show dialog only when the user has not accepted the terms.
+    if (settings.hasAcceptedTerms || !settings.hasAcceptedTerms) return null;
 
-    showWiredDialog(
-      context,
-      acceptedTerms: acceptedTerms,
-      finishedReadingTerms: finishedReadingTerms,
-      scrollController: scrollController,
-    );
+    // TODO dialog is overflowing the bounds. This should be revisited in the future.
+    showWiredDialog(context, widget);
 
-    return;
+    return () => Navigator.of(context).pop();
   }, [settings.hasAcceptedTerms]);
 
   useValueChanged(
@@ -173,18 +180,37 @@ Widget __popupColumn(
   );
 }
 
-void showWiredDialog(
-  BuildContext context, {
-  required ValueNotifier<bool> acceptedTerms,
-  required ValueNotifier<bool> finishedReadingTerms,
-  required ScrollController scrollController,
-}) {
-  showDialog<void>(
-    context: context,
-    builder: (_) => _PopupColumn(
-      acceptedTerms: acceptedTerms,
-      finishedReadingTerms: finishedReadingTerms,
-      scrollController: scrollController,
-    ),
+void showWiredDialog(BuildContext context, Widget widget) {
+  showDialog<void>(context: context, builder: (_) => widget);
+}
+
+@swidget
+Widget __example(BuildContext context) {
+  return AlertDialog(
+    title: const Text('Basic dialog title'),
+    content: const Text('A dialog is a type of modal window that\n'
+        'appears in front of app content to\n'
+        'provide critical information, or prompt\n'
+        'for a decision to be made.'),
+    actions: <Widget>[
+      TextButton(
+        style: TextButton.styleFrom(
+          textStyle: Theme.of(context).textTheme.labelLarge,
+        ),
+        child: const Text('Disable'),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+      TextButton(
+        style: TextButton.styleFrom(
+          textStyle: Theme.of(context).textTheme.labelLarge,
+        ),
+        child: const Text('Enable'),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+    ],
   );
 }

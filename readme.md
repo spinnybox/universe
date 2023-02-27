@@ -1,6 +1,37 @@
-# spinnybox
+<p align="center">
+  <a href="https://spinnybox.com"><img width="300" height="300" src="./apps/spinnybox/assets/svg/logo.svg" alt="Spinny Box Logo" /></a>
+</p>
 
-> a different kind of box
+<p align="center">
+  <a href="#introduction"><strong>Introduction</strong></a> ·
+  <a href="https://spinnybox.com"><strong>Website</strong></a> ·
+  <a href="https://preview.spinnybox.com"><strong>Preview Website</strong></a> ·
+  <a href="https://spinnybox.com/download"><strong>Download</strong></a>
+</p>
+
+<p align="center">
+  <strong>Unconventional</strong> <em>games</em> for everyone.
+</p>
+
+<p align="center">
+<a href="https://github.com/kickjump/spinnybox/actions?query=workflow:ci">
+    <img src="https://github.com/kickjump/spinnybox/workflows/ci/badge.svg?branch=main" alt="Badge for managing automatic uploading of the fonts" title="Main CI Action" />
+  </a>
+</p>
+
+<br />
+
+## Introduction
+
+The idea for SpinnyBox came while I was pacing around my room with my phone in hand. As someone with ADHD, I am constantly fidgeting. On this particular day, I was absent-mindedly throwing my phone up and down.
+
+Feeling like I was wasting time, a thought came to me. "Wouldn't it be cool if I could be rewarded for this?"
+
+And that's where the idea started, as a means to unlock different methods of play on your devices.
+
+This project will release a series of unconventional games that seek to reward the inner child.
+
+I hope it fulfils my initial vision, and I hope you enjoy it!
 
 ## Contributing
 
@@ -25,32 +56,3 @@ setup:vscode # Setup vscode
 setup:helix  # Setup helix configuration
 ```
 
-## Planning
-
-There are three parts to the mvp
-
-- [ ] The 2d game
-  - [x] build on `iOS`
-  - [-] ~~build on android~~
-  - [ ] Support rotation tracking on `iOS`
-    - [ ] Port from previous flutter application
-  - [ ] Simplest game possible with a basic character
-    - [ ] Rotate to dodge obstacles
-    - [ ] Obstactles are randomly generated and more are generated the longer you play
-  - [ ] The game ui
-    - [ ] egui rendering to avoid godot boilerplate
-    - [ ] add handrawn ui
-  - [ ] Characters
-    - [ ] pngs for each part of the character
-    - [ ] dynamic character creation in game
-- [ ] The fundraising platform
-  - [ ] Port over fundraising contract
-  - [ ] Add rust library ui code via `anchor-gen`
-    - [ ] Might have to fork and upgrade
-  - [ ] Write one library test
-  - [ ] Integrate with raising funds via nfts (compressed)
-- [ ] The website
-  - [ ] implement design with tailwind and leptos
-  - [ ] implement dark mode
-  - [ ] support authentication via glow and phantom
-  - [ ] integrate fundraising platform ui

@@ -67,3 +67,10 @@ class _PopupColumn extends HookConsumerWidget {
         scrollController: scrollController,
       );
 }
+
+class _Example extends StatelessWidget {
+  const _Example({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext _context) => __example(_context);
+}
