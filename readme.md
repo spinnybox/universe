@@ -1,6 +1,8 @@
 <p align="center">
-  <a href="https://spinnybox.com"><img width="300" height="300" src="./games/spinnybox_2d/assets/svg/logo.svg" alt="Spinny Box Logo" /></a>
+  <a href="https://spinnybox.com"><img width="300" height="300" src="games/2d/assets/svg/rounded_logo.svg" alt="Spinny Box Logo" /></a>
 </p>
+
+<br />
 
 <p align="center">
   <a href="#introduction"><strong>Introduction</strong></a> ·
@@ -9,29 +11,39 @@
   <a href="https://spinnybox.com/download"><strong>Download</strong></a>
 </p>
 
-<p align="center">
-  <strong>Unconventional</strong> <em>games</em> for everyone.
-</p>
+<br />
 
 <p align="center">
-<a href="https://github.com/kickjump/spinnybox/actions?query=workflow:ci">
-    <img src="https://github.com/kickjump/spinnybox/workflows/ci/badge.svg?branch=main" title="Main CI Action" />
+  <strong>Unconventional</strong> <em>games</em> for <strong>everyone</strong>.
+</p>
+
+<br />
+
+<p align="center">
+  <a href="https://github.com/spinnybox/universe/actions?query=workflow:ci">
+    <img src="https://github.com/spinnybox/universe/workflows/ci/badge.svg?branch=main" title="Main CI Action" />
   </a>
 </p>
 
 <br />
 
-## Introduction
+## Why?
 
-The idea for SpinnyBox came while I was pacing around my room with my phone in hand. As someone with ADHD, I am constantly fidgeting. On this particular day, I was absent-mindedly throwing my phone up and down.
+The idea for Spinny Box came while I was pacing around my room with my phone in hand. As someone
+with _ADHD_, I am constantly fidgeting. On this particular day, I was absent-mindedly throwing my
+phone up and down.
 
-Feeling like I was wasting time, a thought came to me. "Wouldn't it be cool if I could be rewarded for this?"
+Feeling like I was wasting time, a thought came to me. "Wouldn't it be cool if I could be rewarded
+for this?"
 
-And that's where the idea started, as a means to unlock different methods of play on your devices.
+And that's where the idea came to me. Use fidgeting as a means to unlock different methods of play
+on our devices.
 
 This project will release a series of unconventional games that seek to reward the inner child.
 
 I hope it fulfils my initial vision, and I hope you enjoy it!
+
+<br />
 
 ## Contributing
 
@@ -55,4 +67,3 @@ To setup recommended configuration for your favourite editor run the following c
 setup:vscode # Setup vscode
 setup:helix  # Setup helix configuration
 ```
-

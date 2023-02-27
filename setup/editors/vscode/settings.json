@@ -37,5 +37,5 @@
     "editor.defaultFormatter": "Dart-Code.dart-code",
     "editor.rulers": [100]
   },
-  "dart.runPubGetOnPubspecChanges": "never"
+  "githubIssues.issueBranchTitle": "issue/${issueNumber}"
 }
