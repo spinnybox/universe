@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://spinnybox.com"><img width="300" height="300" src="./apps/spinnybox/assets/svg/logo.svg" alt="Spinny Box Logo" /></a>
+  <a href="https://spinnybox.com"><img width="300" height="300" src="./games/spinnybox_2d/assets/svg/logo.svg" alt="Spinny Box Logo" /></a>
 </p>
 
 <p align="center">
@@ -15,7 +15,7 @@
 
 <p align="center">
 <a href="https://github.com/kickjump/spinnybox/actions?query=workflow:ci">
-    <img src="https://github.com/kickjump/spinnybox/workflows/ci/badge.svg?branch=main" alt="Badge for managing automatic uploading of the fonts" title="Main CI Action" />
+    <img src="https://github.com/kickjump/spinnybox/workflows/ci/badge.svg?branch=main" title="Main CI Action" />
   </a>
 </p>
 

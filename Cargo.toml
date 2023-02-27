@@ -1,6 +1,6 @@
 [workspace]
-members = ["spinnybox_com", "games/spinnybox", "programs/*"]
-default-members = ["spinnybox_com", "games/spinnybox", "programs/*"]
+members = ["apps/*", "games/*", "programs/*"]
+default-members = ["apps/*", "games/*", "programs/*"]
 
 [workspace.dependencies]
 anchor-client = "0.26" # { git = "https://github.com/coral-xyz/anchor", rev = "9044b9b" }
@@ -15,9 +15,9 @@ cargo_toml = "0.15"
 cfg-if = "1"
 clap = "4"
 console_error_panic_hook = "0.1"
-leptos = "0.2.0-beta"
-leptos_meta = "0.2.0-beta"
-leptos_router = "0.2.0-beta"
+leptos = "0.2.1"
+leptos_meta = "0.2.1"
+leptos_router = "0.2.1"
 console_log = "0.2"
 crates_io_api = "0.8"
 doc-comment = "0.3"
