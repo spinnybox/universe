@@ -33,7 +33,7 @@ pub mod fundraiser {
       id_counter,
       collected,
       target,
-      authority: platform_authority,
+      authority: _platform_authority,
     } = *platform.as_ref();
     require!(id <= id_counter, DonateErrors::IDBiggerThanCounter);
 

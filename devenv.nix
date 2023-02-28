@@ -3,6 +3,7 @@
 {
   packages = [
     pkgs.cargo-all-features
+    pkgs.cargo-binstall
     pkgs.cargo-generate
     pkgs.cargo-insta
     pkgs.cargo-make

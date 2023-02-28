@@ -1,18 +1,41 @@
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:spinnybox_2d/game/game.dart';
+import 'package:spinnybox_2d/widgets/widgets.dart';
 
-class PlayScreen extends HookWidget {
-  const PlayScreen({Key? key, required this.id}) : super(key: key);
+part 'play_screen.g.dart';
 
+@hcwidget
+Widget _playScreen(
+  BuildContext context,
+  WidgetRef ref, {
   /// The game id. This is used as the seed for the game with the goal of fully reproducible games.
-  final String id;
+  required String id,
+}) {
+  final game = ref.watch(spinnybox2DGameProvider);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text(
-        'This is the PlayScreen screen with $id',
-      ),
-    );
-  }
+  /// Exit the game when the widget is unmounted.
+  useEffect(() => () => game.exit(), const []);
+
+  return GameWidget(
+    game: game,
+    loadingBuilder: (context) => const Loading(),
+    initialActiveOverlays: const [OverlayName.pauseMenu],
+    overlayBuilderMap: {
+      OverlayName.topBar: (_, SpinnyBoxGame game) => GameStatusOverlay(
+            game: game,
+          ),
+      OverlayName.pauseMenu: (_, SpinnyBoxGame game) => GamePauseOverlay(
+            game: game,
+          ),
+      OverlayName.gameOver: (_, SpinnyBoxGame game) => GameOverOverlay(
+            game: game,
+            message: 'Game over',
+            playMessage: 'Play again',
+          ),
+    },
+  );
 }

@@ -2,7 +2,8 @@
 
 #![allow(warnings, unused)]
 pub static DATAMODEL_STR: &'static str = include_str!(
-  "/Users/ifiokjr/Developer/projects/spinnybox/universe/apps/spinnybox_com/prisma/schema.prisma"
+  "../prisma/schema.\
+   prisma"
 );
 static DATABASE_STR: &'static str = "sqlite";
 pub async fn new_client() -> Result<PrismaClient, ::prisma_client_rust::NewClientError> {
