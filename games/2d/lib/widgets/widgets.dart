@@ -1,6 +1,11 @@
-export 'wired/wired_widgets.dart';
+export 'custom_reveal_widget.dart';
+export 'final_score_widget.dart';
+export 'game_exit_overlay_widget.dart';
+export 'game_pause_overlay_widget.dart';
+export 'game_status_overlay_widget.dart';
+export 'loading_widget.dart';
+export 'main_layout_widget.dart';
 export 'svg_background_widget.dart';
 export 'svg_icon_widget.dart';
-export 'main_layout_widget.dart';
-export 'custom_reveal_widget.dart';
 export 'terms_and_conditions_widget.dart';
+export 'wired/wired_widgets.dart';

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:spinnybox_2d/models/game_data.dart';
+import 'package:spinnybox_2d/game/game.dart';
 
 part 'settings.g.dart';
 part 'settings.freezed.dart';
@@ -148,6 +148,7 @@ class Settings extends _$Settings {
   }
 }
 
+/// Save the settings to the shared preferences.
 Future<void> _saveSettings({
   required SharedPreferences preferences,
   required SettingsModel settings,

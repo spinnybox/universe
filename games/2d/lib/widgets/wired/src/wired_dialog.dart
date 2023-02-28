@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:spinnybox_2d/widgets/wired/rough/rough.dart';
 import 'wired_base.dart';
 
 import 'canvas/wired_canvas.dart';
@@ -59,12 +60,17 @@ Widget _wiredDialog(
   BuildContext context, {
   /// The content in dialog.
   required Widget child,
+  double? width,
+  double? height,
 
   /// The padding for dialog's content, defaults to 20.0 if null.
   EdgeInsetsGeometry? padding,
   Color fillColor = Colors.white,
   RoughFilter fillerType = RoughFilter.noFiller,
 }) {
+  width = width ?? MediaQuery.of(context).size.width * 0.8;
+  height = height ?? MediaQuery.of(context).size.height * 0.8;
+
   return Dialog(
     child: Stack(
       children: [
@@ -73,6 +79,7 @@ Widget _wiredDialog(
           child: WiredCanvas(
             painter: WiredRectangleBase(fillColor: fillColor),
             fillerType: fillerType,
+            size: Size(width, height),
           ),
         ),
         Padding(

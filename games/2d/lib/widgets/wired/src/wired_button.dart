@@ -26,6 +26,8 @@ class WiredButton extends WiredBaseWidget {
     this.borderColor = AppColors.black,
     this.fillColor = AppColors.white,
     this.disabled = false,
+    this.borderWidth = 2,
+    this.tooltip,
   }) : super(key: key);
 
   const WiredButton.icon({
@@ -36,9 +38,12 @@ class WiredButton extends WiredBaseWidget {
     this.borderColor = AppColors.black,
     this.fillColor = AppColors.white,
     this.disabled = false,
+    this.borderWidth = 2,
+    this.tooltip,
   })  : child = icon,
         width = size,
-        height = size;
+        height = size,
+        super(key: key);
 
   /// Typically the button's label.
   final Widget child;
@@ -55,20 +60,29 @@ class WiredButton extends WiredBaseWidget {
   /// The height of the button.
   final double? height;
 
+  /// The color of the border.
   final Color? borderColor;
+
+  /// The width of the border.
+  final double? borderWidth;
+
+  /// The color of the fill.
   final Color? fillColor;
+
+  /// The tooltip of the button.
+  final String? tooltip;
 
   @override
   Widget buildWiredElement() {
-    return Container(
+    final button = Container(
       padding: EdgeInsets.zero,
       height: height,
       width: width,
       decoration: RoughBoxDecoration(
         filler: SolidFiller(),
         shape: RoughBoxShape.rectangle,
-        fillStyle: RoughDrawingStyle(color: fillColor),
-        borderStyle: RoughDrawingStyle(width: 2, color: borderColor),
+        fillStyle: RoughDrawingStyle(color: fillColor, width: width),
+        borderStyle: RoughDrawingStyle(width: borderWidth, color: borderColor),
       ),
       child: SizedBox(
         height: double.infinity,
@@ -82,5 +96,14 @@ class WiredButton extends WiredBaseWidget {
         ),
       ),
     );
+
+    if (tooltip != null) {
+      return Tooltip(
+        message: tooltip,
+        child: button,
+      );
+    }
+
+    return button;
   }
 }
