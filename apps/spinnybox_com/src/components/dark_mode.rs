@@ -1,6 +1,6 @@
 use leptos::*;
-use leptos_meta::Meta;
-use leptos_meta::MetaProps;
+
+
 
 #[server(ToggleDarkMode, "/rpc")]
 pub async fn toggle_dark_mode(cx: Scope, prefers_dark: bool) -> Result<bool, ServerFnError> {
@@ -27,7 +27,7 @@ pub async fn toggle_dark_mode(cx: Scope, prefers_dark: bool) -> Result<bool, Ser
 }
 
 #[cfg(not(feature = "ssr"))]
-fn initial_prefers_dark(cx: Scope) -> bool {
+fn initial_prefers_dark(_cx: Scope) -> bool {
   use wasm_bindgen::JsCast;
   use web_sys::HtmlDocument;
 
