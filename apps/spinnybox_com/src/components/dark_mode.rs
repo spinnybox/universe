@@ -1,7 +1,5 @@
 use leptos::*;
 
-
-
 #[server(ToggleDarkMode, "/rpc")]
 pub async fn toggle_dark_mode(cx: Scope, prefers_dark: bool) -> Result<bool, ServerFnError> {
   use axum::http::header::SET_COOKIE;
