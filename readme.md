@@ -23,6 +23,10 @@
   <a href="https://github.com/spinnybox/universe/actions?query=workflow:ci">
     <img src="https://github.com/spinnybox/universe/workflows/ci/badge.svg?branch=main" title="Main CI Action" />
   </a>
+  <a href="https://github.com/spinnybox/universe/actions?query=workflow:ci">
+    <img src="https://api.codemagic.io/apps/63ff0ff9a3a9ec94eed2478d/63ff0ff9a3a9ec94eed2478c/status_badge.svg" title="CodeMagic Build Status" />
+  </a>
+
 </p>
 
 <br />
