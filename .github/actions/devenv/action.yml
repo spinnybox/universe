@@ -16,13 +16,13 @@ runs:
         key: ${{ runner.os }}-nix-cache
 
     - name: install nix
-      uses: cachix/install-nix-action@v18
+      uses: cachix/install-nix-action@v20
       with:
         github_access_token: ${{ inputs.github-token }}
 
     - name: import nix store cache
       if: "steps.nix-cache.outputs.cache-hit == 'true'"
-      run: "nix-store --import < /tmp/nixcache"
+      run: "nix copy --all --from /tmp/nixcache"
       shell: bash
 
     - name: enable cachix
@@ -44,5 +44,5 @@ runs:
 
     - name: export nix store cache
       if: "steps.nix-cache.outputs.cache-hit != 'true'"
-      run: "nix-store --export $(find /nix/store -maxdepth 1 -name '*-*')> /tmp/nixcache"
+      run: "nix copy --all --to /tmp/nixcache"
       shell: bash
