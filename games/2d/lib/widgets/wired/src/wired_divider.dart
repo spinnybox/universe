@@ -40,7 +40,7 @@ class WiredDivider extends StatelessWidget {
             fillerType: RoughFilter.noFiller,
           ),
         ),
-        Divider(color: Colors.transparent),
+        const Divider(color: Colors.transparent),
       ],
     );
   }

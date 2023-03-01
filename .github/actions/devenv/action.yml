@@ -15,6 +15,12 @@ runs:
         path: /tmp/nixcache
         key: ${{ runner.os }}-nix-cache
 
+    - name: cache flutter dependencies
+      uses: actions/cache@v2
+      with:
+        path: ${{ runner.tool_cache }}/flutter
+        key: ${{ runner.os }}-flutter-beta-stable
+
     - name: install nix
       uses: cachix/install-nix-action@v20
       with:
@@ -41,6 +47,21 @@ runs:
 
     - name: update paths
       run: devenv shell setup:ci
+      shell: bash
+
+    - name: flutter install
+      uses: subosito/flutter-action@v2
+      with:
+        channel: "beta"
+
+    # currently melos doesn't work with dart 3 which is used in flutter beta
+    - name: setup melos
+      uses: bluefireteam/melos-action@v1
+
+    - name: install flutter game dependencies
+      run: |
+        cd games/2d
+        flutter pub get
       shell: bash
 
     - name: export nix store cache

@@ -7,12 +7,11 @@ import 'renderer.dart';
 
 /// [Generator] is class that lets you create a [Drawable] object for a shape.
 class Generator {
-  final DrawConfig? drawConfig;
-  final Filler? filler;
-
   Generator(this.drawConfig, this.filler)
       : assert(drawConfig != null),
         assert(filler != null);
+  final DrawConfig? drawConfig;
+  final Filler? filler;
 
   Drawable _buildDrawable(OpSet drawSets, [List<PointD>? fillPoints]) {
     final List<OpSet> sets = [];

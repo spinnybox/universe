@@ -36,3 +36,10 @@ jobs:
       - name: lint
         run: lint:all
         shell: bash
+
+      - name: build flutter app
+        uses: codemagic-ci-cd/trigger-codemagic-workflow-action@v1.0.0
+        with:
+          app-id: 63ff0ff9a3a9ec94eed2478d
+          workflow-id: spinnybox_2d
+          token: ${{ secrets.CODEMAGIC_API_TOKEN }}

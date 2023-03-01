@@ -3,11 +3,10 @@ import '../../rough/rough.dart';
 import 'wired_painter_base.dart';
 
 class WiredPainter extends CustomPainter {
+  WiredPainter(this.drawConfig, this.filler, this.painter);
   final DrawConfig drawConfig;
   final Filler filler;
   final WiredPainterBase painter;
-
-  WiredPainter(this.drawConfig, this.filler, this.painter);
 
   @override
   paint(Canvas canvas, Size size) {

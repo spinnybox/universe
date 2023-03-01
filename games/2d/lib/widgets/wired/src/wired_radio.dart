@@ -26,6 +26,13 @@ import 'canvas/wired_canvas.dart';
 /// ),
 /// ```
 class WiredRadio<T> extends StatefulWidget {
+  const WiredRadio({
+    Key? key,
+    required this.value,
+    required this.groupValue,
+    required this.onChanged,
+  }) : super(key: key);
+
   /// The value for radio.
   final T value;
 
@@ -35,18 +42,11 @@ class WiredRadio<T> extends StatefulWidget {
   /// Called when the radio value changes.
   final bool Function(T?)? onChanged;
 
-  const WiredRadio({
-    Key? key,
-    required this.value,
-    required this.groupValue,
-    required this.onChanged,
-  }) : super(key: key);
-
   @override
-  _WiredRadioState<T> createState() => _WiredRadioState<T>();
+  WiredRadioState<T> createState() => WiredRadioState<T>();
 }
 
-class _WiredRadioState<T> extends State<WiredRadio<T>> {
+class WiredRadioState<T> extends State<WiredRadio<T>> {
   bool _isSelected = false;
   T? _groupValue;
 

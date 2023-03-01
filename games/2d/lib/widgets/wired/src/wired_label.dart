@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:spinnybox_2d/colors.dart';
 import '../rough/rough.dart';
 
-import 'const.dart';
 import 'wired_base.dart';
 
 /// Wired button.

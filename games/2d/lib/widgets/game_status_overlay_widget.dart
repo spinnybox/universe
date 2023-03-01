@@ -104,24 +104,3 @@ Widget _gameStatusOverlay(
     child: topButtonBar,
   );
 }
-
-void Function(Duration duration) _updateGameStatusWidget(
-    GlobalKey? key, SpinnyBoxGame game) {
-  return (duration) {
-    final keyContext = key?.currentContext;
-
-    if (keyContext == null) {
-      return;
-    }
-
-    // Widget is visible
-    final box = keyContext.findRenderObject() as RenderBox?;
-    final offset = box?.localToGlobal(Offset.zero);
-
-    if (box == null || offset == null) {
-      return;
-    }
-
-    game.statusWidget = StatusOverlayDimensions(size: box.size, offset: offset);
-  };
-}

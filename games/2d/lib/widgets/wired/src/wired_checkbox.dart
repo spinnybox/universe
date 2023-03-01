@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import '../rough/rough.dart';
 
 import 'const.dart';
@@ -15,46 +16,28 @@ import 'wired_base.dart';
 ///   },
 /// ),
 /// ```
-class WiredCheckbox extends StatefulWidget {
-  /// Determines the checkbox checked or not.
-  final bool? value;
-
-  /// Called once the checkbox check status changes.
-  final void Function(bool?) onChanged;
-
+class WiredCheckbox extends HookWidget with WiredRepaintMixin {
   const WiredCheckbox({
     Key? key,
     required this.value,
     required this.onChanged,
   }) : super(key: key);
 
-  @override
-  _WiredCheckboxState createState() => _WiredCheckboxState();
-}
+  /// Determines the checkbox checked or not.
+  final bool? value;
 
-class _WiredCheckboxState extends State<WiredCheckbox> with WiredRepaintMixin {
-  bool _value = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _value = widget.value!;
-  }
+  /// Called once the checkbox check status changes.
+  final void Function(bool?) onChanged;
 
   @override
   Widget build(BuildContext context) {
-    return buildWiredElement(
-      key: widget.key,
-      child: _buildWidget(),
-    );
-  }
+    final checked = useState(value ?? false);
 
-  Widget _buildWidget() {
-    return Container(
+    final child = Container(
       padding: EdgeInsets.zero,
       height: 27.0,
       width: 27.0,
-      decoration: RoughBoxDecoration(
+      decoration: const RoughBoxDecoration(
         shape: RoughBoxShape.rectangle,
         borderStyle: RoughDrawingStyle(
           width: 1,
@@ -70,15 +53,18 @@ class _WiredCheckboxState extends State<WiredCheckbox> with WiredRepaintMixin {
             fillColor: MaterialStateProperty.all(Colors.transparent),
             checkColor: borderColor,
             onChanged: (value) {
-              setState(() {
-                widget.onChanged(value);
-                _value = value!;
-              });
+              onChanged(value);
+              checked.value = value ?? false;
             },
-            value: _value,
+            value: checked.value,
           ),
         ),
       ),
+    );
+
+    return buildWiredElement(
+      key: key,
+      child: child,
     );
   }
 }

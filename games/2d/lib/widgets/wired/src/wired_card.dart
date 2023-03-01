@@ -38,6 +38,13 @@ import 'wired_base.dart';
 /// ),
 /// ```
 class WiredCard extends StatelessWidget {
+  const WiredCard({
+    Key? key,
+    this.child,
+    this.fill = false,
+    this.height = 130.0,
+  }) : super(key: key);
+
   /// The [child] contained by the card.
   final Widget? child;
 
@@ -46,13 +53,6 @@ class WiredCard extends StatelessWidget {
 
   /// The [height] of this card.
   final double? height;
-
-  const WiredCard({
-    Key? key,
-    this.child,
-    this.fill = false,
-    this.height = 130.0,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

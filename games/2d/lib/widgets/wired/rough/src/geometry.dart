@@ -47,34 +47,30 @@ bool onSegmentPoints(PointD source, PointD point, PointD target) =>
     Line(source, target).onSegment(point);
 
 class ComputedEllipsePoints {
+  ComputedEllipsePoints({this.corePoints, this.allPoints});
   List<PointD>? corePoints;
   List<PointD>? allPoints;
-
-  ComputedEllipsePoints({this.corePoints, this.allPoints});
 }
 
 class EllipseParams {
+  EllipseParams({this.rx, this.ry, this.increment});
   final double? rx;
   final double? ry;
   final double? increment;
-
-  EllipseParams({this.rx, this.ry, this.increment});
 }
 
 class EllipseResult {
+  EllipseResult({this.opSet, this.estimatedPoints});
   OpSet? opSet;
   List<PointD>? estimatedPoints;
-
-  EllipseResult({this.opSet, this.estimatedPoints});
 }
 
 class Edge {
+  Edge({this.yMin, this.yMax, this.x, this.slope});
   double? yMin;
   double? yMax;
   double? x;
   double? slope;
-
-  Edge({this.yMin, this.yMax, this.x, this.slope});
 
   Edge copyWith({double? yMin, double? yMax, double? x, double? slope}) => Edge(
         yMin: yMin ?? this.yMin,
@@ -90,8 +86,7 @@ class Edge {
 }
 
 class ActiveEdge {
+  ActiveEdge(this.s, this.edge);
   double s;
   Edge edge;
-
-  ActiveEdge(this.s, this.edge);
 }

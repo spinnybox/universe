@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import '../rough/rough.dart';
 import 'wired_base.dart';
 
@@ -25,7 +26,15 @@ import 'canvas/wired_canvas.dart';
 ///   },
 /// ),
 /// ```
-class WiredCombo extends StatefulWidget {
+class WiredCombo extends HookWidget {
+  const WiredCombo({
+    Key? key,
+    required this.items,
+    this.value,
+    this.onChanged,
+    this.height = 60.0,
+  }) : super(key: key);
+
   /// The selected value for combo.
   final dynamic value;
 
@@ -33,40 +42,19 @@ class WiredCombo extends StatefulWidget {
   final List<DropdownMenuItem<dynamic>> items;
 
   /// Called when the combo selected value changed.
-  final Function(dynamic)? onChanged;
+  final void Function(dynamic)? onChanged;
 
-  const WiredCombo({
-    Key? key,
-    required this.items,
-    this.value,
-    this.onChanged,
-  }) : super(key: key);
-
-  @override
-  _WiredComboState createState() => _WiredComboState();
-}
-
-class _WiredComboState extends State<WiredCombo> {
-  double _height = 60.0;
-  dynamic _value;
-
-  @override
-  void initState() {
-    super.initState();
-    _value = widget.value;
-  }
+  final double height;
 
   @override
   Widget build(BuildContext context) {
-    return _buildWidget();
-  }
+    final state = useState(value);
 
-  Widget _buildWidget() {
     return Container(
       color: Colors.transparent,
       padding: EdgeInsets.zero,
       margin: EdgeInsets.zero,
-      height: _height,
+      height: height,
       child: Stack(
         children: [
           Positioned(
@@ -76,23 +64,23 @@ class _WiredComboState extends State<WiredCombo> {
               painter: WiredInvertedTriangleBase(),
               fillerType: RoughFilter.hachureFiller,
               fillerConfig: FillerConfig.build(hachureGap: 2),
-              size: Size(18.0, 18.0),
+              size: const Size(18.0, 18.0),
             ),
           ),
           SizedBox(
-            height: _height,
+            height: height,
             width: double.infinity,
             child: DropdownButtonHideUnderline(
               child: DropdownButton(
-                itemHeight: _height,
+                itemHeight: height,
                 isExpanded: true,
                 elevation: 0,
-                icon: Visibility(
+                icon: const Visibility(
                   visible: false,
                   child: Icon(Icons.arrow_downward),
                 ),
-                value: _value,
-                items: widget.items.map((item) {
+                value: state.value,
+                items: items.map((item) {
                   return DropdownMenuItem<dynamic>(
                     value: item.value,
                     child: Stack(
@@ -100,7 +88,7 @@ class _WiredComboState extends State<WiredCombo> {
                         WiredCanvas(
                           painter: WiredRectangleBase(),
                           fillerType: RoughFilter.noFiller,
-                          size: Size(double.infinity, _height),
+                          size: Size(double.infinity, height),
                         ),
                         Positioned(
                           top: 20.0,
@@ -111,12 +99,8 @@ class _WiredComboState extends State<WiredCombo> {
                   );
                 }).toList(),
                 onChanged: (dynamic value) {
-                  _value = value;
-                  if (widget.onChanged != null) {
-                    widget.onChanged!(_value);
-                  }
-
-                  setState(() {});
+                  state.value = value;
+                  onChanged?.call(value);
                 },
               ),
             ),

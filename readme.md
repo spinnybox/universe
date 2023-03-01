@@ -51,6 +51,9 @@ I hope it fulfils my initial vision, and I hope you enjoy it!
 
 ## Contributing
 
+First make sure to [install `flutter`](https://docs.flutter.dev/get-started/install) since it
+doesn't work on `macos` with `nix` yet.
+
 [`devenv`](https://devenv.sh/) is used to provide a reproducible development environment for this
 project. Follow the [getting started instructions](https://devenv.sh/getting-started/).
 

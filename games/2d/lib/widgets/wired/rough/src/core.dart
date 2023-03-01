@@ -4,9 +4,6 @@ import 'entities.dart';
 import 'geometry.dart';
 
 class Op {
-  final OpType op;
-  final List<PointD> data;
-
   Op.move(PointD point)
       : op = OpType.move,
         data = [point];
@@ -18,13 +15,14 @@ class Op {
   Op.curveTo(PointD control1, PointD control2, PointD destination)
       : op = OpType.curveTo,
         data = [control1, control2, destination];
+  final OpType op;
+  final List<PointD> data;
 }
 
 class OpSet {
+  OpSet({this.type, this.ops});
   OpSetType? type;
   List<Op>? ops;
-
-  OpSet({this.type, this.ops});
 }
 
 enum OpType { move, curveTo, lineTo }
@@ -32,10 +30,9 @@ enum OpType { move, curveTo, lineTo }
 enum OpSetType { path, fillPath, fillSketch }
 
 class Line {
+  Line(this.source, this.target);
   PointD source;
   PointD target;
-
-  Line(this.source, this.target);
 
   double get length =>
       sqrt(pow(source.x - target.x, 2) + pow(source.y - target.y, 2));

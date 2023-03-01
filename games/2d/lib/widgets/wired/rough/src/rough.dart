@@ -37,10 +37,10 @@ extension Rough on Canvas {
 
           break;
         case OpSetType.fillPath:
-          final Paint _fillPaint = fillPaint;
-          _fillPaint.style = PaintingStyle.fill;
-          final Path _path = _drawToContext(drawing)..close();
-          drawPath(_path, _fillPaint);
+          final Paint fillPaint0 = fillPaint;
+          fillPaint0.style = PaintingStyle.fill;
+          final Path path = _drawToContext(drawing)..close();
+          drawPath(path, fillPaint0);
           break;
         case OpSetType.fillSketch:
           drawPath(_drawToContext(drawing), fillPaint);
