@@ -20,6 +20,17 @@ import 'wired_base.dart';
 /// ),
 /// ```
 class WiredInput extends StatelessWidget {
+  const WiredInput({
+    Key? key,
+    this.controller,
+    this.style,
+    this.labelText,
+    this.labelStyle,
+    this.hintText,
+    this.hintStyle,
+    this.onChanged,
+  }) : super(key: key);
+
   /// Controls the text being edited.
   final TextEditingController? controller;
 
@@ -42,17 +53,6 @@ class WiredInput extends StatelessWidget {
   /// Called when the text changes.
   final void Function(String)? onChanged;
 
-  const WiredInput({
-    Key? key,
-    this.controller,
-    this.style,
-    this.labelText,
-    this.labelStyle,
-    this.hintText,
-    this.hintStyle,
-    this.onChanged,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -62,7 +62,7 @@ class WiredInput extends StatelessWidget {
             '$labelText',
             style: labelStyle,
           ),
-        if (labelText != null) SizedBox(width: 10.0),
+        if (labelText != null) const SizedBox(width: 10.0),
         Expanded(
           child: Stack(
             children: [
@@ -80,7 +80,7 @@ class WiredInput extends StatelessWidget {
                   border: InputBorder.none,
                   hintText: hintText,
                   hintStyle: hintStyle,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 5.0),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 5.0),
                 ),
                 onChanged: onChanged,
               ),

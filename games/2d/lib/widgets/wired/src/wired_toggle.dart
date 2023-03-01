@@ -7,20 +7,19 @@ import 'wired_base.dart';
 
 /// Wired toggle
 class WiredToggle extends StatefulWidget {
-  final bool value;
-  final bool Function(bool)? onChange;
-
   const WiredToggle({
     Key? key,
     required this.value,
     required this.onChange,
   }) : super(key: key);
+  final bool value;
+  final bool Function(bool)? onChange;
 
   @override
-  _WiredToggleState createState() => _WiredToggleState();
+  WiredToggleState createState() => WiredToggleState();
 }
 
-class _WiredToggleState extends State<WiredToggle>
+class WiredToggleState extends State<WiredToggle>
     with SingleTickerProviderStateMixin, WiredRepaintMixin {
   bool _isSwitched = false;
   final double _thumbRadius = 24.0;

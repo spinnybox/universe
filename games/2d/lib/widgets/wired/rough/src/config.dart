@@ -2,6 +2,16 @@ import 'dart:math';
 
 // Describe how a particular shape is drawn.
 class DrawConfig {
+  const DrawConfig._({
+    this.maxRandomnessOffset,
+    this.roughness,
+    this.bowing,
+    this.curveFitting,
+    this.curveTightness,
+    this.curveStepCount,
+    this.seed,
+    this.randomizer,
+  });
   final double? maxRandomnessOffset;
   final double? roughness;
   final double? bowing;
@@ -20,17 +30,6 @@ class DrawConfig {
     curveStepCount: 9,
     seed: 1,
   );
-
-  const DrawConfig._({
-    this.maxRandomnessOffset,
-    this.roughness,
-    this.bowing,
-    this.curveFitting,
-    this.curveTightness,
-    this.curveStepCount,
-    this.seed,
-    this.randomizer,
-  });
 
   /// Generates a [DrawConfig]
   /// * [roughness] Numerical value indicating how rough the drawing is. A rectangle with the roughness of 0 would be a perfect rectangle. Default value is 1. There is no upper limit to this value, but a value over 10 is mostly useless.
@@ -121,13 +120,12 @@ class DrawConfig {
 }
 
 class Randomizer {
-  late Random _random;
-  late int _seed;
-
   Randomizer({int seed = 0}) {
     _seed = seed;
     _random = Random(seed);
   }
+  late Random _random;
+  late int _seed;
 
   int get seed => _seed;
 

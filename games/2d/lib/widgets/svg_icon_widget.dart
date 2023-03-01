@@ -6,6 +6,7 @@ import 'package:spinnybox_2d/colors.dart';
 class SvgIcon extends StatelessWidget {
   const SvgIcon(
     this.assetName, {
+    super.key,
     this.size = 40,
     this.color = AppColors.black,
     this.label = '',

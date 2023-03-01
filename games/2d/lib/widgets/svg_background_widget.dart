@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 /// Transforms the svg asset into a full screen sized image.
 class SvgBackground extends StatelessWidget {
-  const SvgBackground(this.assetName);
+  const SvgBackground(this.assetName, {super.key});
 
   final String assetName;
 

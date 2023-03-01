@@ -143,20 +143,20 @@ class WiredLineBase extends WiredPainterBase {
   @override
   void paintRough(
       Canvas canvas, Size size, DrawConfig drawConfig, Filler filler) {
-    var _x1 = x1, _y1 = y1, _x2 = x2, _y2 = y2;
-    if (x1 < 0) _x1 = 0;
-    if (x1 > size.width) _x1 = size.width;
-    if (y1 < 0) _y1 = 0;
-    if (y1 > size.height) _y1 = size.height;
+    var x1 = this.x1, y1 = this.y1, x2 = this.x2, y2 = this.y2;
+    if (this.x1 < 0) x1 = 0;
+    if (this.x1 > size.width) x1 = size.width;
+    if (this.y1 < 0) y1 = 0;
+    if (this.y1 > size.height) y1 = size.height;
 
-    if (x2 < 0) _x2 = 0;
-    if (x2 > size.width) _x2 = size.width;
-    if (y2 < 0) _y2 = 0;
-    if (y2 > size.height) _y2 = size.height;
+    if (this.x2 < 0) x2 = 0;
+    if (this.x2 > size.width) x2 = size.width;
+    if (this.y2 < 0) y2 = 0;
+    if (this.y2 > size.height) y2 = size.height;
 
     Generator generator = Generator(drawConfig, filler);
 
-    Drawable figure = generator.line(_x1, _y1, _x2, _y2);
+    Drawable figure = generator.line(x1, y1, x2, y2);
     canvas.drawRough(
         figure, WiredBase.pathPainter(strokeWidth), WiredBase.fillPaint);
   }

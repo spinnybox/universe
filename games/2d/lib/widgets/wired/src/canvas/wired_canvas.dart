@@ -5,12 +5,6 @@ import 'wired_painter_base.dart';
 import 'wired_painter.dart';
 
 class WiredCanvas extends StatelessWidget {
-  final WiredPainterBase painter;
-  final DrawConfig? drawConfig;
-  final FillerConfig? fillerConfig;
-  final RoughFilter fillerType;
-  final Size? size;
-
   const WiredCanvas({
     Key? key,
     required this.painter,
@@ -19,18 +13,21 @@ class WiredCanvas extends StatelessWidget {
     this.fillerConfig,
     this.size,
   }) : super(key: key);
+  final WiredPainterBase painter;
+  final DrawConfig? drawConfig;
+  final FillerConfig? fillerConfig;
+  final RoughFilter fillerType;
+  final Size? size;
 
   @override
   Widget build(BuildContext context) {
-    DrawConfig _drawConfig =
-        drawConfig == null ? DrawConfig.defaultValues : drawConfig!;
-    FillerConfig _fillerConfig =
-        fillerConfig == null ? FillerConfig.defaultConfig : fillerConfig!;
+    DrawConfig drawConfig = this.drawConfig ?? DrawConfig.defaultValues;
+    FillerConfig fillerConfig = this.fillerConfig ?? FillerConfig.defaultConfig;
 
-    Filler filler = _filters[fillerType]!.call(_fillerConfig);
+    Filler filler = _filters[fillerType]!.call(fillerConfig);
     return CustomPaint(
       size: size == null ? const Size.square(double.infinity) : size!,
-      painter: WiredPainter(_drawConfig, filler, painter),
+      painter: WiredPainter(drawConfig, filler, painter),
     );
   }
 }

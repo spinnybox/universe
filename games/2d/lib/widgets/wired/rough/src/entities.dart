@@ -5,11 +5,10 @@ import 'core.dart';
 import 'geometry.dart';
 
 class Drawable {
+  Drawable({this.shape, this.options, this.sets});
   String? shape;
   DrawConfig? options;
   List<OpSet>? sets;
-
-  Drawable({this.shape, this.options, this.sets});
 }
 
 class PointD extends Point<double> {

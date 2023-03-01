@@ -2,30 +2,19 @@ import 'dart:math';
 
 import '../rough.dart';
 
-import 'config.dart';
 import 'core.dart';
-import 'entities.dart';
 import 'geometry.dart';
 import 'renderer.dart';
 
 class IntersectionInfo {
+  IntersectionInfo({this.point, this.distance});
   PointD? point;
   double? distance;
-
-  IntersectionInfo({this.point, this.distance});
 }
 
 enum FillStyle { fill, sketch }
 
 class FillerConfig {
-  final DrawConfig? _drawConfig;
-  final double? fillWeight;
-  final double? hachureAngle;
-  final double? hachureGap;
-  final double? dashOffset;
-  final double? dashGap;
-  final double? zigzagOffset;
-
   const FillerConfig._({
     DrawConfig? drawConfig,
     this.fillWeight,
@@ -35,6 +24,13 @@ class FillerConfig {
     this.dashGap,
     this.zigzagOffset,
   }) : _drawConfig = drawConfig;
+  final DrawConfig? _drawConfig;
+  final double? fillWeight;
+  final double? hachureAngle;
+  final double? hachureGap;
+  final double? dashOffset;
+  final double? dashGap;
+  final double? zigzagOffset;
 
   /// * [fillWeight] When using dots styles to fill the shape, this value represents the diameter of the dot.
   /// * [hachureAngle] Numerical value (in degrees) that defines the angle of the hachure lines. Default value is -41 degrees.
@@ -87,18 +83,17 @@ class FillerConfig {
 }
 
 abstract class Filler {
-  FillerConfig? _config;
-
   Filler(FillerConfig? config) {
     _config = config ?? FillerConfig.defaultConfig;
   }
+  FillerConfig? _config;
 
   OpSet fill(List<PointD> points);
 
   List<Line> buildFillLines(List<PointD> points, FillerConfig? config) {
-    final _config = config ?? FillerConfig.defaultConfig;
+    final config0 = config ?? FillerConfig.defaultConfig;
     final PointD rotationCenter = PointD(0, 0);
-    final double angle = (_config.hachureAngle! + 90).roundToDouble();
+    final double angle = (config0.hachureAngle! + 90).roundToDouble();
     if (angle != 0) {
       // ignore: parameter_assignments
       points = rotatePoints(points, rotationCenter, angle);

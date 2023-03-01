@@ -35,8 +35,8 @@ List<Op> _line(double x1, double y1, double x2, double y2, DrawConfig config,
   offsetY = config.offsetSymmetric(offsetY, roughnessGain);
 
   final ops = <Op>[];
-  final randomHalf = () => config.offsetSymmetric(halfOffset, roughnessGain);
-  final randomFull = () => config.offsetSymmetric(offset, roughnessGain);
+  randomHalf() => config.offsetSymmetric(halfOffset, roughnessGain);
+  randomFull() => config.offsetSymmetric(offset, roughnessGain);
 
   if (move) {
     if (overlay) {

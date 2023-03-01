@@ -6,10 +6,8 @@ class SettingsScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: const Text(
-        'This is the SETTINGS screen.',
-      ),
+    return const Text(
+      'This is the SETTINGS screen.',
     );
   }
 }

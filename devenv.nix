@@ -56,22 +56,32 @@
   scripts."fix:all".exec = ''
     fix:format
     fix:clippy
+    fix:dart
   '';
   scripts."fix:format".exec = ''
     dprint fmt
+    dart format .
   '';
   scripts."fix:clippy".exec = ''
     cargo clippy --fix --allow-dirty --allow-staged
   '';
+  scripts."fix:dart".exec = ''
+    dart fix --apply
+  '';
   scripts."lint:all".exec = ''
     lint:format
     lint:clippy
+    lint:dart
   '';
   scripts."lint:format".exec = ''
     dprint check
+    dart format -o none --set-exit-if-changed .
   '';
   scripts."lint:clippy".exec = ''
     cargo clippy
+  '';
+  scripts."lint:dart".exec = ''
+    dart analyze
   '';
   scripts."test:snapshot".exec = ''
     cargo insta accept
