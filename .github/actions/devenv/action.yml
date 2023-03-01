@@ -1,5 +1,5 @@
 name: devenv
-description: "Setup development environment with devenv"
+description: Setup development environment with devenv
 inputs:
   github-token:
     description: Provide a github token
@@ -21,8 +21,9 @@ runs:
         github_access_token: ${{ inputs.github-token }}
 
     - name: import nix store cache
-      if: "steps.nix-cache.outputs.cache-hit == 'true'"
-      run: "nix copy --all --from /tmp/nixcache"
+      if: steps.nix-cache.outputs.cache-hit == 'true'
+      run: |
+        nix-store --import < /tmp/nixcache
       shell: bash
 
     - name: enable cachix
@@ -43,6 +44,7 @@ runs:
       shell: bash
 
     - name: export nix store cache
-      if: "steps.nix-cache.outputs.cache-hit != 'true'"
-      run: "nix copy --all --to /tmp/nixcache"
+      if: steps.nix-cache.outputs.cache-hit != 'true'
+      run: |
+        nix-store --export $(find /nix/store -maxdepth 1 -name '*-*')> /tmp/nixcache
       shell: bash
