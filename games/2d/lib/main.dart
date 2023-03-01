@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,10 +8,30 @@ import 'package:logging/logging.dart';
 import 'package:spinnybox_2d/app.dart';
 import 'package:spinnybox_2d/assets.dart';
 import 'package:spinnybox_2d/models/settings.dart';
+import 'package:spinnybox_2d/firebase_options.dart';
+import 'package:spinnybox_2d/services/services.dart';
 import 'package:wakelock/wakelock.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 Future<void> main() async {
-  await guardedMain();
+  FirebaseCrashlytics? crashlytics;
+  if (!kIsWeb && (Platform.isIOS || Platform.isAndroid)) {
+    try {
+      WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+      crashlytics = FirebaseCrashlytics.instance;
+    } catch (e) {
+      debugPrint("Firebase couldn't be initialized: $e");
+    }
+  }
+
+  await guardWithCrashlytics(
+    guardedMain,
+    crashlytics: crashlytics,
+  );
 }
 
 /// Without logging and crash reporting, this would be `void main()`.

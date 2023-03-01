@@ -4,17 +4,21 @@
   packages = [
     pkgs.cargo-all-features
     pkgs.cargo-binstall
+    pkgs.cargo-edit
     pkgs.cargo-generate
     pkgs.cargo-insta
     pkgs.cargo-make
     pkgs.cargo-watch
     pkgs.cargo-workspaces
-    pkgs.cargo-edit
+    pkgs.cocoapods
     pkgs.deno
     pkgs.dprint
     pkgs.fnm
     pkgs.git
+    pkgs.nodePackages.firebase-tools
     pkgs.ripgrep
+    pkgs.ruby_3_1
+    pkgs.rubyPackages_3_1.xcodeproj
     pkgs.rust-analyzer
     pkgs.rustup
     pkgs.trunk
