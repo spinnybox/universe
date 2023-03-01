@@ -10,15 +10,12 @@
     pkgs.cargo-make
     pkgs.cargo-watch
     pkgs.cargo-workspaces
-    pkgs.cocoapods
     pkgs.deno
     pkgs.dprint
     pkgs.fnm
     pkgs.git
     pkgs.nodePackages.firebase-tools
     pkgs.ripgrep
-    pkgs.ruby_3_1
-    pkgs.rubyPackages_3_1.xcodeproj
     pkgs.rust-analyzer
     pkgs.rustup
     pkgs.trunk
