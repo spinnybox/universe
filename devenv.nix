@@ -4,16 +4,17 @@
   packages = [
     pkgs.cargo-all-features
     pkgs.cargo-binstall
+    pkgs.cargo-edit
     pkgs.cargo-generate
     pkgs.cargo-insta
     pkgs.cargo-make
     pkgs.cargo-watch
     pkgs.cargo-workspaces
-    pkgs.cargo-edit
     pkgs.deno
     pkgs.dprint
     pkgs.fnm
     pkgs.git
+    pkgs.nodePackages.firebase-tools
     pkgs.ripgrep
     pkgs.rust-analyzer
     pkgs.rustup
