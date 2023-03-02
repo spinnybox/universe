@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flame/game.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spinnybox_2d/colors.dart';
+import 'package:spinnybox_2d/services/game_service.dart';
 
 import 'game_utils.dart';
 export 'game_utils.dart';
@@ -10,27 +11,16 @@ import 'game_status.dart';
 part 'game.g.dart';
 
 class SpinnyBoxGame extends FlameGame {
-  /// Create a game singleton instance if it doesn't already exist.
-  ///
-  /// If it does then reuse the previously created instance.
-  factory SpinnyBoxGame() {
-    return _instance ??= SpinnyBoxGame._();
-  }
+  SpinnyBoxGame({
+    required this.gameService,
+    required this.id,
+  });
 
-  SpinnyBoxGame._();
+  /// The game id. This is used as the seed for the game with the goal of fully reproducible games.
+  final String id;
 
-  static SpinnyBoxGame? _instance;
-
-  /// Provides access to the the [SpinnyBoxGame] singleton.
-  static SpinnyBoxGame get instance {
-    final instance = _instance;
-
-    if (instance == null) {
-      throw '`SpinnyBox2DGame` accessed before creation.';
-    }
-
-    return instance;
-  }
+  /// The game service.
+  final GameService gameService;
 
   /// Keep track of the score.
   final score = GameScore();
@@ -82,6 +72,8 @@ class SpinnyBoxGame extends FlameGame {
 }
 
 @riverpod
-SpinnyBoxGame spinnybox2DGame(Spinnybox2DGameRef ref) {
-  return SpinnyBoxGame();
+SpinnyBoxGame spinnyBoxGame(SpinnyBoxGameRef ref, String id) {
+  final gameService = ref.watch(gameServiceProvider);
+
+  return SpinnyBoxGame(id: id, gameService: gameService);
 }

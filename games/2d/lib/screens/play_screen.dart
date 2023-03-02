@@ -15,7 +15,9 @@ Widget _playScreen(
   /// The game id. This is used as the seed for the game with the goal of fully reproducible games.
   required String id,
 }) {
-  final game = ref.watch(spinnybox2DGameProvider);
+  // This is not a singleton, but a provider that will create a new instance whenever the id
+  // changes. See if this affects performance.
+  final game = ref.watch(spinnyBoxGameProvider(id));
 
   /// Exit the game when the widget is unmounted.
   useEffect(() => () => game.exit(), const []);

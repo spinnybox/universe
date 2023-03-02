@@ -1,11 +1,11 @@
 name: spinnybox_2d
 description: Think different. Play different.
-publish_to: "none"
+publish_to: 'none'
 
 version: 0.0.0+1
 
 environment:
-  sdk: ">=3.0.0-218.1.beta <4.0.0"
+  sdk: '>=3.0.0-218.1.beta <4.0.0'
 
 dependencies:
   audioplayers: ^3.0.1
@@ -35,7 +35,7 @@ dependencies:
 
   firebase_core: ^2.7.0 # Needed for Crashlytics below
   firebase_crashlytics: ^3.0.15 # Error reporting
-  # games_services: ^3.0.0  # Achievements and leaderboards
+  games_services: ^3.0.0 # Achievements and leaderboards
   # google_mobile_ads: ^2.3.0  # Ads
   # in_app_purchase: ^3.1.5  # In-app purchases
 
@@ -78,9 +78,9 @@ flutter:
 
 flutter_native_splash:
   image: assets/images/splash_screen_image_light.png
-  color: "#ffffff"
+  color: '#ffffff'
   image_dark: assets/images/splash_screen_image_dark.png
-  color_dark: "#313131"
+  color_dark: '#313131'
   android_gravity: center
   ios_content_mode: center
 
