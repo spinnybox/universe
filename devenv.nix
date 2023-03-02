@@ -32,21 +32,22 @@
     cargo run --bin run_prisma -- $@
   '';
   scripts."build:ios:debug".exec = ''
-    m export-aarch64-apple-ios-debug spinnybox
+    cargo:make export-aarch64-apple-ios-debug spinnybox
   '';
   scripts."build:ios".exec = ''
-    m export-aarch64-apple-ios-release spinnybox
+    cargo:make export-aarch64-apple-ios-release spinnybox
   '';
   scripts."export:ios:debug".exec = ''
-    m export-aarch64-apple-ios-debug-script spinnybox
+    cargo:make export-aarch64-apple-ios-debug-script spinnybox
   '';
   scripts."export:ios".exec = ''
-    m export-aarch64-apple-ios-release-script spinnybox
+    cargo:make export-aarch64-apple-ios-release-script spinnybox
   '';
-  scripts.m.exec = ''
+  scripts."cargo:make".exec = ''
     cargo make $@
   '';
   scripts.leptos.exec = ''
+    set -e
     PATH=$PWD/.bin/bin:$PATH
     cargo leptos $@
   '';
@@ -54,11 +55,13 @@
     cargo build
   '';
   scripts."fix:all".exec = ''
+    set -e
     fix:format
     fix:clippy
     fix:dart
   '';
   scripts."fix:format".exec = ''
+    set -e
     dprint fmt
     dart format .
   '';
@@ -69,11 +72,13 @@
     dart fix --apply
   '';
   scripts."lint:all".exec = ''
+    set -e
     lint:format
     lint:clippy
     lint:dart
   '';
   scripts."lint:format".exec = ''
+    set -e
     dprint check
     dart format -o none --set-exit-if-changed .
   '';
@@ -93,14 +98,17 @@
     cargo install --root ./.bin cargo-leptos
   '';
   scripts."setup:helix".exec = ''
+    set -e
     rm -rf .helix
     cp -r setup/editors/helix .helix
   '';
   scripts."setup:vscode".exec = ''
+    set -e
     rm -rf .vscode
     cp -r ./setup/editors/vscode .vscode
   '';
   scripts."setup:ci".exec = ''
+    set -e
     # update GitHub CI Path
     echo "$DEVENV_PROFILE/bin" >> $GITHUB_PATH
     echo "DEVENV_PROFILE=$DEVENV_PROFILE" >> $GITHUB_ENV
