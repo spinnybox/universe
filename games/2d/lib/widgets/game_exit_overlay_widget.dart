@@ -7,7 +7,7 @@ import 'package:spinnybox_2d/colors.dart';
 import 'package:spinnybox_2d/constants.dart';
 import 'package:spinnybox_2d/game/game.dart';
 import 'package:spinnybox_2d/screens/router.dart';
-import 'package:spinnybox_2d/widgets/widgets.dart';
+import 'package:spinnybox_2d/widgets.dart';
 
 part 'game_exit_overlay_widget.g.dart';
 

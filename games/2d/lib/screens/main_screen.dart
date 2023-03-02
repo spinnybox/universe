@@ -7,7 +7,7 @@ import 'package:spinnybox_2d/constants.dart';
 import 'package:spinnybox_2d/models/settings.dart';
 import 'package:spinnybox_2d/screens/router.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:spinnybox_2d/widgets/widgets.dart';
+import 'package:spinnybox_2d/widgets.dart';
 import 'package:share_plus/share_plus.dart';
 
 part 'main_screen.g.dart';

@@ -10,7 +10,7 @@ import 'package:go_router/go_router.dart'
         GoRouterState,
         TypedGoRoute;
 import 'package:spinnybox_2d/colors.dart' show AppColors;
-import 'package:spinnybox_2d/widgets/widgets.dart' show CustomReveal;
+import 'package:spinnybox_2d/widgets.dart' show CustomReveal;
 import 'package:spinnybox_2d/screens/play_screen.dart' show PlayScreen;
 import 'package:spinnybox_2d/screens/main_screen.dart' show MainScreen;
 import 'package:spinnybox_2d/screens/settings_screen.dart' show SettingsScreen;
