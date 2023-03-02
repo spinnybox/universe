@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:spinnybox_2d/game/game.dart';
-import 'package:spinnybox_2d/widgets/widgets.dart';
+import 'package:spinnybox_2d/widgets.dart';
 
 part 'play_screen.g.dart';
 

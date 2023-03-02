@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:spinnybox_2d/colors.dart';
 import 'package:spinnybox_2d/constants.dart';
 import 'package:spinnybox_2d/models/settings.dart';
-import 'package:spinnybox_2d/widgets/widgets.dart';
+import 'package:spinnybox_2d/widgets.dart';
 
 part 'terms_and_conditions_widget.g.dart';
 

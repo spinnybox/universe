@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:spinnybox_2d/widgets/widgets.dart';
+import 'package:spinnybox_2d/widgets.dart';
 
 part 'game_over_screen.g.dart';
 
