@@ -15,30 +15,32 @@ console_error_panic_hook = { workspace = true, optional = true }
 console_log = { workspace = true, optional = true }
 dotenvy = { workspace = true, optional = true }
 futures = { workspace = true }
-http = { workspace = true, optional = true }
+http = { workspace = true }
 leptos = { version = "0.2", default-features = false, features = ["serde"] }
 leptos_axum = { version = "0.2", optional = true, default_features = false }
 leptos_meta = { version = "0.2", default-features = false }
 leptos_router = { version = "0.2", default-features = false }
-
 log = { workspace = true }
 once_cell = { workspace = true }
 # prisma-client-rust = { workspace = true }
 reqwest = { workspace = true, features = ["json"], optional = true }
 serde = { workspace = true, features = ["derive"] }
-serde_json = { workspace = true, optional = true }
+serde_json = { workspace = true }
 simple_logger = { workspace = true, optional = true }
 strum = { workspace = true }
 strum_macros = { workspace = true }
+thiserror = { workspace = true }
 tokio = { workspace = true, optional = true, features = ["full"] }
+tower = { workspace = true, optional = true }
 tower-cookies = { workspace = true, optional = true, features = ["private", "signed"] }
-tower-http = { workspace = true, optional = true, features = ["fs", "redirect"] }
+tower-http = { workspace = true, optional = true, features = ["fs", "redirect", "compression-gzip"] }
 wasm-bindgen = { workspace = true, optional = true }
+wasm-cookies = { workspace = true, optional = true }
 web-sys = { workspace = true, features = ["AbortController", "AbortSignal", "HtmlDocument"] }
 
 [features]
 leptos_autoreload = []
-default = ["csr"]
+default = ["hydrate"]
 hydrate = [
   "leptos/hydrate",
   "leptos_router/hydrate",
@@ -46,6 +48,7 @@ hydrate = [
   "dep:wasm-bindgen",
   "dep:console_log",
   "dep:console_error_panic_hook",
+  "dep:wasm-cookies",
 ]
 csr = [
   "leptos/csr",
@@ -54,6 +57,7 @@ csr = [
   "dep:wasm-bindgen",
   "dep:console_log",
   "dep:console_error_panic_hook",
+  "dep:wasm-cookies",
 ]
 ssr = [
   "leptos/ssr",
@@ -61,12 +65,11 @@ ssr = [
   "leptos_meta/ssr",
   "dep:reqwest",
   "dep:axum",
-  "dep:http",
   "dep:leptos_axum",
   "dep:tower-http",
   "dep:simple_logger",
-  "dep:serde_json",
   "dep:tokio",
+  "dep:tower",
   "dep:tower-cookies",
   "dep:dotenvy",
 ]
@@ -83,7 +86,7 @@ assets-dir = "assets"
 # The environment Leptos will run in, usually either "DEV" or "PROD"
 env = "DEV"
 # The IP and port (ex: 127.0.0.1:3000) where the server serves the content. Use it in your server setup.
-site-address = "127.0.0.1:3000"
+site-addr = "127.0.0.1:3000"
 # The port to use for automatic reload monitoring
 reload-port = 3001
 # Main style file. If scss or sass then it will be compiled to css.
@@ -91,6 +94,3 @@ reload-port = 3001
 style-file = "styles/main.css"
 lib-features = ["hydrate"]
 bin-features = ["ssr"]
-
-[profile.release]
-lto = true

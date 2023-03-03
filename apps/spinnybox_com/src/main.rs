@@ -1,12 +1,10 @@
-use cfg_if::cfg_if;
+#[cfg(feature = "ssr")]
+#[tokio::main]
+async fn main() -> std::io::Result<()> {
+  spinnybox_com::ssr::run().await
+}
 
-cfg_if! {
-  if #[cfg(feature = "ssr")] {
-    #[tokio::main]
-    async fn main() -> std::io::Result<()> {
-      spinnybox_com::ssr::run().await
-    }
-  } else {
-    pub fn main() {}
-  }
+#[cfg(not(feature = "ssr"))]
+pub fn main() {
+  // no client-side main function
 }

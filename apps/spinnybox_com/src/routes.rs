@@ -33,66 +33,182 @@ pub fn FileRoutes(cx: Scope) -> impl IntoView {
 
 #[cfg(feature = "ssr")]
 pub mod ssr {
-  use axum::error_handling::HandleError;
+
+  use axum::body::Body;
+  use axum::routing::get;
   use axum::routing::post;
   use axum::Router;
   use dotenvy::dotenv;
-  use http::StatusCode;
+  use http::Request;
+  use leptos_axum::generate_route_list;
   use leptos_axum::handle_server_fns;
-  use leptos_axum::render_app_to_stream;
+  use leptos_axum::render_app_async_with_context;
+  use leptos_axum::render_app_to_stream_in_order_with_context;
+  use leptos_axum::render_app_to_stream_with_context;
   use tower_cookies::CookieManagerLayer;
+  use tower_cookies::Cookies;
   use tower_cookies::Key;
-  use tower_http::services::ServeDir;
+  use tower_http::compression::CompressionLayer;
 
   use super::*;
+  use crate::components::SetTheme;
+  use crate::file_and_error_handler;
   use crate::root::*;
+  use crate::CookieDataContext;
   use crate::KEY;
 
-  fn register_server_functions() {}
-
-  async fn handle_file_error(err: std::io::Error) -> (StatusCode, String) {
-    (StatusCode::NOT_FOUND, format!("File Not Found: {}", err))
+  fn register_server_functions() -> Result<(), ServerFnError> {
+    SetTheme::register().expect("SetTheme server function failed to register!");
+    Ok(())
   }
 
   pub async fn run() -> std::io::Result<()> {
-    register_server_functions();
+    register_server_functions().expect("Failed to register server functions!");
     _ = dotenv();
-    let key: &[u8] = std::env::var("COOKIE_SECRET").unwrap().as_bytes();
+    let key = std::env::var("COOKIE_SECRET").expect("COOKIE_SECRET is not defined!");
+    let key = key.as_bytes();
     KEY.set(Key::from(key)).ok();
 
-    let config = get_configuration(Some("spinnybox_com/Cargo.toml"))
+    let config = get_configuration(Some("./apps/spinnybox_com/Cargo.toml"))
       .await
       .unwrap();
     let leptos_options = config.leptos_options;
-    let address = leptos_options.site_address.clone();
-    let site_root = &leptos_options.site_root;
-    let pkg_dir = &leptos_options.site_pkg_dir;
+    let address = leptos_options.site_addr.clone();
+    // let site_root = &leptos_options.site_root;
+    // let pkg_dir = &leptos_options.site_pkg_dir;
 
-    // The URL path of the generated JS/WASM bundle from cargo-leptos
-    let bundle_path = format!("/{site_root}/{pkg_dir}");
-    // The filesystem path of the generated JS/WASM bundle from cargo-leptos
-    let bundle_filepath = format!("./{site_root}/{pkg_dir}");
-    let favicon_path = "/favicon.ico";
-    let favicon_filepath = format!("./{site_root}/favicon.ico");
+    // // The URL path of the generated JS/WASM bundle from cargo-leptos
+    // let bundle_path = format!("/{site_root}/{pkg_dir}");
+    // // The filesystem path of the generated JS/WASM bundle from cargo-leptos
+    // let bundle_filepath = format!("./{site_root}/{pkg_dir}");
+    // let favicon_path = "/favicon.ico";
+    // let favicon_filepath = format!("./{site_root}/favicon.ico");
 
-    let favicon_service = HandleError::new(ServeDir::new(favicon_filepath), handle_file_error);
-    let cargo_leptos_service = HandleError::new(ServeDir::new(&bundle_filepath), handle_file_error);
+    // setup logging
+    simple_logger::SimpleLogger::new()
+      .with_level(log::LevelFilter::Warn)
+      .with_module_level("auth_sessions_example", log::LevelFilter::Trace)
+      .init()
+      .expect("couldn't initialize logging");
+
+    // Generate the list of routes in your Leptos App
+    let routes = generate_route_list(|cx| view! { cx, <Root /> }).await;
+
     let app = Router::new()
       .route("/rpc/*fn_name", post(handle_server_fns))
+      .leptos_routes_handlers(leptos_options.clone(), routes, |cx| {
+        log!("RENDERING APP!!!");
+        view! { cx , <Root /> }
+      })
       .layer(CookieManagerLayer::new())
-      .nest_service(favicon_path, favicon_service)
-      .nest_service(&bundle_path, cargo_leptos_service)
-      .fallback(render_app_to_stream(
-        leptos_options,
-        |cx| view! { cx , <Root /> },
-      ));
-    // .nest_service("/", assets_service);
+      .fallback(file_and_error_handler)
+      .layer(CompressionLayer::new());
 
     axum::Server::bind(&address)
       .serve(app.into_make_service())
       .await
       .unwrap();
     Ok(())
+  }
+
+  trait LeptosRouteHandler {
+    fn leptos_routes_handlers<IV>(
+      self,
+      options: LeptosOptions,
+      paths: Vec<(String, SsrMode)>,
+      app_fn: impl Fn(leptos::Scope) -> IV + Clone + Send + 'static,
+    ) -> Self
+    where
+      IV: IntoView + 'static;
+  }
+
+  impl LeptosRouteHandler for Router {
+    fn leptos_routes_handlers<IV>(
+      self,
+      options: LeptosOptions,
+      paths: Vec<(String, SsrMode)>,
+      app_fn: impl Fn(leptos::Scope) -> IV + Clone + Send + 'static,
+    ) -> Self
+    where
+      IV: IntoView + 'static,
+    {
+      let mut router = self;
+      for (path, mode) in paths.iter() {
+        let app_fn = app_fn.clone();
+        let options = options.clone();
+        let path = if path.ends_with('*') {
+          format!("{}key", path)
+        } else {
+          path.to_string()
+        };
+        log!("Adding PATH: {}", path);
+        router = router.route(
+          &path,
+          match mode {
+            SsrMode::OutOfOrder => {
+              let handler = move |req: Request<Body>| {
+                let app_fn = app_fn.clone();
+                let cookies = req
+                  .extensions()
+                  .get::<Cookies>()
+                  .expect("Can't extract cookies. Is `CookieManagerLayer` enabled?")
+                  .clone();
+                render_app_to_stream_with_context(
+                  options,
+                  move |cx| {
+                    log!("OutOfOrder: ADDED COOKIE CONTEXT!!!");
+                    provide_context::<CookieDataContext>(cx, cookies.clone().into());
+                  },
+                  app_fn,
+                )(req)
+              };
+
+              get(handler)
+            }
+            SsrMode::InOrder => {
+              let handler = move |req: Request<Body>| {
+                let cookies = req
+                  .extensions()
+                  .get::<Cookies>()
+                  .expect("Can't extract cookies. Is `CookieManagerLayer` enabled?")
+                  .clone();
+                render_app_to_stream_in_order_with_context(
+                  options,
+                  move |cx| {
+                    log!("InOrder: ADDED COOKIE CONTEXT!!!");
+                    provide_context::<CookieDataContext>(cx, cookies.clone().into());
+                  },
+                  app_fn,
+                )(req)
+              };
+
+              get(handler)
+            }
+            SsrMode::Async => {
+              let handler = move |req: Request<Body>| {
+                let cookies = req
+                  .extensions()
+                  .get::<Cookies>()
+                  .expect("Can't extract cookies. Is `CookieManagerLayer` enabled?")
+                  .clone();
+                render_app_async_with_context(
+                  options,
+                  move |cx| {
+                    log!("Async: ADDED COOKIE CONTEXT!!!");
+                    provide_context::<CookieDataContext>(cx, cookies.clone().into());
+                  },
+                  app_fn,
+                )(req)
+              };
+
+              get(handler)
+            }
+          },
+        );
+      }
+
+      router
+    }
   }
 }
 
@@ -105,6 +221,18 @@ pub fn hydrate() {
   _ = console_log::init_with_level(log::Level::Debug);
   console_error_panic_hook::set_once();
   leptos::mount_to_body(move |cx| {
+    log!("MOUNTING TO BODY");
+    #[cfg(not(feature = "ssr"))]
+    {
+      use crate::CookieDataContext;
+      provide_context::<CookieDataContext>(
+        cx,
+        CookieDataContext {
+          data: Default::default(),
+        },
+      );
+    }
+
     view! { cx , <Root /> }
   });
 }

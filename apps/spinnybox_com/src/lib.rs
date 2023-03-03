@@ -1,5 +1,4 @@
-pub use cookie_data::ColorTheme;
-pub use cookie_data::CookieData;
+pub use cookie_data::*;
 pub use routes::*;
 #[cfg(feature = "ssr")]
 pub use server::*;
@@ -10,3 +9,4 @@ mod root;
 mod routes;
 #[cfg(feature = "ssr")]
 mod server;
+mod traits;
