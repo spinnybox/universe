@@ -57,12 +57,17 @@ doesn't work on `macos` with `nix` yet.
 [`devenv`](https://devenv.sh/) is used to provide a reproducible development environment for this
 project. Follow the [getting started instructions](https://devenv.sh/getting-started/).
 
+The installation will be easier if you are using `nix flakes`. On `macos` and `linux` you can run the following command.
+
+```bash
+mkdir -p ~/.config/nix
+echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+```
+
 To automatically load the environment you should
 [install direnv](https://devenv.sh/automatic-shell-activation/) and then load the `direnv`.
 
 ```bash
-# The security mechanism didn't allow to load the `.envrc`.
-# Since we trust it, let's allow it execution.
 direnv allow .
 ```
 
