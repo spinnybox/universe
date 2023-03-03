@@ -44,10 +44,6 @@ runs:
       with:
         channel: "beta"
 
-    # currently melos doesn't work with dart 3 which is used in flutter beta
-    # - name: setup melos
-    #   uses: bluefireteam/melos-action@v1
-
     - name: install flutter game dependencies
       run: |
         cd games/2d
