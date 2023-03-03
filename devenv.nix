@@ -70,7 +70,7 @@
   scripts."fix:all".exec = ''
     set -e
     fix:format
-    fix:clippy
+    # fix:clippy # this sometimes breaks things when working with feature flags
     fix:dart
   '';
   scripts."fix:format".exec = ''

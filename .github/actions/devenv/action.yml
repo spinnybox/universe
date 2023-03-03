@@ -4,23 +4,13 @@ inputs:
   github-token:
     description: Provide a github token
     required: true
+  nix-cache:
+    description: The location of the nix cache
+    required: true
 
 runs:
   using: composite
   steps:
-    - name: cache nix store
-      uses: actions/cache@v3
-      id: nix-cache
-      with:
-        path: /tmp/nixcache
-        key: ${{ runner.os }}-nix-cache
-
-    - name: cache flutter dependencies
-      uses: actions/cache@v2
-      with:
-        path: ${{ runner.tool_cache }}/flutter
-        key: ${{ runner.os }}-flutter-beta-stable
-
     - name: install nix
       uses: cachix/install-nix-action@v20
       with:
@@ -29,7 +19,7 @@ runs:
     - name: import nix store cache
       if: steps.nix-cache.outputs.cache-hit == 'true'
       run: |
-        nix-store --import < /tmp/nixcache
+        nix-store --import < ${{ inputs.nix-cache }}
       shell: bash
 
     - name: enable cachix
@@ -67,5 +57,5 @@ runs:
     - name: export nix store cache
       if: steps.nix-cache.outputs.cache-hit != 'true'
       run: |
-        nix-store --export $(find /nix/store -maxdepth 1 -name '*-*')> /tmp/nixcache
+        nix-store --export $(find /nix/store -maxdepth 1 -name '*-*')> ${{ inputs.nix-cache }}
       shell: bash
