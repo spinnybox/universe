@@ -15,6 +15,7 @@
     pkgs.fnm
     pkgs.git
     pkgs.nodePackages.firebase-tools
+    pkgs.nodePackages.sass
     pkgs.ripgrep
     pkgs.rust-analyzer
     pkgs.rustup
@@ -25,11 +26,23 @@
   devcontainer.enable = true;
 
   # Scripts
+  scripts."leptos:watch".exec = ''
+    cargo:make leptos
+  '';
+  scripts."leptos:build".exec = ''
+    cargo:make leptos:build
+  '';
   scripts."prisma:generate".exec = ''
     prisma generate --schema=./apps/spinnybox_com/prisma/schema.prisma
   '';
   scripts."prisma".exec = ''
-    cargo run --bin run_prisma -- $@
+    cargo run -p prisma_cli -- $@
+  '';
+  scripts."css:generate".exec = ''
+    cargo:make css:generate
+  '';
+  scripts."css:watch".exec = ''
+    cargo:make css:watch
   '';
   scripts."build:ios:debug".exec = ''
     cargo:make export-aarch64-apple-ios-debug spinnybox
@@ -93,9 +106,6 @@
   '';
   scripts."test:all".exec = ''
     cargo test
-  '';
-  scripts."setup:cargo".exec = ''
-    cargo install --root ./.bin cargo-leptos
   '';
   scripts."setup:helix".exec = ''
     set -e

@@ -1,8 +1,8 @@
 use serde::Deserialize;
 use serde::Serialize;
 use strum::IntoEnumIterator;
+use strum_macros::Display;
 use strum_macros::EnumIter;
-use strum_macros::ToString as StrumToString;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub struct CookieData {
@@ -21,7 +21,7 @@ impl CookieData {
 }
 
 /// The color theme used.
-#[derive(Debug, Eq, PartialEq, Clone, StrumToString, EnumIter, Serialize, Deserialize)]
+#[derive(Debug, Eq, PartialEq, Clone, Display, EnumIter, Serialize, Deserialize)]
 #[strum(serialize_all = "camelCase")]
 pub enum ColorTheme {
   /// The `light` theme.

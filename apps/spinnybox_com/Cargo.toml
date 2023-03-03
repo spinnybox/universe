@@ -23,8 +23,7 @@ leptos_router = { version = "0.2", default-features = false }
 
 log = { workspace = true }
 once_cell = { workspace = true }
-prisma-client-rust = { workspace = true }
-prisma-client-rust-cli = { workspace = true }
+# prisma-client-rust = { workspace = true }
 reqwest = { workspace = true, features = ["json"], optional = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true, optional = true }
@@ -89,6 +88,9 @@ site-address = "127.0.0.1:3000"
 reload-port = 3001
 # Main style file. If scss or sass then it will be compiled to css.
 # the parent folder will be watched for changes
-style-file = "styles/main.scss"
+style-file = "styles/main.css"
 lib-features = ["hydrate"]
 bin-features = ["ssr"]
+
+[profile.release]
+lto = true

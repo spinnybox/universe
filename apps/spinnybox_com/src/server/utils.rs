@@ -17,7 +17,7 @@ pub fn get_typed_header<T: Header>(
   match headers.typed_try_get::<T>() {
     Ok(Some(value)) => Ok(TypedHeader(value)),
     Ok(None) => {
-      Err(Self::Rejection {
+      Err(TypedHeaderRejection {
         name: T::name(),
         reason: TypedHeaderRejectionReason::Missing,
       })
@@ -33,11 +33,12 @@ pub fn get_typed_header<T: Header>(
 
 /// Convert the `leptop_axum::RequestParts` to `http::request::Parts`
 pub fn request_parts_to_parts(request_parts: &RequestParts) -> Parts {
-  let mut parts = Parts::from(request_parts.uri);
-
-  parts.method = request_parts.method;
-  parts.version = request_parts.version;
-  parts.headers = request_parts.headers;
-
-  parts
+  Parts {
+    method: request_parts.method,
+    uri: request_parts.uri,
+    version: request_parts.version,
+    headers: request_parts.headers,
+    extensions: Default::default(),
+    _priv: (),
+  }
 }

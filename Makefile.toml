@@ -1,3 +1,40 @@
+[tasks.leptos]
+run_task = { name = ["leptos:watch", "css:watch"], parallel = true, fork = true }
+
+[tasks."leptos:watch"]
+dependencies = ["css:generate"]
+install_crate = { crate_name = "cargo-leptos", version = "0.1.8" }
+command = "cargo"
+args = ["leptos", "watch"]
+
+[tasks."leptos:build"]
+dependencies = ["css:generate"]
+install_crate = { crate_name = "cargo-leptos", version = "0.1.8" }
+command = "cargo"
+args = ["leptos", "build"]
+
+[tasks."leptos:serve"]
+dependencies = ["css:generate"]
+install_crate = { crate_name = "cargo-leptos", version = "0.1.8" }
+command = "cargo"
+args = ["leptos", "serve"]
+
+[tasks."css:generate"]
+command = "deno"
+args = ["run", "--allow-env", "--allow-sys", "--allow-read", "--allow-write", "./apps/spinnybox_com/unocss.ts"]
+
+[tasks."css:watch"]
+command = "deno"
+args = [
+  "run",
+  "--allow-env",
+  "--allow-sys",
+  "--allow-read",
+  "--allow-write",
+  "./apps/spinnybox_com/unocss.ts",
+  "--watch",
+]
+
 [tasks."build:debug"]
 dependencies = [
   "build-aarch64-linux-android-debug",

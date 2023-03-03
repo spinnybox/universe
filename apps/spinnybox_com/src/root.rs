@@ -10,11 +10,9 @@ pub fn Root(cx: Scope) -> impl IntoView {
 
   view! {
     cx,
-    <>
-      <Stylesheet id="spinnybox" href="./target/site/spinnybox_com/pkg/styles.css" />
-      <Title text="SpinnyBox" />
-      <Meta name="description" content="Motion based mobile games." />
-      <FileRoutes />
-    </>
+    <Stylesheet id="spinnybox" href="./target/site/spinnybox_com/pkg/styles.css" />
+    <Title text="SpinnyBox" />
+    <Meta name="description" content="Motion based mobile games." />
+    <FileRoutes />
   }
 }
