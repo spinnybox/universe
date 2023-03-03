@@ -1,8 +1,23 @@
+use std::string::ToString;
+
+#[cfg(feature = "ssr")]
+use axum::async_trait;
+#[cfg(feature = "ssr")]
+use axum::extract::FromRequestParts;
+#[cfg(feature = "ssr")]
+use http::request::Parts;
 use serde::Deserialize;
 use serde::Serialize;
 use strum::IntoEnumIterator;
+use strum_macros::Display;
 use strum_macros::EnumIter;
-use strum_macros::ToString as StrumToString;
+#[cfg(feature = "ssr")]
+use tower_cookies::Cookies;
+#[cfg(feature = "ssr")]
+use tower_cookies::PrivateCookies;
+
+#[cfg(feature = "ssr")]
+pub static KEY: once_cell::sync::OnceCell<tower_cookies::Key> = once_cell::sync::OnceCell::new();
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub struct CookieData {
@@ -10,19 +25,110 @@ pub struct CookieData {
   pub theme: ColorTheme,
 }
 
-impl CookieData {
+#[derive(Clone)]
+pub struct CookieDataContext {
+  pub data: CookieData,
+  #[cfg(feature = "ssr")]
+  cookies: std::sync::Arc<PrivateCookies<'static>>,
+}
+
+impl CookieDataContext {
   /// The cookie is stored in a json object with this name as the key.
-  pub const NAME: &'static str = "session_cookie_key";
+  pub const NAME: &'static str = "_session_spinnybox";
+
+  /// Get the current theme.
+  pub fn theme(&self) -> ColorTheme {
+    self.data.theme
+  }
+
+  /// Check if the theme is dark.
+  pub fn is_dark_theme(&self) -> bool {
+    self.data.theme == ColorTheme::Dark
+  }
 
   /// Toggle the theme.
   pub fn toggle_theme(&mut self) {
-    self.theme = self.theme.toggle();
+    self.data.theme = self.data.theme.toggle();
+  }
+
+  /// Toggle the theme.
+  pub fn set_theme(&mut self, theme: ColorTheme) {
+    self.data.theme = theme;
+  }
+
+  /// Save the changes made to the cookie on the server side. Changes made on
+  /// the client side are ignored.
+  #[cfg(feature = "ssr")]
+  pub fn save(&self) {
+    use tower_cookies::Cookie;
+
+    let json = serde_json::to_string(&self.data).expect("Failed to serialize cookie data.");
+    let cookie = Cookie::new(Self::NAME, json);
+    self.cookies.clone().add(cookie);
+  }
+}
+
+#[cfg(any(feature = "ssr", target_arch = "wasm32"))]
+impl From<leptos::Scope> for CookieDataContext {
+  #[cfg(feature = "ssr")]
+  fn from(cx: leptos::Scope) -> Self {
+    use leptos::*;
+
+    use_context::<CookieDataContext>(cx).expect("Cookies not found in context.")
+  }
+
+  #[cfg(target_arch = "wasm32")]
+  #[cfg(not(feature = "ssr"))]
+  fn from(cx: leptos::Scope) -> Self {
+    use wasm_cookies::get_raw;
+
+    let data: CookieData = get_raw(CookieDataContext::NAME)
+      .and_then(|cookie| serde_json::from_str(cookie.as_str()).ok())
+      .unwrap_or(Default::default());
+
+    Self { data }
+  }
+}
+
+#[cfg(feature = "ssr")]
+impl From<Cookies> for CookieDataContext {
+  fn from(cookies: Cookies) -> Self {
+    use std::sync::Arc;
+
+    let key = KEY
+      .get()
+      .expect("The cookie key must be initialized before use.");
+
+    let private_cookies = cookies.private(key);
+
+    let data: CookieData = private_cookies
+      .get(CookieDataContext::NAME)
+      .and_then(|cookie| serde_json::from_str(cookie.value()).ok())
+      .unwrap_or(Default::default());
+
+    Self {
+      data,
+      cookies: Arc::new(private_cookies),
+    }
+  }
+}
+
+#[cfg(feature = "ssr")]
+#[async_trait]
+impl<S> FromRequestParts<S> for CookieDataContext
+where
+  S: Send + Sync,
+{
+  type Rejection = (http::StatusCode, &'static str);
+
+  async fn from_request_parts(req: &mut Parts, state: &S) -> Result<Self, Self::Rejection> {
+    Ok(Cookies::from_request_parts(req, state).await?.into())
   }
 }
 
 /// The color theme used.
-#[derive(Debug, Eq, PartialEq, Clone, StrumToString, EnumIter, Serialize, Deserialize)]
-#[strum(serialize_all = "camelCase")]
+#[derive(Debug, Eq, PartialEq, Copy, Clone, Display, EnumIter, Serialize, Deserialize)]
+#[strum(serialize_all = "PascalCase")]
 pub enum ColorTheme {
   /// The `light` theme.
   Light,

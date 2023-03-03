@@ -1,12 +1,16 @@
 use leptos::*;
 use leptos_router::*;
 
+use crate::components::ThemeToggle;
+use crate::components::ThemeToggleProps;
+
 #[component]
 pub fn Page(cx: Scope) -> impl IntoView {
   view! {
     cx,
     <h1>"Index Page"</h1>
     <p>"This is the index page"</p>
+    <ThemeToggle />
   }
 }
 
