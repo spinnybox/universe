@@ -9,6 +9,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
 jobs:
   checks:
     strategy:
@@ -21,13 +25,20 @@ jobs:
         id: nix-cache
         with:
           path: /tmp/nixcache
-          key: ${{ runner.os }}-nix-cache
+          key: ${{ runner.os }}-nix-cache-${{ hashFiles('**/devenv.nix', '**/devenv.yaml', '**/devenv.lock') }}
+          restore-keys: ${{ runner.os }}-nix-cache
+
+      - name: cache rust dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ runner.os }}
 
       - name: cache flutter dependencies
         uses: actions/cache@v3
         with:
           path: ${{ runner.tool_cache }}/flutter
-          key: ${{ runner.os }}-flutter-beta-stable
+          key: ${{ runner.os }}-flutter-beta-${{ hashFiles('**/pubspec.yaml', '**/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-flutter-beta-
 
       - name: checkout repository
         uses: actions/checkout@v3
@@ -37,11 +48,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           nix-cache: /tmp/nixcache
-
-      - name: cache rust dependencies
-        uses: Swatinem/rust-cache@v2
-        with:
-          key: ${{ runner.os }}
 
       - name: build
         run: build:all

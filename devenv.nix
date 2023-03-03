@@ -3,8 +3,11 @@
 {
   packages = [
     pkgs.cargo-all-features
+    pkgs.cargo-audit
+    pkgs.cargo-udeps
     pkgs.cargo-binstall
     pkgs.cargo-edit
+    pkgs.cargo-deny
     pkgs.cargo-generate
     pkgs.cargo-insta
     pkgs.cargo-make
