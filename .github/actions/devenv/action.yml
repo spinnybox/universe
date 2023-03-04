@@ -11,6 +11,14 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: cache nix store
+      uses: actions/cache@v3
+      id: nix-cache
+      with:
+        path: ${{ inputs.nix-cache }}
+        key: ${{ runner.os }}-nix-cache-${{ hashFiles('**/devenv.nix', '**/devenv.yaml', '**/devenv.lock') }}
+        restore-keys: ${{ runner.os }}-nix-cache-
+
     - name: install nix
       uses: cachix/install-nix-action@v20
       with:

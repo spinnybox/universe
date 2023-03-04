@@ -20,14 +20,6 @@ jobs:
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: cache nix store
-        uses: actions/cache@v3
-        id: nix-cache
-        with:
-          path: /tmp/nixcache
-          key: ${{ runner.os }}-nix-cache-${{ hashFiles('**/devenv.nix', '**/devenv.yaml', '**/devenv.lock') }}
-          restore-keys: ${{ runner.os }}-nix-cache-
-
       - name: cache rust dependencies
         uses: Swatinem/rust-cache@v2
         with:
