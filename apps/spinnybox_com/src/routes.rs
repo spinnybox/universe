@@ -1,5 +1,7 @@
 use leptos::*;
 use leptos_router::*;
+use route_index::Layout as RouteIndexLayout;
+use route_index::LayoutProps as RouteIndexLayoutProps;
 // use route_index::Layout as RouteIndexLayout;
 // use route_index::LayoutProps as RouteIndexLayoutProps;
 use route_index::NotFound as RouteIndexNotFound;
@@ -22,9 +24,11 @@ pub fn FileRoutes(cx: Scope) -> impl IntoView {
       </header>
       <main>
         <Routes>
-          <Route path="/" view=move |cx| view! { cx , <RouteIndexPage /> } />
+        <Route path="" view=move |cx| view! { cx, <RouteIndexLayout /> } >
           <Route path="about" view=move |cx| view! { cx, <div>"About this site"</div> } />
-          <Route path= "*" view=move |cx| view! { cx , <RouteIndexNotFound /> } />
+          // <Route path= "*" view=move |cx| view! { cx , <RouteIndexNotFound /> } />
+          <Route path="/" view=move |cx| view! { cx , <RouteIndexPage /> }  />
+        </Route>
         </Routes>
       </main>
     </Router>
@@ -35,14 +39,20 @@ pub fn FileRoutes(cx: Scope) -> impl IntoView {
 pub mod ssr {
   use std::net::SocketAddr;
 
+  use std::sync::Arc;
+
   use axum::body::Body;
+  use axum::extract::Path;
+  use axum::response::IntoResponse;
   use axum::routing::get;
   use axum::routing::post;
+  use axum::Extension;
   use axum::Router;
   use dotenvy::dotenv;
+  use http::HeaderMap;
   use http::Request;
   use leptos_axum::generate_route_list;
-  use leptos_axum::handle_server_fns;
+  use leptos_axum::handle_server_fns_with_context;
   use leptos_axum::render_app_async_with_context;
   use leptos_axum::render_app_to_stream_in_order_with_context;
   use leptos_axum::render_app_to_stream_with_context;
@@ -61,6 +71,28 @@ pub mod ssr {
   fn register_server_functions() -> Result<(), ServerFnError> {
     SetTheme::register().expect("SetTheme server function failed to register!");
     Ok(())
+  }
+
+  async fn handle_server_fns(
+    path: Path<String>,
+    headers: HeaderMap,
+    req: Request<Body>,
+  ) -> impl IntoResponse {
+    let cookies = req
+      .extensions()
+      .get::<Cookies>()
+      .cloned()
+      .expect("Can't extract cookies. Is `CookieManagerLayer` enabled?");
+    handle_server_fns_with_context(
+      path,
+      headers,
+      move |cx| {
+        log!("OutOfOrder: ADDED COOKIE CONTEXT!!!");
+        provide_context::<CookieDataContext>(cx, cookies.clone().into());
+      },
+      req,
+    )
+    .await
   }
 
   pub async fn run() -> std::io::Result<()> {
@@ -84,17 +116,7 @@ pub mod ssr {
     }
 
     let address = leptos_options.site_addr.clone();
-    // let site_root = &leptos_options.site_root;
-    // let pkg_dir = &leptos_options.site_pkg_dir;
 
-    // // The URL path of the generated JS/WASM bundle from cargo-leptos
-    // let bundle_path = format!("/{site_root}/{pkg_dir}");
-    // // The filesystem path of the generated JS/WASM bundle from cargo-leptos
-    // let bundle_filepath = format!("./{site_root}/{pkg_dir}");
-    // let favicon_path = "/favicon.ico";
-    // let favicon_filepath = format!("./{site_root}/favicon.ico");
-
-    // setup logging
     simple_logger::SimpleLogger::new()
       .with_level(log::LevelFilter::Warn)
       .with_module_level("auth_sessions_example", log::LevelFilter::Trace)
@@ -106,18 +128,17 @@ pub mod ssr {
 
     let app = Router::new()
       .route("/rpc/*fn_name", post(handle_server_fns))
-      .leptos_routes_handlers(leptos_options.clone(), routes, |cx| {
-        log!("RENDERING APP!!!");
-        view! { cx , <Root /> }
-      })
-      .layer(CookieManagerLayer::new())
+      .leptos_routes_handlers(leptos_options.clone(), routes, |cx| view! { cx , <Root /> })
       .fallback(file_and_error_handler)
+      .layer(CookieManagerLayer::new())
+      .layer(Extension(Arc::new(leptos_options)))
       .layer(CompressionLayer::new());
 
     axum::Server::bind(&address)
       .serve(app.into_make_service())
       .await
       .unwrap();
+
     Ok(())
   }
 
@@ -147,7 +168,8 @@ pub mod ssr {
         let app_fn = app_fn.clone();
         let options = options.clone();
         let path = if path.ends_with('*') {
-          format!("{}key", path)
+          // format!("{}key", path);
+          continue;
         } else {
           path.to_string()
         };
@@ -161,8 +183,8 @@ pub mod ssr {
                 let cookies = req
                   .extensions()
                   .get::<Cookies>()
-                  .expect("Can't extract cookies. Is `CookieManagerLayer` enabled?")
-                  .clone();
+                  .cloned()
+                  .expect("Can't extract cookies. Is `CookieManagerLayer` enabled?");
                 render_app_to_stream_with_context(
                   options,
                   move |cx| {
@@ -177,11 +199,13 @@ pub mod ssr {
             }
             SsrMode::InOrder => {
               let handler = move |req: Request<Body>| {
+                log!("InOrder: BODY GENERATED!!!");
                 let cookies = req
                   .extensions()
                   .get::<Cookies>()
-                  .expect("Can't extract cookies. Is `CookieManagerLayer` enabled?")
-                  .clone();
+                  .cloned()
+                  .expect("Can't extract cookies. Is `CookieManagerLayer` enabled?");
+
                 render_app_to_stream_in_order_with_context(
                   options,
                   move |cx| {
@@ -199,8 +223,8 @@ pub mod ssr {
                 let cookies = req
                   .extensions()
                   .get::<Cookies>()
-                  .expect("Can't extract cookies. Is `CookieManagerLayer` enabled?")
-                  .clone();
+                  .cloned()
+                  .expect("Can't extract cookies. Is `CookieManagerLayer` enabled?");
                 render_app_async_with_context(
                   options,
                   move |cx| {

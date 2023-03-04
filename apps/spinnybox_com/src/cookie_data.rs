@@ -64,7 +64,7 @@ impl CookieDataContext {
 
     let json = serde_json::to_string(&self.data).expect("Failed to serialize cookie data.");
     let cookie = Cookie::new(Self::NAME, json);
-    self.cookies.clone().add(cookie);
+    self.cookies.add(cookie);
   }
 }
 

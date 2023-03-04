@@ -9,12 +9,14 @@ use crate::CookieDataContext;
 pub async fn set_theme(cx: Scope, theme: ColorTheme) -> Result<ColorTheme, ServerFnError> {
   let mut cookie_data_context = CookieDataContext::from(cx);
   cookie_data_context.set_theme(theme);
+  log!("Saving cookie! {:#?}", cookie_data_context.data);
   cookie_data_context.save();
 
   Ok(theme)
 }
 
 fn initial_theme(cx: Scope) -> ColorTheme {
+  // CookieDataContext::from(cx).theme()
   cfg_if::cfg_if! {
     if #[cfg(feature = "ssr")] {
       log!("SERVER: INITIAL THEME !!!!");

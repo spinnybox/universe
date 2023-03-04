@@ -8,8 +8,8 @@ use crate::components::ThemeToggleProps;
 pub fn Page(cx: Scope) -> impl IntoView {
   view! {
     cx,
-    <h1>"Index Page"</h1>
-    <p>"This is the index page"</p>
+    <h1 class="bg-red">"Index Page"</h1>
+    <p>"This is the indexer page"</p>
     <ThemeToggle />
   }
 }
@@ -20,12 +20,12 @@ pub fn Layout(cx: Scope) -> impl IntoView {
     cx,
     <header>
       <nav>
-        <A href="/">
+        <A href="/" class="bg-red">
           <span>"Main"</span>
         </A>
       </nav>
     </header>
-    <main>
+    <main class="font-aspekta antialiased bg-white text-slate-800 font-[350]">
       <Outlet />
     </main>
   }

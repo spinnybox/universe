@@ -71,13 +71,22 @@ args = [
 
 [tasks."css:generate"]
 command = "deno"
-args = ["run", "--allow-env", "--allow-sys", "--allow-read", "--allow-write", "./apps/spinnybox_com/unocss.ts"]
+args = [
+  "run",
+  "--allow-env",
+  "--allow-net",
+  "--allow-sys",
+  "--allow-read",
+  "--allow-write",
+  "./apps/spinnybox_com/unocss.ts",
+]
 
 [tasks."css:watch"]
 command = "deno"
 args = [
   "run",
   "--allow-env",
+  "--allow-net",
   "--allow-sys",
   "--allow-read",
   "--allow-write",

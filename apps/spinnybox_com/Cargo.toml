@@ -82,7 +82,7 @@ site-root = "target/site/spinnybox_com"
 # Defaults to pkg
 site-pkg-dir = "pkg"
 # [Optional] Files in the asset_dir will be copied to the target/site directory
-assets-dir = "assets"
+assets-dir = "./public"
 # The environment Leptos will run in, usually either "DEV" or "PROD"
 env = "DEV"
 # The IP and port (ex: 127.0.0.1:3000) where the server serves the content. Use it in your server setup.
@@ -91,6 +91,6 @@ site-addr = "127.0.0.1:3000"
 reload-port = 3001
 # Main style file. If scss or sass then it will be compiled to css.
 # the parent folder will be watched for changes
-style-file = "styles/main.css"
+style-file = "./styles/main.css"
 lib-features = ["hydrate"]
 bin-features = ["ssr"]
