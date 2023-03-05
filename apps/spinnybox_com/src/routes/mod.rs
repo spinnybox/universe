@@ -14,7 +14,7 @@ pub fn FileRoutes(cx: Scope) -> impl IntoView {
   view! {
     cx,
     <Router>
-      <main>
+      <>
         <Routes>
         <Route path="" view=move |cx| view! { cx, <RouteIndexLayout /> } >
           <Route path="about" view=move |cx| view! { cx, <div>"About this site"</div> } />
@@ -22,7 +22,7 @@ pub fn FileRoutes(cx: Scope) -> impl IntoView {
           <Route path="/" view=move |cx| view! { cx , <RouteIndexPage /> }  />
         </Route>
         </Routes>
-      </main>
+      </>
     </Router>
   }
 }
@@ -30,7 +30,6 @@ pub fn FileRoutes(cx: Scope) -> impl IntoView {
 #[cfg(feature = "ssr")]
 pub mod ssr {
   use std::net::SocketAddr;
-
   use std::sync::Arc;
 
   use axum::body::Body;
@@ -266,5 +265,5 @@ pub fn hydrate() {
   });
 }
 
-#[path = "./routes/index.rs"]
+#[path = "./index.rs"]
 pub(crate) mod route_index;

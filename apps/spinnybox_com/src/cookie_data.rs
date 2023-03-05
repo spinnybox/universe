@@ -128,12 +128,14 @@ where
 
 /// The color theme used.
 #[derive(Debug, Eq, PartialEq, Copy, Clone, Display, EnumIter, Serialize, Deserialize)]
-#[strum(serialize_all = "PascalCase")]
+#[serde(rename_all = "camelCase")]
 pub enum ColorTheme {
   /// The `light` theme.
+  #[strum(serialize = "light")]
   Light,
 
   /// The `dark` theme.
+  #[strum(serialize = "dark")]
   Dark,
 }
 

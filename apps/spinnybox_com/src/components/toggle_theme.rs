@@ -35,7 +35,7 @@ fn initial_theme(cx: Scope) -> ColorTheme {
 }
 
 #[component]
-pub fn ThemeToggle(cx: Scope) -> impl IntoView {
+pub fn ToggleTheme(cx: Scope) -> impl IntoView {
   let initial = initial_theme(cx);
   let set_theme_action = create_server_action::<SetTheme>(cx);
   let input = set_theme_action.input();
@@ -51,9 +51,9 @@ pub fn ThemeToggle(cx: Scope) -> impl IntoView {
   let toggled_theme_string = move || theme().toggle().to_string();
   let switcher = move || {
     if theme() == ColorTheme::Dark {
-      "Switch to Light Mode"
+      "Light Mode"
     } else {
-      "Switch to Dark Mode"
+      "Dark Mode"
     }
   };
 

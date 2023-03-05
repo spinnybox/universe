@@ -5,10 +5,11 @@ import config from "./unocss.config.ts";
 
 const { watch } = parse(Deno.args, { boolean: ["watch"] });
 
+const ROOT = new URL(".", import.meta.url);
 const TARGET = new URL("./src", import.meta.url);
 const CSS_RESET_URL = new URL("https://unpkg.com/@unocss/reset/antfu.css");
 const CSS_RESET_TARGET = new URL("./styles/reset.css", TARGET);
-const generator = createGenerator(config);
+const CSS_GLOBALS_TARGET = new URL("./styles/globals.css", TARGET);
 
 try {
   // Do nothing if the file exists.
@@ -41,8 +42,10 @@ try {
 }
 
 const RESET = await Deno.readTextFile(CSS_RESET_TARGET);
+const GLOBALS = await Deno.readTextFile(CSS_GLOBALS_TARGET);
 
 async function run() {
+  const generator = createGenerator(config);
   const contents: Array<string> = [];
 
   for await (const file of expandGlob("**\/*.rs", { root: TARGET.pathname })) {
@@ -61,7 +64,7 @@ async function run() {
 
   await Deno.writeTextFile(
     new URL("./styles/main.css", TARGET),
-    `${RESET}\n\n${generated.css}`,
+    `${RESET}\n\n${GLOBALS}\n\n${generated.css}`,
   );
 }
 
@@ -74,7 +77,10 @@ if (watch) {
     "color: orange",
     "font-weight: bold; color: orange",
   );
-  const watcher = Deno.watchFs(TARGET.pathname);
+
+  const filesToWatch = ["src", "unocss.config.ts", "styles/globals.css"]
+    .map((path) => new URL(path, ROOT).pathname);
+  const watcher = Deno.watchFs(filesToWatch);
 
   for await (const change of watcher) {
     console.log(

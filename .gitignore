@@ -215,3 +215,7 @@ devenv.local.nix
 /games/*/godot/lib/*/*
 !/games/*/godot/lib/*/.gitkeep
 !/games/*/bin/*/.gitkeep
+
+
+package.json
+pnpm-lock.yaml

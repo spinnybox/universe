@@ -44,9 +44,13 @@
     "https://deno.land/x/aleph@1.0.0-beta.29/types.d.ts": "d65f0962822a86fafea3ab1962a6dfdbedf2916384c840d983dfe2de90638cbd",
     "https://deno.land/x/lol_html@0.0.6/types.d.ts": "bf06e1f27f776389334d001992d1e3efe3a335b4688e2c3ca39e307d2ae11cc4",
     "https://esm.sh/v110/@antfu/utils@0.5.2/index.d.ts": "b55dd2eb5ced2eec9fbac96be6fe8d5c30cb9fd875fd47f711882c7e3c2a857d",
+    "https://esm.sh/v110/@unocss/core@0.49.8/deno/core.js": "b1f1a436bb4bfef41302507d4ac76f893aa37cea073d2285bb1ee24e213212b1",
+    "https://esm.sh/v110/@unocss/core@0.49.8/dist/index.d.ts": "d608fd874e98aefa37518deba2ddfac9e8036b163a47ce0a60ab55e282d07034",
     "https://esm.sh/v110/@unocss/core@0.50.3": "175e45bf9e3be2b40599a4a62956c18f8d919c10daca36b1dec1b41624da99e1",
     "https://esm.sh/v110/@unocss/core@0.50.3/deno/core.js": "ad51680a33e7963573ee5a719298d899ff191efabe242498d7211332b6eca1d7",
     "https://esm.sh/v110/@unocss/core@0.50.3/dist/index.d.ts": "b7778d6862ec860d2c2d21f417b27ea039466d9c1d94dc398265bec86148b4b9",
+    "https://esm.sh/v110/@unocss/preset-mini@0.49.8/deno/utils.js": "173c633aa17af304d7a48dc6d34bfcba68844874fd24e613859774bd4ee70209",
+    "https://esm.sh/v110/@unocss/preset-mini@0.50.3": "8a2dffd4fa7498adbd2c11fab7fdb07b7724847697c0901ec37de7435b53165f",
     "https://esm.sh/v110/@unocss/preset-mini@0.50.3/deno/preset-mini.js": "05e8954730fb394853ea723b7b6ff3739aea75e8d75142a022057c02fda8da82",
     "https://esm.sh/v110/@unocss/preset-mini@0.50.3/deno/rules.js": "e32a42bdd17eebd482c03354843d7e5735d384108b88ed350e79bc952beeb28d",
     "https://esm.sh/v110/@unocss/preset-mini@0.50.3/deno/theme.js": "24c78cd2d4b677ca5526d9186571bd35081957755422bead38cc809b5c49bb7b",
@@ -57,12 +61,18 @@
     "https://esm.sh/v110/@unocss/preset-mini@0.50.3/dist/index.d.ts": "ceb38f8dbc56734b3d9afcac4f9dc19bd557895d8be9b06e8bc043929048b286",
     "https://esm.sh/v110/@unocss/preset-mini@0.50.3/dist/types-f73ecdfe.d.ts": "5d6ec397df686af228d6e0bb7e2fe0935bc3816fa7052b88a40a57285ec0554a",
     "https://esm.sh/v110/@unocss/preset-mini@0.50.3/dist/utilities-a87209ad.d.ts": "b5e645f38bb788c80e917132a897d8dbdd4b8ec7c6ce10c405f31f52b732b172",
+    "https://esm.sh/v110/@unocss/preset-typography@0.50.3": "7d28a842c296c0d5031f8ad2eefc7b93c897222d804c4662aa230061381e8eae",
+    "https://esm.sh/v110/@unocss/preset-typography@0.50.3/deno/preset-typography.js": "f7c4d3a8944089c1c9dedbdd9a74ce76e01b8632130e513f5f8fcbbc5ae74298",
+    "https://esm.sh/v110/@unocss/preset-typography@0.50.3/dist/index.d.ts": "b3d1ec3d117e3130773952fc05b541f7cd76eae3fc7d543cfd3cadd7c77bbeab",
     "https://esm.sh/v110/@unocss/preset-uno@0.50.3": "0ded3e9f2b57662f2f5a143a828d20c8615d6e04676863fa7dc2cf74f05896df",
     "https://esm.sh/v110/@unocss/preset-uno@0.50.3/deno/preset-uno.js": "ab9947b5ab4aa89be681c9ba05939ed46842a1f8f59fa025722e9078bbad90b6",
     "https://esm.sh/v110/@unocss/preset-uno@0.50.3/dist/index.d.ts": "6d2c6118496bb404448a41b7d5f40a73a44d223d02ba5384a04bac0d56c5406d",
     "https://esm.sh/v110/@unocss/preset-wind@0.50.3/deno/preset-wind.js": "91ae43d7526015e09bd4d5f6fb49bcd2ce3f407c54f62a33dd248e399ba1d91f",
     "https://esm.sh/v110/magic-string@0.30.0/index.d.ts": "dff50cb5dc6990d26ea2a5a3320132e872d258d283599e744c8fa603ab40f88b",
     "https://esm.sh/v110/unconfig@0.3.7/dist/index.d.ts": "6ede3993caa0f5903af0f848359ca11c886fc50b299a92dbc139e0d9ecda792d",
-    "https://esm.sh/v110/unconfig@0.3.7/dist/types-6886c41e.d.ts": "fab09fbc7ae65e1ed0e2541947eb6e34762b75c84d93beae49b5ccb167b48812"
+    "https://esm.sh/v110/unconfig@0.3.7/dist/types-6886c41e.d.ts": "fab09fbc7ae65e1ed0e2541947eb6e34762b75c84d93beae49b5ccb167b48812",
+    "https://esm.sh/v110/unocss-preset-theme@0.4.0": "d69584f800adceacc84ff71fac9079214a78cdb878b9dbda8033177a34754a0e",
+    "https://esm.sh/v110/unocss-preset-theme@0.4.0/deno/unocss-preset-theme.js": "6d1bba91ce2429d32bf7ba7a1d2d63af5c00fef02b9cbcb8dfa6d4fb462d59b4",
+    "https://esm.sh/v110/unocss-preset-theme@0.4.0/dist/index.d.ts": "04381d67291e1bde6ddceece5db9a2624e1c8030e8e3081dbe67948969547a3b"
   }
 }
