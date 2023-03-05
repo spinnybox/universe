@@ -2,8 +2,6 @@ use leptos::*;
 use leptos_router::*;
 use route_index::Layout as RouteIndexLayout;
 use route_index::LayoutProps as RouteIndexLayoutProps;
-// use route_index::Layout as RouteIndexLayout;
-// use route_index::LayoutProps as RouteIndexLayoutProps;
 use route_index::NotFound as RouteIndexNotFound;
 use route_index::NotFoundProps as RouteIndexNotFoundProps;
 use route_index::Page as RouteIndexPage;
@@ -11,17 +9,11 @@ use route_index::PageProps as RouteIndexPageProps;
 #[cfg(feature = "hydrate")]
 use wasm_bindgen::prelude::wasm_bindgen;
 
-use crate::components::Nav;
-use crate::components::NavProps;
-
 #[component]
 pub fn FileRoutes(cx: Scope) -> impl IntoView {
   view! {
     cx,
     <Router>
-      <header>
-        <Nav />
-      </header>
       <main>
         <Routes>
         <Route path="" view=move |cx| view! { cx, <RouteIndexLayout /> } >
@@ -105,6 +97,9 @@ pub mod ssr {
       .and_then(|p| p.parse::<u16>().ok());
     let key = key.as_bytes();
     KEY.set(Key::from(key)).ok();
+    let port = std::env::var("PORT")
+      .ok()
+      .and_then(|p| p.parse::<u16>().ok());
 
     let config = get_configuration(Some("./apps/spinnybox_com/Cargo.toml"))
       .await

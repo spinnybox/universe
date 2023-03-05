@@ -1,8 +1,7 @@
 use leptos::*;
 use leptos_router::*;
 
-use crate::components::ThemeToggle;
-use crate::components::ThemeToggleProps;
+use crate::components::*;
 
 #[component]
 pub fn Page(cx: Scope) -> impl IntoView {
@@ -18,12 +17,8 @@ pub fn Page(cx: Scope) -> impl IntoView {
 pub fn Layout(cx: Scope) -> impl IntoView {
   view! {
     cx,
-    <header>
-      <nav>
-        <A href="/" class="bg-red">
-          <span>"Main"</span>
-        </A>
-      </nav>
+    <header class="absolute w-full z-30">
+      <Nav />
     </header>
     <main class="font-aspekta antialiased bg-white text-slate-800 font-[350]">
       <Outlet />
