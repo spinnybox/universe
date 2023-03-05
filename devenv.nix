@@ -3,26 +3,16 @@
 {
   packages = [
     pkgs.cargo-all-features
-    pkgs.cargo-audit
-    pkgs.cargo-udeps
     pkgs.cargo-binstall
-    pkgs.cargo-edit
-    pkgs.cargo-deny
-    pkgs.cargo-generate
     pkgs.cargo-insta
     pkgs.cargo-make
     pkgs.cargo-watch
-    pkgs.cargo-workspaces
     pkgs.deno
     pkgs.dprint
-    pkgs.fnm
-    pkgs.git
-    pkgs.nodePackages.firebase-tools
-    pkgs.nodePackages.sass
-    pkgs.ripgrep
-    pkgs.rust-analyzer
+    pkgs.nixpacks
     pkgs.rustup
-    pkgs.trunk
+    pkgs.sass
+    pkgs.wasm-pack
   ];
 
   difftastic.enable = true;
@@ -34,6 +24,9 @@
   '';
   scripts."leptos:build".exec = ''
     cargo:make leptos:build
+  '';
+  scripts."leptos:build:release".exec = ''
+    cargo:make leptos:build:release
   '';
   scripts."prisma:generate".exec = ''
     prisma generate --schema=./apps/spinnybox_com/prisma/schema.prisma

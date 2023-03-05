@@ -20,6 +20,9 @@ jobs:
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+
       - name: cache rust dependencies
         uses: Swatinem/rust-cache@v2
         with:
@@ -31,9 +34,6 @@ jobs:
           path: ${{ runner.tool_cache }}/flutter
           key: ${{ runner.os }}-flutter-beta-${{ hashFiles('**/pubspec.yaml', '**/pubspec.lock') }}
           restore-keys: ${{ runner.os }}-flutter-beta-
-
-      - name: checkout repository
-        uses: actions/checkout@v3
 
       - name: setup development environment
         uses: ./.github/actions/devenv

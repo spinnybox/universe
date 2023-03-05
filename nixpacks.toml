@@ -1,0 +1,11 @@
+providers = ["rust"]
+
+[phases.setup]
+nixOverlays = ['https://github.com/oxalica/rust-overlay/archive/master.tar.gz']
+nixPkgs = ["...", "cargo-make", "deno"]
+
+[phases.build]
+cmds = ["cargo make leptos:build:release"]
+
+[start]
+cmd = "./target/server/release/spinnybox_com"

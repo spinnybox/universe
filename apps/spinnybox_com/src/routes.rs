@@ -33,6 +33,7 @@ pub fn FileRoutes(cx: Scope) -> impl IntoView {
 
 #[cfg(feature = "ssr")]
 pub mod ssr {
+  use std::net::SocketAddr;
 
   use axum::body::Body;
   use axum::routing::get;
@@ -65,14 +66,23 @@ pub mod ssr {
   pub async fn run() -> std::io::Result<()> {
     register_server_functions().expect("Failed to register server functions!");
     _ = dotenv();
-    let key = std::env::var("COOKIE_SECRET").expect("COOKIE_SECRET is not defined!");
+    let key = std::env::var("COOKIE_SECRET")
+      .expect("The `COOKIE_SECRET` environment variable is not defined!");
+    let port = std::env::var("PORT")
+      .ok()
+      .and_then(|p| p.parse::<u16>().ok());
     let key = key.as_bytes();
     KEY.set(Key::from(key)).ok();
 
     let config = get_configuration(Some("./apps/spinnybox_com/Cargo.toml"))
       .await
       .unwrap();
-    let leptos_options = config.leptos_options;
+    let mut leptos_options = config.leptos_options;
+
+    if let Some(port) = port {
+      leptos_options.site_addr = SocketAddr::from(([0, 0, 0, 0], port));
+    }
+
     let address = leptos_options.site_addr.clone();
     // let site_root = &leptos_options.site_root;
     // let pkg_dir = &leptos_options.site_pkg_dir;

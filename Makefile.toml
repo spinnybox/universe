@@ -13,6 +13,12 @@ install_crate = { crate_name = "cargo-leptos", version = "0.1.8" }
 command = "cargo"
 args = ["leptos", "build"]
 
+[tasks."leptos:build:release"]
+dependencies = ["css:generate"]
+install_crate = { crate_name = "cargo-leptos", version = "0.1.8" }
+command = "cargo"
+args = ["leptos", "build", "--release"]
+
 [tasks."leptos:serve"]
 dependencies = ["css:generate"]
 install_crate = { crate_name = "cargo-leptos", version = "0.1.8" }
