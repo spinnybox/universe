@@ -10,6 +10,7 @@
     pkgs.deno
     pkgs.dprint
     pkgs.nixpacks
+    pkgs.railway
     pkgs.rustup
     pkgs.sass
     pkgs.wasm-pack

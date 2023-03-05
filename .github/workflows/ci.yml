@@ -20,6 +20,7 @@ jobs:
         os: [ubuntu-latest]
     outputs:
       spinnybox_2d_changed: ${{ steps.filter.outputs.spinnybox_2d }}
+      spinnybox_com_changed: ${{ steps.filter.outputs.spinnybox_com }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: checkout repository
@@ -92,3 +93,21 @@ jobs:
           app-id: 63ff0ff9a3a9ec94eed2478d
           workflow-id: spinnybox_2d
           token: ${{ secrets.CODEMAGIC_API_TOKEN }}
+
+  deploy_spinnybox_com:
+    if: ${{ github.event_name == 'push' && needs.checks.outputs.spinnybox_com_changed == 'true' }}
+    runs-on: ubuntu-latest
+    needs: checks
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+
+      - name: install railway
+        run: curl -fsSL https://railway.app/install.sh | sh
+        shell: bash
+
+      - name: deploy railway app
+        run: railway up
+        shell: bash
+        env:
+          RAILWAY_TOKEN: ${{ secrets.PRODUCTION_RAILWAY_TOKEN }}
