@@ -1,29 +1,73 @@
-[tasks.leptos]
-run_task = { name = ["leptos:watch", "css:watch"], parallel = true, fork = true }
-
 [tasks."leptos:watch"]
+run_task = { name = ["leptos:watch:debug", "css:watch"], parallel = true, fork = true }
+
+[tasks."leptos:run"]
+dependencies = ["leptos:build"]
+script = '''
+./target/server/release/spinnybox_com
+'''
+
+[tasks."leptos:watch:debug"]
 dependencies = ["css:generate"]
 install_crate = { crate_name = "cargo-leptos", version = "0.1.8" }
 command = "cargo"
 args = ["leptos", "watch"]
 
 [tasks."leptos:build"]
-dependencies = ["css:generate"]
-install_crate = { crate_name = "cargo-leptos", version = "0.1.8" }
-command = "cargo"
-args = ["leptos", "build"]
+dependencies = ["leptos:build:wasm", "leptos:build:server"]
 
-[tasks."leptos:build:release"]
+[tasks."leptos:build:wasm"]
 dependencies = ["css:generate"]
-install_crate = { crate_name = "cargo-leptos", version = "0.1.8" }
 command = "cargo"
-args = ["leptos", "build", "--release"]
+args = [
+  "build",
+  "--package=spinnybox_com",
+  "--lib",
+  "--target-dir=target/front",
+  "--target=wasm32-unknown-unknown",
+  "--no-default-features",
+  "--features=hydrate",
+  "--release",
+]
 
-[tasks."leptos:serve"]
-dependencies = ["css:generate"]
-install_crate = { crate_name = "cargo-leptos", version = "0.1.8" }
+[tasks."leptos:build:server"]
 command = "cargo"
-args = ["leptos", "serve"]
+args = [
+  "build",
+  "--package=spinnybox_com",
+  "--bin=spinnybox_com",
+  "--target-dir=target/server",
+  "--no-default-features",
+  "--features=ssr",
+  "--release",
+]
+
+[tasks."leptos:debug"]
+dependencies = ["leptos:debug:wasm", "leptos:debug:server"]
+
+[tasks."leptos:debug:wasm"]
+dependencies = ["css:generate"]
+command = "cargo"
+args = [
+  "build",
+  "--package=spinnybox_com",
+  "--lib",
+  "--target-dir=target/front",
+  "--target=wasm32-unknown-unknown",
+  "--no-default-features",
+  "--features=hydrate",
+]
+
+[tasks."leptos:debug:server"]
+command = "cargo"
+args = [
+  "build",
+  "--package=spinnybox_com",
+  "--bin=spinnybox_com",
+  "--target-dir=target/server",
+  "--no-default-features",
+  "--features=ssr",
+]
 
 [tasks."css:generate"]
 command = "deno"

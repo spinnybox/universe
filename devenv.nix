@@ -20,13 +20,13 @@
 
   # Scripts
   scripts."leptos:watch".exec = ''
-    cargo:make leptos
+    cargo:make leptos:watch
   '';
   scripts."leptos:build".exec = ''
     cargo:make leptos:build
   '';
-  scripts."leptos:build:release".exec = ''
-    cargo:make leptos:build:release
+  scripts."leptos:run".exec = ''
+    PORT=3003 COOKIE_SECRET="this_needs_to_be_at_least_32_characters_long"  cargo:make leptos:run
   '';
   scripts."prisma:generate".exec = ''
     prisma generate --schema=./apps/spinnybox_com/prisma/schema.prisma
