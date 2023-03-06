@@ -6,6 +6,8 @@ use route_index::NotFound as RouteIndexNotFound;
 use route_index::NotFoundProps as RouteIndexNotFoundProps;
 use route_index::Page as RouteIndexPage;
 use route_index::PageProps as RouteIndexPageProps;
+use route_showcase::Page as RouteShowcasePage;
+use route_showcase::PageProps as RouteShowcasePageProps;
 #[cfg(feature = "hydrate")]
 use wasm_bindgen::prelude::wasm_bindgen;
 
@@ -18,8 +20,9 @@ pub fn FileRoutes(cx: Scope) -> impl IntoView {
         <Routes>
         <Route path="" view=move |cx| view! { cx, <RouteIndexLayout /> } >
           <Route path="about" view=move |cx| view! { cx, <div>"About this site"</div> } />
-          // <Route path= "*" view=move |cx| view! { cx , <RouteIndexNotFound /> } />
-          <Route path="/" view=move |cx| view! { cx , <RouteIndexPage /> }  />
+          // <Route path= "*" view=move |cx| view! { cx, <RouteIndexNotFound /> } />
+          <Route path="/" view=move |cx| view! { cx, <RouteIndexPage /> }  />
+          <Route path="showcase" view=move |cx| view! {cx, <RouteShowcasePage /> } />
         </Route>
         </Routes>
       </>
@@ -78,7 +81,6 @@ pub mod ssr {
       path,
       headers,
       move |cx| {
-        log!("OutOfOrder: ADDED COOKIE CONTEXT!!!");
         provide_context::<CookieDataContext>(cx, cookies.clone().into());
       },
       req,
@@ -167,7 +169,6 @@ pub mod ssr {
         } else {
           path.to_string()
         };
-        log!("Adding PATH: {}", path);
         router = router.route(
           &path,
           match mode {
@@ -182,7 +183,6 @@ pub mod ssr {
                 render_app_to_stream_with_context(
                   options,
                   move |cx| {
-                    log!("OutOfOrder: ADDED COOKIE CONTEXT!!!");
                     provide_context::<CookieDataContext>(cx, cookies.clone().into());
                   },
                   app_fn,
@@ -193,7 +193,6 @@ pub mod ssr {
             }
             SsrMode::InOrder => {
               let handler = move |req: Request<Body>| {
-                log!("InOrder: BODY GENERATED!!!");
                 let cookies = req
                   .extensions()
                   .get::<Cookies>()
@@ -203,7 +202,6 @@ pub mod ssr {
                 render_app_to_stream_in_order_with_context(
                   options,
                   move |cx| {
-                    log!("InOrder: ADDED COOKIE CONTEXT!!!");
                     provide_context::<CookieDataContext>(cx, cookies.clone().into());
                   },
                   app_fn,
@@ -222,7 +220,6 @@ pub mod ssr {
                 render_app_async_with_context(
                   options,
                   move |cx| {
-                    log!("Async: ADDED COOKIE CONTEXT!!!");
                     provide_context::<CookieDataContext>(cx, cookies.clone().into());
                   },
                   app_fn,
@@ -249,7 +246,6 @@ pub fn hydrate() {
   _ = console_log::init_with_level(log::Level::Debug);
   console_error_panic_hook::set_once();
   leptos::mount_to_body(move |cx| {
-    log!("MOUNTING TO BODY");
     #[cfg(not(feature = "ssr"))]
     {
       use crate::CookieDataContext;
@@ -267,3 +263,5 @@ pub fn hydrate() {
 
 #[path = "./index.rs"]
 pub(crate) mod route_index;
+#[path = "./showcase.rs"]
+pub(crate) mod route_showcase;

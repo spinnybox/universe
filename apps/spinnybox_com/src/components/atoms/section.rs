@@ -15,21 +15,19 @@ pub(crate) fn Section(
   let wrapper_classes = move || {
     let mut classes = String::from("py-12 relative");
 
-    if let Some(class) = wrapper_class.as_ref() {
-      classes = format!("{} {}", classes, class());
+    match wrapper_class {
+      Some(ref class) if !class.get_untracked().is_empty() => format!("{} {}", classes, class()),
+      _ => classes,
     }
-
-    classes
   };
 
   let classes = move || {
     let mut classes = String::from("max-w-6xl mx-auto px-4 sm:px-10");
 
-    if let Some(class) = class.as_ref() {
-      classes = format!("{} {}", classes, class());
+    match class {
+      Some(ref class) if !class.get_untracked().is_empty() => format!("{} {}", classes, class()),
+      _ => classes,
     }
-
-    classes
   };
 
   view! {
