@@ -1,0 +1,14 @@
+/* Find similar fonts here: https://www.1001fonts.com/3d+handwritten-fonts.html?page=1
+  TODO provide attribution to the font creator
+*/
+@font-face {
+  font-family: "sippin";
+  src: url("/fonts/sippin.woff2") format("woff2"),
+       url("/fonts/sippin.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "gloriah";
+  src: url("/fonts/gloriah.woff2") format("woff2"),
+       url("/fonts/gloriah.ttf") format("truetype");
+}

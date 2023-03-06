@@ -17,23 +17,20 @@ pub async fn set_theme(cx: Scope, theme: ColorTheme) -> Result<ColorTheme, Serve
 fn initial_theme(cx: Scope) -> ColorTheme {
   cfg_if::cfg_if! {
     if #[cfg(feature = "ssr")] {
-      log!("SERVER: INITIAL THEME !!!!");
       use_context::<CookieDataContext>(cx)
         .map(|data| data.theme())
         .unwrap_or(ColorTheme::default())
 
     } else if #[cfg(target_arch = "wasm32")] {
-      log!("WASM: INITIAL THEME !!!!");
       CookieDataContext::from(cx).theme()
     } else {
-      log!("OTHER: INITIAL THEME !!!!");
       ColorTheme::default()
     }
   }
 }
 
 #[component]
-pub fn ThemeToggle(cx: Scope) -> impl IntoView {
+pub fn ToggleTheme(cx: Scope) -> impl IntoView {
   let initial = initial_theme(cx);
   let set_theme_action = create_server_action::<SetTheme>(cx);
   let input = set_theme_action.input();
@@ -49,9 +46,9 @@ pub fn ThemeToggle(cx: Scope) -> impl IntoView {
   let toggled_theme_string = move || theme().toggle().to_string();
   let switcher = move || {
     if theme() == ColorTheme::Dark {
-      "Switch to Light Mode"
+      "Light Mode"
     } else {
-      "Switch to Dark Mode"
+      "Dark Mode"
     }
   };
 

@@ -10,7 +10,6 @@
       "https://deno.land/x/aleph@1.0.0-beta.29/types.d.ts"
     ]
   },
-  "importMap": "import_map.json",
   "tasks": {
     "dev": "deno run -A apps/spinnybox_com/dev.ts",
     "start": "deno run -A apps/spinnybox_com/server.ts",
@@ -18,5 +17,17 @@
     "esm:add": "deno run -A https://esm.sh/v110 add",
     "esm:update": "deno run -A https://esm.sh/v110 update",
     "esm:remove": "deno run -A https://esm.sh/v110 remove"
+  },
+  "imports": {
+    "std/": "https://deno.land/std@0.178.0/",
+    "@unocss/core": "https://esm.sh/v110/@unocss/core@0.50.3",
+    "@unocss/preset-mini": "https://esm.sh/v110/@unocss/preset-mini@0.50.3",
+    "@unocss/preset-typography": "https://esm.sh/v110/@unocss/preset-typography@0.50.3",
+    "@unocss/preset-uno": "https://esm.sh/v110/@unocss/preset-uno@0.50.3",
+    "unocss-preset-theme": "https://esm.sh/v110/unocss-preset-theme@0.4.0",
+    "aleph/": "https://deno.land/x/aleph@1.0.0-beta.29/",
+    "aleph/server": "https://deno.land/x/aleph@1.0.0-beta.29/server/mod.ts",
+    "aleph/dev": "https://deno.land/x/aleph@1.0.0-beta.29/server/dev.ts",
+    "aleph/unocss": "https://deno.land/x/aleph@1.0.0-beta.29/server/unocss.ts"
   }
 }
