@@ -26,12 +26,23 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v3
 
+      - name: cache rust dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ runner.os }}
+
       - name: cache flutter dependencies
         uses: actions/cache@v3
         with:
           path: ${{ runner.tool_cache }}/flutter
           key: ${{ runner.os }}-flutter-beta-${{ hashFiles('**/pubspec.yaml', '**/pubspec.lock') }}
           restore-keys: ${{ runner.os }}-flutter-beta-
+
+      - name: setup development environment
+        uses: ./.github/actions/devenv
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          nix-cache: /tmp/nixcache
 
       - uses: dorny/paths-filter@v2
         id: filter
