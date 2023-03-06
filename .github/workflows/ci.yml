@@ -26,31 +26,12 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v3
 
-      - name: cache nix store
-        uses: actions/cache@v3
-        id: nix-cache
-        with:
-          path: /tmp/nixcache
-          key: ${{ runner.os }}-nix-cache-${{ hashFiles('**/devenv.nix', '**/devenv.yaml', '**/devenv.lock') }}
-          restore-keys: ${{ runner.os }}-nix-cache-
-
-      - name: cache rust dependencies
-        uses: Swatinem/rust-cache@v2
-        with:
-          key: ${{ runner.os }}
-
       - name: cache flutter dependencies
         uses: actions/cache@v3
         with:
           path: ${{ runner.tool_cache }}/flutter
           key: ${{ runner.os }}-flutter-beta-${{ hashFiles('**/pubspec.yaml', '**/pubspec.lock') }}
           restore-keys: ${{ runner.os }}-flutter-beta-
-
-      - name: setup development environment
-        uses: ./.github/actions/devenv
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          nix-cache: /tmp/nixcache
 
       - uses: dorny/paths-filter@v2
         id: filter
@@ -72,11 +53,6 @@ jobs:
 
       - name: lint
         run: lint:all
-        shell: bash
-
-      - name: build website
-        if: steps.filter.outputs.spinnybox_com == 'true'
-        run: leptos:build
         shell: bash
 
   deploy_spinnybox_2d:
@@ -102,8 +78,24 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v3
 
+      - name: cache rust dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ runner.os }}
+
+      - name: setup development environment
+        uses: ./.github/actions/devenv
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          nix-cache: /tmp/nixcache
+
+      - name: build website
+        if: steps.filter.outputs.spinnybox_com == 'true'
+        run: leptos:build
+        shell: bash
+
       - name: install railway
-        run: curl -fsSL https://railway.app/install.sh | sh
+        run: npm i -g @railway/cli
         shell: bash
 
       - name: deploy railway app
