@@ -38,7 +38,7 @@ runs:
     - name: install devenv.sh
       run: |
         cachix use devenv
-        nix profile install --accept-flake-config github:cachix/devenv/v0.6.1
+        nix profile install --accept-flake-config github:cachix/devenv/v0.6.2
       shell: bash
 
     - name: run devenv in ci

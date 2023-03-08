@@ -6,8 +6,6 @@ edition = "2021"
 [lib]
 crate-type = ["cdylib", "rlib"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
 axum = { workspace = true, optional = true, features = ["headers"] }
 cfg-if = { workspace = true }
@@ -16,10 +14,10 @@ console_log = { workspace = true, optional = true }
 dotenvy = { workspace = true, optional = true }
 futures = { workspace = true }
 http = { workspace = true }
-leptos = { version = "0.2", default-features = false, features = ["serde"] }
-leptos_axum = { version = "0.2", optional = true, default_features = false }
-leptos_meta = { version = "0.2", default-features = false }
-leptos_router = { version = "0.2", default-features = false }
+leptos = { git = "https://github.com/leptos-rs/leptos", rev = "c66b673", default-features = false, features = ["serde"] }
+leptos_axum = { git = "https://github.com/leptos-rs/leptos", rev = "c66b673", optional = true, default_features = false }
+leptos_meta = { git = "https://github.com/leptos-rs/leptos", rev = "c66b673", default-features = false }
+leptos_router = { git = "https://github.com/leptos-rs/leptos", rev = "c66b673", default-features = false }
 log = { workspace = true }
 once_cell = { workspace = true }
 # prisma-client-rust = { workspace = true }
