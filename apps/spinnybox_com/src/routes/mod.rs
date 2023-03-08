@@ -68,15 +68,11 @@ pub mod ssr {
   }
 
   async fn handle_server_fns(
+    cookies: Cookies,
     path: Path<String>,
     headers: HeaderMap,
     req: Request<Body>,
   ) -> impl IntoResponse {
-    let cookies = req
-      .extensions()
-      .get::<Cookies>()
-      .cloned()
-      .expect("Can't extract cookies. Is `CookieManagerLayer` enabled?");
     handle_server_fns_with_context(
       path,
       headers,
@@ -173,13 +169,8 @@ pub mod ssr {
           &path,
           match mode {
             SsrMode::OutOfOrder => {
-              let handler = move |req: Request<Body>| {
+              let handler = move |cookies: Cookies, req: Request<Body>| {
                 let app_fn = app_fn.clone();
-                let cookies = req
-                  .extensions()
-                  .get::<Cookies>()
-                  .cloned()
-                  .expect("Can't extract cookies. Is `CookieManagerLayer` enabled?");
                 render_app_to_stream_with_context(
                   options,
                   move |cx| {
@@ -192,13 +183,7 @@ pub mod ssr {
               get(handler)
             }
             SsrMode::InOrder => {
-              let handler = move |req: Request<Body>| {
-                let cookies = req
-                  .extensions()
-                  .get::<Cookies>()
-                  .cloned()
-                  .expect("Can't extract cookies. Is `CookieManagerLayer` enabled?");
-
+              let handler = move |cookies: Cookies, req: Request<Body>| {
                 render_app_to_stream_in_order_with_context(
                   options,
                   move |cx| {
@@ -211,12 +196,7 @@ pub mod ssr {
               get(handler)
             }
             SsrMode::Async => {
-              let handler = move |req: Request<Body>| {
-                let cookies = req
-                  .extensions()
-                  .get::<Cookies>()
-                  .cloned()
-                  .expect("Can't extract cookies. Is `CookieManagerLayer` enabled?");
+              let handler = move |cookies: Cookies, req: Request<Body>| {
                 render_app_async_with_context(
                   options,
                   move |cx| {
