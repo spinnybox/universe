@@ -57,6 +57,8 @@ jobs:
               - 'apps/spinnybox_com/**/*.rs'
               - 'Cargo.lock'
               - 'crates/**/*.rs'
+              - 'railway.toml'
+              - 'nixpacks.toml'
 
       - name: build
         run: build:all
