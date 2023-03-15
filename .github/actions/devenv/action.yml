@@ -52,12 +52,12 @@ runs:
     - name: flutter install
       uses: subosito/flutter-action@v2
       with:
-        channel: "beta"
+        channel: beta
 
-    - name: install flutter game dependencies
+    - name: install flutter dependencies
       run: |
-        cd games/2d
-        flutter pub get
+        flutter pub global activate melos 3.0.0
+        melos bootstrap
       shell: bash
 
     - name: export nix store cache

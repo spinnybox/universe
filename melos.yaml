@@ -1,0 +1,9 @@
+name: spinnybox_universe
+
+packages:
+  - games/2d
+  - packages/*
+
+scripts:
+  analyze:
+    exec: dart analyze .

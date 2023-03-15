@@ -219,3 +219,5 @@ devenv.local.nix
 
 package.json
 pnpm-lock.yaml
+
+pubspec_overrides.yaml
