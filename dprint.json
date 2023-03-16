@@ -6,7 +6,7 @@
     "module.sortImportDeclarations": "caseInsensitive"
   },
   "json": { "deno": true, "useTabs": false },
-  "markdown": { "deno": true, "textWrap": "always", "lineWidth": 100 },
+  "markdown": { "deno": true, "textWrap": "never", "lineWidth": 80 },
   "toml": { "useTabs": false },
   "includes": [
     "**/*.{ts,tsx,js,jsx,cjs,mjs,json,jsonc,md,toml,dockerfile,rs,yml,yaml}"

@@ -57,7 +57,8 @@ doesn't work on `macos` with `nix` yet.
 [`devenv`](https://devenv.sh/) is used to provide a reproducible development environment for this
 project. Follow the [getting started instructions](https://devenv.sh/getting-started/).
 
-The installation will be easier if you are using `nix flakes`. On `macos` and `linux` you can run the following command.
+The installation will be easier if you are using `nix flakes`. On `macos` and `linux` you can run
+the following command.
 
 ```bash
 mkdir -p ~/.config/nix
@@ -72,6 +73,19 @@ direnv allow .
 ```
 
 At this point you should see the `nix` commands available in your terminal.
+
+### Upgrading `devenv`
+
+If you have an outdated version of `devenv` you can update it by running the following commands. If
+you have an easier way, please create a PR and I'll update these docs.
+
+```bash
+nix profile list # find the index of the nxi package
+nix profile remove <index>
+nix profile install --accept-flake-config github:cachix/devenv/<version>
+```
+
+### Editor Setup
 
 To setup recommended configuration for your favourite editor run the following commands.
 

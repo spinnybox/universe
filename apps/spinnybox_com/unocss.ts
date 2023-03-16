@@ -19,13 +19,13 @@ try {
     "%c✔ %c`reset.css` %calready exists",
     "color: green",
     "color: gray",
-    "color: rgb(255, 192, 203)",
+    "color: hsl(350, 100%, 88%)",
   );
 } catch {
   console.log(
     "%cℹ %cDownloading %c`reset.css`",
     "color: blue",
-    "color: rgb(255, 192, 203)",
+    "color: hsl(350, 100%, 88%)",
     "color: gray",
   );
 
@@ -42,7 +42,7 @@ try {
 }
 
 const RESET = await Deno.readTextFile(CSS_RESET_TARGET);
-const GLOBALS = await Deno.readTextFile(CSS_GLOBALS_TARGET);
+let globals = await Deno.readTextFile(CSS_GLOBALS_TARGET);
 
 async function run() {
   const generator = createGenerator(config);
@@ -64,7 +64,7 @@ async function run() {
 
   await Deno.writeTextFile(
     new URL("./styles/main.css", TARGET),
-    `${RESET}\n\n${GLOBALS}\n\n${generated.css}`,
+    `${RESET}\n\n${globals}\n\n${generated.css}`,
   );
 }
 
@@ -90,6 +90,10 @@ if (watch) {
     );
     console.log(change.paths);
     console.log();
+
+    if (change.paths.some((path) => path.endsWith("globals.css"))) {
+      globals = await Deno.readTextFile(CSS_GLOBALS_TARGET);
+    }
 
     await run();
   }

@@ -132,9 +132,9 @@ pub mod fundraiser {
   }
 }
 
-const PREFIX: &str = "fundraiser_platform";
-const TOP_DONORS: &str = "top_donors";
-const DONOR: &str = "donor";
+const PREFIX: &[u8] = b"fundraiser_platform";
+const TOP_DONORS: &[u8] = b"top_donors";
+const DONOR: &[u8] = b"donor";
 
 #[derive(Accounts)]
 #[instruction(target: u64)]
@@ -146,7 +146,7 @@ pub struct Initialize<'info> {
     init,
     payer = authority,
     space = Donates::SIZE,
-    seeds=[PREFIX.as_bytes(), authority.key().as_ref()],
+    seeds=[PREFIX, authority.key().as_ref()],
     bump,
   )]
   pub platform: Account<'info, Donates>,
@@ -155,7 +155,7 @@ pub struct Initialize<'info> {
     init,
     payer = authority,
     space = TopDonors::SIZE,
-    seeds = [PREFIX.as_bytes(), TOP_DONORS.as_bytes(), authority.key().as_ref()],
+    seeds = [PREFIX, TOP_DONORS, authority.key().as_ref()],
     bump,
   )]
   pub top_donors: Account<'info, TopDonors>,
@@ -169,7 +169,7 @@ pub struct Withdraw<'info> {
   #[account(
         mut,
         has_one = authority,
-        seeds = [PREFIX.as_bytes(), platform.authority.key().as_ref()],
+        seeds = [PREFIX, platform.authority.key().as_ref()],
         bump
     )]
   pub platform: Account<'info, Donates>,
@@ -192,8 +192,8 @@ pub struct Send<'info> {
     payer = donor,
     space = Donor::SIZE,
     seeds = [
-      PREFIX.as_bytes(),
-      DONOR.as_bytes(),
+      PREFIX,
+      DONOR,
       platform.key().as_ref(),
       id.to_string().as_bytes(),
     ],
@@ -203,14 +203,14 @@ pub struct Send<'info> {
 
   #[account(
     mut,
-    seeds = [PREFIX.as_bytes(), platform.authority.key().as_ref()],
+    seeds = [PREFIX, platform.authority.key().as_ref()],
     bump
   )]
   pub platform: Account<'info, Donates>,
 
   #[account(
     mut,
-    seeds = [PREFIX.as_bytes(), TOP_DONORS.as_bytes(), platform.authority.key().as_ref()],
+    seeds = [PREFIX, TOP_DONORS, platform.authority.key().as_ref()],
     bump
   )]
   pub top_donors: Account<'info, TopDonors>,

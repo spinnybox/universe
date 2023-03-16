@@ -16,9 +16,6 @@
     pkgs.wasm-pack
   ];
 
-  difftastic.enable = true;
-  devcontainer.enable = true;
-
   # Scripts
   scripts."leptos:watch".exec = ''
     cargo:make leptos:watch
