@@ -1,4 +1,3 @@
-
 import 'motions_platform_interface.dart';
 
 class Motions {
