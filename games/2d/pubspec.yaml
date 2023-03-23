@@ -36,7 +36,7 @@ dependencies:
   firebase_core: ^2.8.0 # Needed for Crashlytics below
   firebase_crashlytics: ^3.0.17 # Error reporting
   games_services: ^3.0.1 # Achievements and leaderboards
-  # google_mobile_ads: ^2.3.0  # Ads
+  google_mobile_ads: ^2.3.0 # Ads
   in_app_purchase: ^3.1.5 # In-app purchases
 
 dev_dependencies:
