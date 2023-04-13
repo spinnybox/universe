@@ -2,8 +2,6 @@
 
 {
   packages = [
-    pkgs.cargo-all-features
-    pkgs.cargo-binstall
     pkgs.cargo-insta
     pkgs.cargo-make
     pkgs.cargo-watch
