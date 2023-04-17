@@ -12,7 +12,6 @@ cfg-if = { workspace = true }
 console_error_panic_hook = { workspace = true, optional = true }
 console_log = { workspace = true, optional = true }
 dotenvy = { workspace = true, optional = true }
-futures = { workspace = true }
 http = { workspace = true }
 leptos = { version = "0.2", default-features = false, features = ["serde"] }
 leptos_axum = { version = "0.2", optional = true, default_features = false }
@@ -21,7 +20,6 @@ leptos_router = { version = "0.2", default-features = false }
 log = { workspace = true }
 once_cell = { workspace = true }
 # prisma-client-rust = { workspace = true }
-reqwest = { workspace = true, features = ["json"], optional = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 simple_logger = { workspace = true, optional = true }
@@ -61,7 +59,6 @@ ssr = [
   "leptos/ssr",
   "leptos_router/ssr",
   "leptos_meta/ssr",
-  "dep:reqwest",
   "dep:axum",
   "dep:leptos_axum",
   "dep:tower-http",

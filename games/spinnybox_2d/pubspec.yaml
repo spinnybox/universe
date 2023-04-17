@@ -9,11 +9,11 @@ environment:
 
 dependencies:
   audioplayers: ^4.0.1
-  badges: ^3.1.0
+  badges: ^3.1.1
   cupertino_icons: ^1.0.5
-  flame_audio: ^2.0.0
-  flame_svg: ^1.7.2
-  flame: ^1.7.2
+  flame_audio: ^2.0.1
+  flame_svg: ^1.7.3
+  flame: ^1.7.3
   flutter_hooks: ^0.18.6
   flutter_markdown: ^0.6.14
   flutter_riverpod: ^2.3.4
@@ -36,7 +36,6 @@ dependencies:
   firebase_core: ^2.9.0 # Needed for Crashlytics below
   firebase_crashlytics: ^3.1.0 # Error reporting
   games_services: ^3.0.1 # Achievements and leaderboards
-  google_mobile_ads: ^2.4.0 # Ads
   in_app_purchase: ^3.1.5 # In-app purchases
 
 dev_dependencies:
