@@ -5491,7 +5491,6 @@ dependencies = [
  "console_error_panic_hook",
  "console_log 1.0.0",
  "dotenvy",
- "futures 0.3.28",
  "http",
  "leptos",
  "leptos_axum",

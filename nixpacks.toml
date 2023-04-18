@@ -1,7 +1,7 @@
 providers = ["rust"]
 
 [phases.setup]
-nixpkgsArchive = '9b8e5abb18324c7fe9f07cb100c3cd4a29cda8b8'
+nixpkgsArchive = '0a4206a51b386e5cda731e8ac78d76ad924c7125'
 nixOverlays = ['https://github.com/oxalica/rust-overlay/archive/master.tar.gz']
 nixPkgs = ["...", "cargo-make", "deno"]
 
