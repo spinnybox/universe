@@ -2,14 +2,16 @@
   "deno.enable": true,
   "deno.testing.enable": true,
   "deno.lint": true,
-
-  "[markdown]": {
+  "githubIssues.issueBranchTitle": "issue/${issueNumber}",
+  "[css]": {
     "editor.defaultFormatter": "dprint.dprint"
   },
-  "[typescript]": {
-    "editor.defaultFormatter": "dprint.dprint"
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "Dart-Code.dart-code",
+    "editor.rulers": [100]
   },
-  "[typescriptreact]": {
+  "[dockerfile]": {
     "editor.defaultFormatter": "dprint.dprint"
   },
   "[javascript]": {
@@ -24,19 +26,22 @@
   "[jsonc]": {
     "editor.defaultFormatter": "dprint.dprint"
   },
-  "[toml]": {
-    "editor.defaultFormatter": "dprint.dprint"
-  },
-  "[yaml]": {
+  "[markdown]": {
     "editor.defaultFormatter": "dprint.dprint"
   },
   "[rust]": {
     "editor.defaultFormatter": "dprint.dprint"
   },
-  "[dart]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "Dart-Code.dart-code",
-    "editor.rulers": [100]
+  "[toml]": {
+    "editor.defaultFormatter": "dprint.dprint"
   },
-  "githubIssues.issueBranchTitle": "issue/${issueNumber}"
+  "[typescript]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  }
 }

@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:spinnybox_2d/app.dart';
-import 'package:spinnybox_2d/assets.dart';
 import 'package:spinnybox_2d/models/settings.dart';
 import 'package:spinnybox_2d/firebase_options.dart';
 import 'package:spinnybox_2d/services/services.dart';
@@ -46,7 +45,6 @@ Future<void> guardedMain() async {
 
   // load settings before the app starts
   await Settings.loadSettings();
-  await preloadSvgs();
 
   if (kReleaseMode) {
     // Don't log anything below warnings in production.

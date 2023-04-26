@@ -25,6 +25,7 @@ class GameService extends _$GameService {
 
   final Completer<bool> _signedInCompleter = Completer();
 
+  // ignore: avoid_public_notifier_properties
   Future<bool> get signedIn => _signedInCompleter.future;
 
   /// Unlocks an achievement on Game Center / Play Games.

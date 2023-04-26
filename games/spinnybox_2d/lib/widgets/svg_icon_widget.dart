@@ -22,7 +22,7 @@ class SvgIcon extends StatelessWidget {
     return SvgPicture.asset(
       assetName,
       height: size,
-      color: color,
+      colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
       semanticsLabel: label,
     );
   }

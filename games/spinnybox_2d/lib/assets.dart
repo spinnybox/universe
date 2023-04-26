@@ -1,8 +1,3 @@
-import 'package:flame/cache.dart';
-import 'package:flame/flame.dart';
-import 'package:flutter_svg/flutter_svg.dart'
-    show DrawableRoot, ExactAssetPicture, SvgPicture, precachePicture, svg;
-
 const _svgFolder = 'assets/svg/';
 const _svgIconsFolder = '${_svgFolder}icons/';
 
@@ -90,75 +85,4 @@ class UiAsset {
   );
 
   static const loading = '${_svgFolder}ui/loading.svg';
-}
-
-final Map<String, DrawableRoot> _cache = {};
-
-/// Get the cached Svg Asset
-DrawableRoot getGameSvg(String asset) {
-  return _cache[asset]!;
-}
-
-final _assetsToLoad = [
-  SvgAsset.backgroundDefault,
-  SvgAsset.characterDefaultHop,
-  SvgAsset.characterDefaultPlain,
-  SvgAsset.logo,
-  SvgAsset.logoText,
-  SvgAsset.mobileDevice,
-
-  // Icons
-  SvgIconName.back,
-  SvgIconName.checkboxChecked,
-  SvgIconName.checkboxUnchecked,
-  SvgIconName.settings,
-  SvgIconName.share,
-  SvgIconName.shop,
-  SvgIconName.volume,
-  SvgIconName.mute,
-  SvgIconName.pause,
-
-  // UI
-  UiAsset.layerButtonBottom.background,
-  UiAsset.layerButtonBottom.outline,
-  UiAsset.layerButtonTop.background,
-  UiAsset.layerButtonTop.outline,
-  UiAsset.layerIconBottom.background,
-  UiAsset.layerIconBottom.outline,
-  UiAsset.layerIconTop.background,
-  UiAsset.layerIconTop.outline,
-  UiAsset.layerOverlay1.outline,
-  UiAsset.layerOverlay1.outline,
-];
-
-final _gameSvgAssets = [
-  GameSvgAsset.backgroundSky,
-  GameSvgAsset.backgroundGrass,
-  GameSvgAsset.backgroundDistantBush,
-  GameSvgAsset.backgroundCloud1,
-  GameSvgAsset.backgroundCloud2,
-  GameSvgAsset.backgroundCloud3,
-  GameSvgAsset.obstacle1Lane,
-  GameSvgAsset.obstacle2Lane,
-  GameSvgAsset.obstacle3Lane,
-  GameSvgAsset.characterDefault,
-];
-
-Future<void> preloadSvgs() async {
-  for (final asset in _assetsToLoad) {
-    await precachePicture(
-      ExactAssetPicture(SvgPicture.svgStringDecoderBuilder, asset),
-      null,
-    );
-  }
-
-  for (final asset in _gameSvgAssets) {
-    _cache[asset] = await loadFlameSvg(asset.replaceFirst(_svgFolder, 'svg/'));
-  }
-}
-
-Future<DrawableRoot> loadFlameSvg(String fileName, {AssetsCache? cache}) async {
-  cache ??= Flame.assets;
-  final svgString = await cache.readFile(fileName);
-  return svg.fromSvgString(svgString, 'FLAME:$fileName');
 }
