@@ -30,13 +30,13 @@ dependencies:
   rive: ^0.10.4
   riverpod_annotation: ^2.1.1
   rxdart: ^0.27.7
-  sensors_plus: ^2.0.4
-  share_plus: ^6.3.2
+  sensors_plus: ^2.0.5
+  share_plus: ^6.3.4
   shared_preferences: ^2.1.0
   wakelock: ^0.6.2
 
   firebase_core: ^2.10.0 # Needed for Crashlytics below
-  firebase_crashlytics: ^3.1.1 # Error reporting
+  firebase_crashlytics: ^3.1.2 # Error reporting
   games_services: ^3.0.1 # Achievements and leaderboards
   in_app_purchase: ^3.1.5 # In-app purchases
 
